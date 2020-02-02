@@ -1,0 +1,88 @@
+/* pages/news.wxss */
+.news{
+  background-color: rgb(250, 250, 250)
+}
+.noUnread{
+  text-align: center;
+  color:rgb(78,78,78);
+  margin:30px;
+  font-size: 18px;
+}
+.news .title-top{
+  height: 40px;
+  line-height:40px;
+  padding: 0 10px;
+  color: rgb(168, 168, 168);
+  background-color: rgb(250, 250, 250);
+}
+.news .title-top .read{
+  float: right;
+}
+.news .news-list{
+  width: 100%;
+  height: 100px;
+  display: flex;
+  background-color: #fff;
+  margin-bottom: 5px;
+}
+.news .news-list .news-list-left{
+  padding: 15px 10px;
+  position: relative;
+}
+.news .news-list .news-list-left image{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.news .news-list .news-list-left .redPoint{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: red;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+.news .news-list .news-list-right {
+  padding: 10px 0;
+  line-height: 30px;
+}
+.news .news-list .news-list-right .news-right-name{
+  color: rgb(168, 168, 168);
+}
+.news .news-list .news-list-right .news-right-name view{
+  display: inline-block;
+  vertical-align: middle;
+}
+.news .news-list .news-list-right .news-right-name .messageName{
+  max-width:50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  margin-right:5px;
+}
+.news .news-list .news-list-right .news-right-answer{
+  color: rgb(38, 38, 38);
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+  line-height: 24px;
+  padding-right:20px;
+}
+.news .news-list .news-list-right .news-right-time{
+  color: rgb(211, 211, 211);
+  font-size: 14px;
+}
+.loadMore{
+  text-align: center;
+}
+.show{
+  display: block !important;
+}
+.hide{
+  display: none !important;
+}

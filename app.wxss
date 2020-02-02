@@ -1,0 +1,31 @@
+/**app.wxss**/
+@import "./utils/iconfont.wxss";
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+/* 首页按钮背景字体颜色 */
+.indexButton{
+  /* background: #dbecff !important;
+  color: #419bff; */
+  background-color: #f7d2dc !important;
+  color: #ff6464;
+}
+/* 按钮颜色 */
+.buttonBg{
+  /* background-color: #215089; */
+  background:rgba(255,100,100,1) !important;
+  color: #fff;
+}
+/* 字体颜色 */
+.fontColor{
+  /* color: #215089;
+  border: 1px solid #215089; */
+  border:1px solid rgba(255,100,100,1) !important;
+  color:rgba(255,100,100,1) !important;
+}

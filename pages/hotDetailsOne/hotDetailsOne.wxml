@@ -1,0 +1,41 @@
+<!--pages/hotDetailsNoe.wxml-->
+<view class="hotDetails">
+  <!--提交成功提示框  -->
+  <van-toast id="van-toast" />
+  <view class='hotDetails-top'>
+      <view class='hotDetails-title'>{{contentDetailTitle}}</view>
+      <view class="hotDetails-image">
+        <image src="{{contentDetailAvatar}}" />
+        <view class="name-time">
+          <view class="name">{{contentDetailNickName}}</view>
+        </view>
+      </view>
+  </view>
+  <view class="{{hotDetails == ''?'hotDetails-main-kong':'hotDetails-main'}}">
+    <!-- 一级列表循环 -->
+    <view  wx:for="{{hotDetails}}"   class='hotDetails-main-list'>
+      <view class='hotDetails-main-list-top'>
+          <image src="{{item.portrait}}"/>
+          <view class="hotDetails-main-name">
+            <view class="name">{{item.nickname}}</view>
+            <view class="time">{{item.createTime}}</view>
+          </view>
+      </view>
+      <view class='hotDetails-main-list-bottom' >
+        {{item.content}}
+      </view>
+      <view class="hotDetails-main-list-icon-allCommentsShow">
+        <view bindtap="allComments" data-listid="{{item.id}}" class="{{item.sonCommentsNum>0?'allCommentsShow':'allCommentsHide'}}">查看全部{{item.sonCommentsNum}}条评论</view> 
+        <view bindtap="editorShowTwo" data-listid="{{item.id}}" data-listname="{{item.nickname}}"
+        class="{{item.id == listidShow?'allCommentsHide':'hotDetails-main-list-icon'}}">
+        <van-icon name="chat-o"/>
+        </view>
+       </view>
+       <view class="{{item.id == listidShow?'textarea-wrp':'textarea-wrpHide'}}">
+          <input bindinput="bindKeyInput" value="{{inputValue}}"   placeholder="回答 {{objectName}}"/>
+          <view bindtap="getcontentTwo" class="textarea-wrp-btn">回复</view>
+        </view>
+    </view>
+  </view>
+</view>
+<van-loading class="{{loadMore ? 'show':'hide'}}">加载中...</van-loading>

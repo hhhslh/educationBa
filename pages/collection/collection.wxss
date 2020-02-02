@@ -1,0 +1,61 @@
+/* pages/Collection.wxss */
+.noComment view{
+  text-align: center;
+  padding:5px 0;
+  color:rgb(78,78,78);
+}
+.collection .collection-list{
+  padding: 10px 15px;
+  overflow: hidden;
+  border-bottom: 1px solid rgb(240, 240, 240)
+}
+.collection .collection-list .collection-title{
+  display: flex;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.collection .collection-list .collection-title .collection-left{
+  width: 82%;
+  height: 60px;
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 28px;
+  color: rgb(38,38,38);
+  margin-right: 2%;
+}
+.collection .collection-list .collection-title .show{
+  height: 60px;
+  width: 16%;
+  border-radius: 8px;
+  vertical-align: middle;
+}
+.collection .collection-list .content-avatar text{
+  font-size: 14px;
+  margin-right: 10px;
+  color: rgb(168, 168, 168)
+}
+.collection .collection-list .content-avatar view{
+  float: right;
+  margin-top: 2px;
+  font-size: 18px;
+  height: 16px;
+  color: #cdcdcd;
+}
+.widthimg{
+  width:0 !important;
+  height:0 !important;
+}
+.showHide{
+  display: block !important;
+  text-align: center;
+
+}
+.hide{
+  display: none !important;
+}

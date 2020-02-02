@@ -1,0 +1,11 @@
+/* login.wxss */
+image{
+  display: block;
+  margin: 70px auto;
+  opacity: 0.4;
+}
+.explain{
+  text-align: center;
+  margin: 30px 0; 
+  color: rgb(168, 168, 168);
+}

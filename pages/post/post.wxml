@@ -1,0 +1,26 @@
+  <view class="newInvitation"> 
+    <view class="noComment" wx:if="{{hotList ==''}}">
+     <view>暂无帖子</view>
+    </view>
+    <view wx:else>
+      <view class="newInvitation-list-one" wx:for="{{hotList}}" >
+        <view bindtap="hotDetails" data-detailid="{{item.itemId}}" class="newInvitation-content-title">{{item.title}}</view>
+        <view bindtap="hotDetails" data-detailid="{{item.itemId}}" class="newInvitation-content">
+          <view  class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}">
+            <image src="{{item.avatar}}" class="head-image"/>
+            <text>{{item.nickName}}</text>
+            <view>{{item.summaryDesc}}</view>
+          </view>
+          <image src="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />
+        </view>
+        <view class="ellipsis" bindtap="ellipsis" data-deleteid="{{item.itemId}}">
+         <van-tag type="success" class="{{item.isCheck=='审核中'?'':'hide'}}">{{item.isCheck}}</van-tag>
+         <van-tag type="primary" class="{{item.isCheck=='已发布'?'':'hide'}}">{{item.isCheck}}</van-tag>
+         <van-tag type="warning" class="{{item.isCheck=='审核失败'?'':'hide'}}">{{item.isCheck}}</van-tag>
+         <van-icon class="ellipsisRight" name="ellipsis" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <van-loading class="{{loadMore ? 'show':'hide'}}">加载中...</van-loading>

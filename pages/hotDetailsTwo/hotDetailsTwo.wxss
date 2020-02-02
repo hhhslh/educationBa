@@ -1,0 +1,119 @@
+/* 标题和内容部分css */
+page{
+  height: 100%;
+}
+.hotDetails{
+   height: 100%;
+   background-color: rgb(240, 240, 240);
+}
+.hotDetails .hotDetails-top{
+  background-color:#fff;
+}
+.hotDetails .hotDetails-top .hotDetails-image{
+  height: 50px;
+  padding: 5px 10px;
+}
+.hotDetails .hotDetails-top .hotDetails-image image{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: top;
+}
+.hotDetails .hotDetails-top .hotDetails-image .name-time{
+  display: inline-block;
+}
+.hotDetails .hotDetails-top .hotDetails-image .name-time .name{
+  font-size: 18px;
+  font-weight: 700;
+}
+.hotDetails .hotDetails-top .hotDetails-image .name-time .time{
+  font-size: 14px;
+  color: rgb(168, 168, 168);
+}
+.hotDetails .hotDetails-top .hotDetails-image .follow{
+  float: right;
+  line-height: 30px;
+  width: 60px;
+  height: 30px;
+  color: #fff;
+  background-color: #215089;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.hotDetails .hotDetails-top .hotDetails-content{
+  font-size: 16px;
+  margin: 6px 0 0;
+  padding: 0 10px 10px;
+}
+/* 回答列表的css */
+.hotDetails .hotDetails-main{
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list{
+  padding: 10px;
+  background-color:#fff;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list:last-child{
+  margin-bottom: 0;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top image{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: top;
+  margin-right: 10px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name{
+  display: inline-block;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name .name{
+  font-size: 16px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name .time{
+  font-size: 14px;
+  color: rgb(168, 168, 168);
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-bottom{
+   margin:10px 0 0;
+   font-size:15px;
+}
+.hotDetails .null{
+  height: 53px;
+}
+.footInput{
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  padding: 10px 0;
+  z-index: 22;
+  width: 100%;
+  background-color: #fff;
+  box-shadow:  0 -2px 3px #eee;
+}
+.footInput input  {
+  width: 74%;
+  padding:5px 8px 4px;
+  margin-right: 4%;
+  background-color: #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-left: 4%;
+}
+.footInput .textarea-wrp-btn{
+  width: 14%;
+  text-align: center;
+  height: 1rem;
+  padding: 8px;
+  min-height: 1rem;
+  line-height: 1rem;
+  margin-right: 4%;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 20px;
+}

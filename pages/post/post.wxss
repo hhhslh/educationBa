@@ -1,0 +1,91 @@
+/* 最新帖子*/
+.noComment view{
+  text-align: center;
+  padding:5px 0;
+  color:rgb(78,78,78);
+}
+.newInvitation{
+  background-color: rgb(250, 250, 250)
+}
+.newInvitation-list-one{
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0px 2px 0px #eee;
+}
+.newInvitation-list-one .newInvitation-content-title{
+  padding: 5px  0;
+  font-size: 18px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.newInvitation .newInvitation-content{
+  display: flex;
+  padding: 5px  0;
+  overflow: hidden;
+}
+.newInvitation .newInvitation-content .content-image{
+  height: 88px;
+  width: 26%;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+.newInvitation .newInvitation-content .left-content{
+   width: 72%;
+   margin-right: 2%;
+}
+.newInvitation .newInvitation-content .left-content .head-image{
+  width:20px;
+  height:20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.newInvitation .newInvitation-content .left-content text{
+  font-size: 14px;
+  color: rgb(168, 168, 168)
+}
+.newInvitation .newInvitation-content .left-content view{
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 3;
+  display: -webkit-box;
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+  line-height: 22px;
+  color:rgb(78,78,78);
+}
+.newInvitation .newInvitation-list-one .ellipsis{
+  color: #cdcdcd;
+}
+.newInvitation .newInvitation-list-one .ellipsis .ellipsisRight{
+  float: right;
+  font-size: 20px;
+  margin-top: 4px;
+}
+.widthLong{
+  width:100% !important;
+}
+.widthimg{
+  width:0 !important;
+  height:0 !important;
+}
+.van-loading{
+  margin: 0 auto;
+  display: block !important;
+}
+.show{
+  display: block !important;
+  text-align: center;
+}
+.hide{
+  display: none !important;
+}

@@ -1,0 +1,82 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/news/news",
+    "pages/mine/mine",
+    "pages/post/post",
+    "pages/login/login",
+    "pages/publish/publish",
+    "pages/hotList/hotList",
+    "pages/hotDetails/hotDetails",
+    "pages/hotDetailsTwo/hotDetailsTwo",
+    "pages/follow/follow",
+    "pages/followHomePage/followHomePage",
+    "pages/collection/collection",
+    "pages/modifyMy/modifyMy",
+    "pages/AdministratorsList/AdministratorsList",
+    "pages/AdministratorsDetails/AdministratorsDetails",
+    "pages/hotDetailsOne/hotDetailsOne"
+  ],
+  "tabBar": {
+    "selectedColor": "#215089",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./images/first.png",
+        "selectedIconPath": "./images/first-1.png"
+      },
+      {
+        "pagePath": "pages/hotList/hotList",
+        "text": "热榜",
+        "iconPath": "./images/hot.png",
+        "selectedIconPath": "./images/hot-1.png"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "text": "发布",
+        "iconPath": "./images/publish.png",
+        "selectedIconPath": "./images/publish-1.png"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "消息",
+        "iconPath": "./images/message.png",
+        "selectedIconPath": "./images/message-1.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "./images/mine.png",
+        "selectedIconPath": "./images/mine-1.png"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "火龙果国际教育论坛",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-row": "miniprogram_npm/vant-weapp/row/index",
+    "van-col": "miniprogram_npm/vant-weapp/col/index",
+    "van-icon": "miniprogram_npm/vant-weapp/icon/index",
+    "van-search": "miniprogram_npm/vant-weapp/search/index",
+    "van-loading": "miniprogram_npm/vant-weapp/loading/index",
+    "van-button": "miniprogram_npm/vant-weapp/button/index",
+    "van-popup": "miniprogram_npm/vant-weapp/popup/index",
+    "van-picker": "miniprogram_npm/vant-weapp/picker/index",
+    "van-checkbox": "miniprogram_npm/vant-weapp/checkbox/index",
+    "van-checkbox-group": "miniprogram_npm/vant-weapp/checkbox-group/index",
+    "van-toast": "miniprogram_npm/vant-weapp/toast/index",
+    "van-tab": "miniprogram_npm/vant-weapp/tab/index",
+    "van-tabs": "miniprogram_npm/vant-weapp/tabs/index",
+    "van-radio": "miniprogram_npm/vant-weapp/radio/index",
+    "van-radio-group": "miniprogram_npm/vant-weapp/radio-group/index",
+    "van-tag": "miniprogram_npm/vant-weapp/tag/index"
+  }
+}

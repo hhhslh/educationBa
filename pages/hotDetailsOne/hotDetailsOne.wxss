@@ -1,0 +1,125 @@
+/* pages/hotDetailsNoe.wxss */
+@import "../../app.wxss";
+.hotDetails .hotDetails-top{
+  background-color:#fff;
+}
+.hotDetails .hotDetails-top .hotDetails-image{
+  padding: 10px;
+}
+.hotDetails .hotDetails-top .hotDetails-image image{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.hotDetails .hotDetails-top .hotDetails-image .name-time{
+  display: inline-block;
+}
+.hotDetails .hotDetails-top .hotDetails-image .name-time .name{
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(168, 168, 168);
+}
+
+.hotDetails .hotDetails-top .hotDetails-title{
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 5px;
+  padding: 0 10px;
+}
+
+/* 回答列表的css */
+.hotDetails .hotDetails-main-kong{
+  background-color: rgb(240, 240, 240);
+  padding-top: 5px;
+}
+.hotDetails .hotDetails-main{
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list{
+  padding: 10px;
+  background-color:#fff;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list:last-child{
+  margin-bottom: 0;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top image{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  vertical-align: top;
+  margin-right: 10px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name{
+  display: inline-block;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name .name{
+  font-size: 14px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name .time{
+  font-size: 12px;
+  color: rgb(168, 168, 168);
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-bottom{
+   margin:10px 0;
+   font-size:16px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-icon-allCommentsShow{
+   line-height: 20px;
+   height: 20px;
+   overflow: hidden;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-icon-allCommentsShow .allCommentsShow{
+  font-size: 14px;
+  color: rgb(168, 168, 168);
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-icon-allCommentsShow .allCommentsHide{
+  display: none;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-icon-allCommentsShow .hotDetails-main-list-icon{
+  font-size: 20px;
+  vertical-align: middle;
+  text-align: right;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .textarea-wrpHide{
+  display: none;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .textarea-wrp {
+  display: flex;
+  margin-top: -20px;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .textarea-wrp input{
+  width: 82%;
+  padding:8px;
+  border: 1px solid #eee;
+  margin-right: 2%;
+}
+.hotDetails .hotDetails-main .hotDetails-main-list .textarea-wrp .textarea-wrp-btn{
+  width: 16%;
+  text-align: center;
+  border: 1px solid #eee;
+  height: 38px;
+  line-height: 38px;
+}
+
+.widthLong{
+  width:100% !important;
+}
+.widthimg{
+  width:0 !important;
+  height:0 !important;
+}
+.van-loading{
+  margin: 0 auto;
+  display: block !important;
+}
+.show{
+  display: block !important;
+}
+.hide{
+  display: none !important;
+}

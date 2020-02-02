@@ -1,0 +1,250 @@
+/**index.wxss**/
+@import "../../app.wxss";
+.head{
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.head image{
+  width:25px;
+  height:25px;
+  vertical-align: middle;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+}
+.head text{
+  margin-left:10px;
+  font-size:14px;
+  font-weight:500;
+  color:rgba(0,0,0,1);
+  height: 46px;
+  line-height: 46px;
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  z-index: 10;
+}
+swiper{
+  padding-left:10px;
+}
+.oneSwiperPart swiper-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.oneSwiperPart swiper-item view{
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  width:100%;
+  height:100%;
+  margin-right:10px;
+  position: relative;
+   box-shadow: 0px -20px 20px -10px rgb(78, 78, 78) inset;
+  border-radius: 5px;
+}
+.oneSwiperPart swiper-item view text{
+  border-radius: 5px;
+  color:#fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+  position: absolute;
+  bottom:10px;
+  left:10px;
+}
+.oneSwiperPart swiper-item:nth-child(1) view{
+  margin-left:0px;
+}
+.weekDiscuss .thisWeek{
+  padding:16px 0 8px 10px;
+  font-size:16px;
+  font-weight:bold;
+  line-height:22px;
+  color:rgba(0,0,0,1);
+  opacity:1;
+}
+.weekDiscuss swiper-item .bgSwiperItem{
+  background-image: url(https://nsi.oss-cn-zhangjiakou.aliyuncs.com/nsi-community/indexBg/Bg01.png);
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  margin-right:10px;
+  height:130px;
+  position: relative;
+}
+.weekDiscuss swiper-item:nth-child(1) .bgSwiperItem{
+  margin-left:0px;
+}
+.weekDiscuss swiper-item .bgSwiperItem .hotTitle{
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 25px;
+  padding:5px 10px;
+  letter-spacing: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+} 
+.weekDiscuss swiper-item .bgSwiperItem .data{
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+}
+.weekDiscuss swiper-item .bgSwiperItem .data text{
+  color:#fff;
+  font-size:12px;
+  margin-right:10px;
+}
+.van-search{ 
+  padding:10px 16px 5px !important;
+} 
+.van-search__content{ 
+  border-radius: 15px !important; 
+} 
+.van-search .van-icon:before { 
+  font-size: 20px;
+  color:rgb(128,128,128) !important;
+}
+/* 类目 */
+.van-hairline--bottom:after,.van-hairline--left:after,.van-hairline--right:after,.van-hairline--surround:after,.van-hairline--top-bottom:after,.van-hairline--top:after,.van-hairline:after {
+  border:none !important;
+}
+.van-tabs--line .van-tabs__wrap{
+  height: 40px !important;
+  background: #fff;
+  box-shadow: 0px 2px 2px #eee;
+}
+.index_main .chooseTab .tabName{
+  background: #eee;
+  padding: 5px 8px;
+  margin: 10px 8px;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 5px;
+}
+/* 最新帖子*/
+.newInvitation{
+  background-color: rgb(250, 250, 250)
+}
+.newInvitation-list-one{
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0px 2px 0px #eee;
+}
+.newInvitation-list-one .newInvitation-content-title{
+  font-size: 18px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+  line-height: 24px;
+  color:rgb(38,38,38);
+}
+.newInvitation .newInvitation-content{
+  display: flex;
+  overflow: hidden;
+  margin-top:5px;
+}
+.newInvitation .newInvitation-content .content-image{
+  height: 80px;
+  width: 35%;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+.newInvitation .newInvitation-content .left-content{
+   width: 72%;
+   margin-right: 2%;
+}
+.newInvitation .newInvitation-content .left-content .head-image{
+  width:20px;
+  height:20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+  float: left;
+}
+.newInvitation .newInvitation-content .left-content text{
+  font-size: 14px;
+  color: rgb(168, 168, 168);
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+.newInvitation .newInvitation-content .left-content .summaryDesc{
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+  line-height: 26px;
+  color:rgb(78,78,78);
+}
+/* 发布时间及评论 */
+.newInvitation .comment{
+  height: 25px;
+  line-height: 25px;
+  display: flex;
+  margin-top: 5px;
+  color:rgb(78,78,78);
+}
+.newInvitation .comment .commentIcon{
+  margin: 2px 5px 0 15px;
+} 
+.newInvitation .comment .commentIcon view{
+  font-size:18px !important;
+}
+.newInvitation .comment .publishTime{
+  font-size:14px;
+}
+.newInvitation .comment .commentNum{
+  font-size:14px;
+}
+.widthLong{
+  width:100% !important;
+}
+.widthimg{
+  width:0 !important;
+  height:0 !important;
+}
+.van-loading{
+  margin: 0 auto;
+  display: block !important;
+}
+.show{
+  display: block !important;
+}
+.hide{
+  display: none !important;
+}
+.redPoint{
+  width:5px;
+  height:5px;
+  border-radius: 50%;
+  background:red;
+}
+.isNull{
+  text-align: center;
+  margin: 50px;
+  color: rgb(78,78,78);
+}

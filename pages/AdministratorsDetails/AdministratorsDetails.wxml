@@ -1,0 +1,11 @@
+<!-- // 引入模板 -->
+<!-- <import src="../../wxParse/wxParse.wxml"/> -->
+<!-- //这里data中article为bindName -->
+<!-- <template data="{{wxParseData:article.nodes}}"/> -->
+<view class="header">{{headerTitle}}</view>
+<rich-text nodes="{{nodes}}"></rich-text>
+<view class="Btn">
+  <button size="mini" type="warn" bindtap="refuse">拒绝</button>
+  <button size="mini" type="default">下一个</button>
+  <button size="mini" type="primary" bindtap="adopt">通过</button>
+</view>

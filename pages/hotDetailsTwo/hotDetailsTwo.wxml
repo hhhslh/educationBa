@@ -1,0 +1,36 @@
+<!--pages/hotDetails.wxml-->
+<view class='hotDetails'>
+  <!--提交成功提示框  -->
+  <van-toast id="van-toast" />
+  <view class='hotDetails-top'>
+      <view class="hotDetails-image">
+        <image src="{{contentDetailPortrait}}"/>
+        <view class="name-time">
+          <view class="name">{{contentDetailNickname}}</view>
+          <view class="time">{{contentDetailCreateTime}}</view>
+        </view>
+        <!-- <text class="follow">关注</text> -->
+      </view>
+      <view class='hotDetails-content'><rich-text nodes="{{contentDetailContent}}"></rich-text></view>
+  </view>
+  <view class='hotDetails-main'>
+     <!-- 一级列表循环 -->
+     <view  wx:for="{{hotDetails}}"   class='hotDetails-main-list'>
+       <view class='hotDetails-main-list-top'>
+          <image src="{{item.portrait}}"/>
+          <view class="hotDetails-main-name">
+            <view class="name">{{item.nickname}}</view>
+            <view class="time">{{item.createTime}}</view>
+          </view>
+       </view>
+       <view class='hotDetails-main-list-bottom' >
+        {{item.content}}
+       </view>
+     </view>
+  </view>
+  <view class="null"></view>
+</view>
+<view class="footInput" >
+  <input bindinput="getcontentValue" value="{{getcontentValue}}" cursor-spacing="18px"   placeholder="友善的评论是交流的起点"/>
+  <view bindtap="getcontentTwo" class="textarea-wrp-btn buttonBg">回复</view>
+</view>

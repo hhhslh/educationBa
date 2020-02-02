@@ -1,0 +1,18 @@
+<!--pages/follow.wxml-->
+<view class="follow">
+  <view class="noComment" wx:if="{{followList ==''}}">
+    <view>暂无关注</view>
+  </view>
+  <view wx:else >
+    <view  class="follow-list" wx:for="{{followList}}">
+      <view class="ellipsis" bindtap="ellipsis" data-deleteid="{{item.id}}" data-deletename="{{item.followerNickname}}">
+        <view class="iconfont icon-more"></view>
+      </view>
+      <view   bindtap="enterHomePage" data-followerId="{{item.followerId}}">
+        <image src="{{item.followerPortrait}}"/>
+        <text class="follow-left">{{item.followerNickname}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<van-loading class="{{loadMore ? 'show':'hide'}}">加载中...</van-loading>

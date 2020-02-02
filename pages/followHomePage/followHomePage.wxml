@@ -1,0 +1,53 @@
+<!--pages/followHomePage/followHomePage.wxml-->
+<view class="topPart">
+  <view class="avar"><image src="{{userMessage.wechatPortrait}}"/></view>
+  <view>
+    <text class="focusOnWhite">取消关注</text> 
+    <text class="name">{{userMessage.nickname}}</text>
+    <text class="focusOn buttonBg">取消关注</text> 
+  </view>
+  <view class="signature" wx:if="{{userMessage.slogan=='null'|| userMessage.slogan==null}}">暂无签名</view>
+  <view class="signature" wx:else>{{userMessage.slogan}}</view>
+</view>
+
+<van-tabs active="0" bind:change="onChangeTab">
+  <van-tab title="帖子">
+    <view wx:if="{{postList!=''}}">
+      <view class="newInvitation" wx:for="{{postList}}" data-postid="{{item.itemId}}" bindtap="postDetail"> 
+        <view class="newInvitation-list-one">
+          <view class="newInvitation-content-title">{{item.title}}</view>
+          <view class="newInvitation-content">
+            <view class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}" >
+              <image src="{{item.avatar}}" class="head-image"/>
+              <text>{{item.nickName}}</text>
+              <view class="summaryDesc">{{item.summaryDesc}}</view>
+            </view>
+            <image src="{{item.postIcon}}"  wx:if="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />
+          </view>
+          <view class="comment">
+            <text class="publishTime">{{item.createTime}}</text>
+            <van-icon name="chat-o" class="commentIcon" />
+            <text class="commentNum">{{item.commentNum}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+     <view wx:else class="noPost">暂无帖子</view>
+  </van-tab>
+
+  <van-tab title="回答">
+    <view wx:if="{{commentList!=''}}">
+      <view class="commentPart" wx:for="{{commentList}}" data-postid="{{item.objectId}}" bindtap="postDetail">
+        <view class="cardLine">
+          <image src="{{item.portrait}}"></image>
+          <view class="summaryDesc">{{item.content}}</view>
+        </view>
+        <view class="comment">
+          <text class="publishTime">{{item.createTime}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="noComment">暂无回答</view>
+  </van-tab>
+</van-tabs>
+<van-loading class="{{loadMore ? 'show':'hide'}}"></van-loading>

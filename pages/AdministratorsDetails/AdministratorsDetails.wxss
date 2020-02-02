@@ -1,0 +1,19 @@
+.Btn{
+  height:75rpx;
+  width: 100%;
+  background: #ccc;
+  position:fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+button{ 
+  height: 55rpx;
+  margin-top: 10rpx;
+}
+.header{
+  margin-bottom: 30px;
+  font-size: 50rpx;
+}

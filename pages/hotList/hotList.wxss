@@ -1,0 +1,210 @@
+/* 最新帖子*/
+page{
+  background:rgba(244,244,244,1);
+}
+.title-Bg{
+  width: 100%;
+  height: 190px;
+  background-image: url("https://nsi.oss-cn-zhangjiakou.aliyuncs.com/nsi-community/hotBg/hotBg.png");
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  -moz-background-size:100% 100%;
+}
+.newInvitation{
+  margin-top: -90px;
+  padding: 0 10px;
+}
+.newInvitation-list-one{
+  padding: 14px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius:8px;
+}
+.newInvitation-list-one:nth-child(2) {
+  display: none;
+}
+.newInvitation-list-one .newInvitation-content-title{
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 28px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.newInvitation .newInvitation-content{
+  display: flex;
+  overflow: hidden;
+}
+.newInvitation .newInvitation-content .content-image{
+  height: 85px;
+  width: 26%;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+.newInvitation .newInvitation-content .left-content{
+   width: 72%;
+   margin-right: 2%;
+}
+.newInvitation .newInvitation-content .left-content .head-image{
+  width:20px;
+  height:20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.newInvitation .newInvitation-content .left-content text{
+  font-size: 14px;
+  color:rgba(102,102,102,1);
+}
+.newInvitation .newInvitation-content .left-content .summaryDesc{
+  margin-top: 5px;
+  overflow: hidden;
+  font-weight:400;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  display: -webkit-box;
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+  line-height: 26px;
+  color:rgba(74,74,74,1);
+}
+/* 发布时间及评论 */
+.newInvitation .comment{
+  height: 25px;
+  line-height: 25px;
+  display: flex;
+  margin-top: 5px;
+  color:rgb(78,78,78);
+}
+.newInvitation .comment .commentIcon{
+  margin: 2px 5px 0 15px;
+  color:rgba(153,153,153,1);
+} 
+.newInvitation .comment .commentIcon view{
+  font-size:18px !important;
+}
+.newInvitation .comment .publishTime{
+  font-size:14px;
+  color:rgba(153,153,153,1);
+}
+.newInvitation .comment .commentNum{
+  font-size:14px;
+  color:rgba(153,153,153,1);
+}
+.widthLong{
+  width:100% !important;
+}
+.widthimg{
+  width:0 !important;
+  height:0 !important;
+}
+.van-loading{
+  margin: 0 auto;
+  display: block !important;
+}
+.show{
+  display: block !important;
+}
+.hide{
+  display: none !important;
+}
+/* 最热帖子的第一条css */
+.newInvitation-hot{
+ padding: 14px;
+ background-color: #fff;
+ margin-bottom: 10px;
+ border-radius:8px;
+}
+.newInvitation-hot .newInvitation-hotBg .xian{
+  height:1px;
+  background:rgba(235,235,235,1);
+  margin:10px -10px; 
+}
+.newInvitation-hot .newInvitation-hotBg .reply{
+  display: flex;
+  overflow: hidden;
+  height:20px;
+  line-height:20px;
+  margin-top: 6px;
+}
+.newInvitation-hot .newInvitation-hotBg .reply .reply-one{
+  width: 79%;
+  font-size:14px;
+  font-weight:bold;
+  color:rgba(90,90,90,1);
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+  margin-right: 1%;
+}
+.newInvitation-hot .newInvitation-hotBg .reply .reply-two{
+  width: 20%;
+  text-align: right;
+  font-size:12px;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+}
+.newInvitation-hot .newInvitation-hotBg{
+  background:rgba(255,247,247,1);
+  padding: 14px;
+  border-radius:6px;
+}
+.newInvitation-hot .newInvitation-hotBg .newInvitation-hotBg-title{
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 28px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.newInvitation-hot .newInvitation-hotBg-content{
+  display: flex;
+  overflow: hidden;
+}
+.newInvitation-hot .newInvitation-hotBg-content .hotBg-left-content{
+  width: 68%;
+  margin-right: 2%;
+}
+.newInvitation-hot .newInvitation-hotBg-content .hotBg-left-content .left-summaryDesc{
+  margin-bottom:5px;
+  overflow: hidden;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  line-clamp: 3;
+  display: -webkit-box;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 22px;
+  color:rgba(90,90,90,1);
+}
+.newInvitation-hot .newInvitation-hotBg-content .hotBg-left-content .hotBg-image{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.newInvitation-hot .newInvitation-hotBg-content .hotBg-left-content text {
+  font-size: 12px;
+  color: rgba(102,102,102,1);
+  margin-right: 15px;
+}
+.newInvitation-hot .newInvitation-hotBg-content .hotBg-content-image{
+  height:86px;
+  width: 30%;
+  border-radius: 4px;
+}

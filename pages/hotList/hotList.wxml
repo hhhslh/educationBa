@@ -1,0 +1,42 @@
+<view class="title-Bg">
+</view>
+<view class="newInvitation">
+  <view class="newInvitation-hot" bindtap="hot">
+    <view class="newInvitation-hotBg">
+      <view class="newInvitation-hotBg-title">{{hotBg.title}}</view>
+      <view class="newInvitation-hotBg-content">
+        <view  class="hotBg-left-content {{hotBg.postIcon==null || hotBg.postIcon==''? 'widthLong':''}}">
+          <view class="left-summaryDesc">{{hotBg.summaryDesc}}</view>
+          <image src="{{hotBg.avatar}}" class="hotBg-image"/>
+          <text>{{hotBg.nickName}}</text>
+          <text>{{hotBg.commentNum}} 评论</text>
+        </view>
+        <image src="{{hotBg.postIcon}}" class="hotBg-content-image {{hotBg.postIcon==null || hotBg.postIcon==''? 'widthimg':''}}" />
+      </view>
+      <view class="xian"></view>
+      <view class="reply" wx:for="{{hot}}">
+        <text class="reply-one">{{item.content}}</text>
+        <text class="reply-two">{{item.sonCommentsNum}}  回复</text>
+      </view>
+    </view>
+  </view>
+  <view bindtap="hotDetails" data-detailid="{{item.itemId}}" class="newInvitation-list-one" wx:for="{{hotList}}">
+    <view class="newInvitation-content-title">{{item.title}}</view>
+    <view class="newInvitation-content">
+      <view  class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}">
+        <image src="{{item.avatar}}" class="head-image"/>
+        <text>{{item.nickName}}</text>
+        <view class="summaryDesc">{{item.summaryDesc}}</view>
+      </view>
+      <image src="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />
+    </view>
+    <view class="comment">
+      <text class="publishTime">{{item.createTime}}</text>
+      <van-icon name="chat-o" class="commentIcon" />
+      <text class="commentNum">{{item.commentNum}}</text>
+    </view>
+  </view>
+</view>
+<van-loading class="{{loadMore ? 'show':'hide'}}">加载中...</van-loading>
+
+  

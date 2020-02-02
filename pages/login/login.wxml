@@ -1,0 +1,6 @@
+<!--login.wxml-->
+<view>
+ <image src="../../images/loginBg.png"/>
+ <view class="explain">请授权信息，以便提供更好的服务</view>
+ <button wx:if="{{canIUse}}" type="primary" open-type="getUserInfo" bindgetuserinfo="login">授权登录</button>
+</view>
