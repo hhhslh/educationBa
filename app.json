@@ -23,7 +23,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
+        "text": "首部",
         "iconPath": "./images/first.png",
         "selectedIconPath": "./images/first-1.png"
       },
