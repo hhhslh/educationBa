@@ -26,7 +26,9 @@ Page({
     searchList:"",//存放搜索下拉刷新全部列表
     isSearch:false,//判断是否搜索
     searchNull:false,//判断是否是空搜
-    homeConfigList:""
+    homeConfigList: "",
+    listId: "",
+    postHeadList: "" 
   },
   //事件处理函数
   bindViewTap: function() {
@@ -74,7 +76,11 @@ Page({
     that.data.pageNum++
     that.data.isRefresh=true
     that.data.isSearch=false
-    that.getIndexList()
+    if (that.data.listId == "") {
+      that.getIndexList()
+    } else {
+      that.tabList()
+    } 
   },
   gethomeConfig(){
     var that=this
@@ -101,7 +107,11 @@ Page({
       isSearch:true,
       isRefresh:false
     })
-    this.getIndexList()
+    if (that.data.listId == "") {
+      that.getIndexList()
+    } else {
+      that.tabList()
+    } 
   },
   // 获取全部列表
   getIndexList() {
@@ -183,9 +193,20 @@ Page({
   // 进类目列表
   toTabDetail(e) {
     var that = this
-    var listId = e.currentTarget.dataset.listid
+    that.setData({
+      listId: e.currentTarget.dataset.listid,
+      pageNum: 1,
+      postHeadList: "",
+    })
+    console.log(that.data.postHeadList)
+    that.tabList()
+  }, 
+  tabList() {
+    var that = this 
     api.chineseList({
-      categoryId: listId
+      categoryId: that.data.listId,
+      pageNum: that.data.pageNum,
+      pageSize: that.data.pageSize, 
     }, function (res) {
       console.log('接口请求成功', res)
       for (var i = 0; i < res.data.itemList.length; i++) {
@@ -194,12 +215,32 @@ Page({
         res.data.itemList[i].nickName = time.uncodeUtf16(res.data.itemList[i].nickName)
         res.data.itemList[i].title = time.uncodeUtf16(res.data.itemList[i].title)
       }
-      that.setData({
-        postHead: res.data,
-        showId: listId,
-        isShow:false,
-        loadMore:false
-      })
+      // 判断是否刷新 
+      if (that.data.isRefresh) {
+        that.data.postHeadList = that.data.postHead.concat(res.data.itemList);
+        if (res.data.itemList.length == 0) {
+          that.setData({
+            loadMore: false
+          })
+          wx.showToast({
+            title: '没有更多了',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      } else {
+        that.data.postHeadList = res.data.itemList
+        if (res.data.itemList.length < 10) {
+          that.setData({
+            loadMore: false
+          })
+        }
+      } 
+        that.setData({
+          postHead: that.data.postHeadList,
+          showId: that.data.listId,
+          isShow: false,
+        })
     },
       function (err) {
         console.log(err)
@@ -218,6 +259,30 @@ Page({
     wx.navigateTo({
       url: e.currentTarget.dataset.cardid
     })
-  }
+  },
+  // 上传文件 
+  uploadFlie() {
+    wx.chooseMessageFile({
+      count: 3,
+      type: 'file',
+      success(res) {
+        console.log(res)
+        console.log(res.tempFiles[0].path)
+        // const tempFilePaths = res.tempFiles 
+        wx.uploadFile({
+          url: 'http://high.natapp1.cc/nsi-1.0/postItem/upfile.do',
+          filePath: res.tempFiles[0].path,
+          name: 'file',
+          formData: {
+            'type': 'nsi-community/attachment/',
+          },
+          success(res) {
+            console.log(res)
+            const data = res.data
+          }
+        })
+      }
+    })
+  }, 
 
 })

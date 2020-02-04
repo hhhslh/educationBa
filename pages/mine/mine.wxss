@@ -48,10 +48,36 @@ page {
    -webkit-box-orient: vertical;
 }
 .mine .mine-center .mine-center-top .modify{
-  margin: 10px 0 15px;
+  margin: 10px 0;
   color: rgb(165, 165, 165);
   font-size: 14px;
 }
+.mine .mine-center .integral{ 
+  text-align: center; 
+  margin-bottom:10px; 
+  font-size:14px; 
+} 
+.mine .mine-center .integral .van-popup{ 
+  padding:10px; 
+  width:60%; 
+} 
+.mine .mine-center .integral .popup view:first-of-type{ 
+  font-size:18px; 
+  margin:5px 0; 
+} 
+.mine .mine-center .integral .popup view{ 
+  font-size: 14px; 
+  line-height: 30px; 
+  color: rgb(38,38,38); 
+} 
+.mine .mine-center .integral .popup view text{ 
+  margin-left:30px; 
+} 
+ 
+.mine .mine-center .integral .van-icon{ 
+  vertical-align: middle; 
+  margin-left:5px; 
+} 
 .mine .mine-center .mine-center-top .modify .modify-icon{
   font-size: 16px;
   vertical-align: middle;

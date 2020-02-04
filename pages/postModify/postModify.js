@@ -336,7 +336,7 @@ Page({
                 that.setData({
                   showModalStatus: false,
                 })
-                Toast('提交成功，请等待审核！')
+                Toast('编辑成功，请等待审核！')
                 setTimeout(function () {
                   that.setData({
                     titleContent: ""
