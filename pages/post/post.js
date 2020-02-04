@@ -155,5 +155,12 @@ Page({
         }
       }
     })
-  }
+  },
+  postModify: function (e) {
+    console.log(e.currentTarget.dataset.detailid)
+    wx.navigateTo({
+      url: '../postModify/postModify?id=' + e.currentTarget.dataset.detailid
+    })
+  },
+  
 })

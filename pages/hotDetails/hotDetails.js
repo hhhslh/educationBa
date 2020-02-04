@@ -189,9 +189,9 @@ Page({
           icon: 'none',
           duration: 1500,
         })
-      } else if (that.data.getcontentValue.length > 50){
+      } else if (that.data.getcontentValue.length > 140){
         wx.showToast({
-          title: "输入框文字不能超过50字...",
+          title: "输入框文字不能超过140字...",
           icon: 'none',
           duration: 1500,
         })
@@ -272,9 +272,9 @@ Page({
           icon: 'none',
           duration: 1500,
         })
-      } else if (that.data.inputValue >50){
+      } else if (that.data.inputValue >140){
         wx.showToast({
-          title: "输入框文字不能超过50字...",
+          title: "输入框文字不能超过140字...",
           icon: 'none',
           duration: 1500,
         })

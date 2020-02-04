@@ -16,7 +16,8 @@
     "pages/modifyMy/modifyMy",
     "pages/AdministratorsList/AdministratorsList",
     "pages/AdministratorsDetails/AdministratorsDetails",
-    "pages/hotDetailsOne/hotDetailsOne"
+    "pages/hotDetailsOne/hotDetailsOne",
+    "pages/postModify/postModify"
   ],
   "tabBar": {
     "selectedColor": "#215089",
@@ -77,7 +78,6 @@
     "van-tabs": "miniprogram_npm/vant-weapp/tabs/index",
     "van-radio": "miniprogram_npm/vant-weapp/radio/index",
     "van-radio-group": "miniprogram_npm/vant-weapp/radio-group/index",
-    "van-tag": "miniprogram_npm/vant-weapp/tag/index",
-    "van-dialog": "miniprogram_npm/vant-weapp/dialog/index"
+    "van-tag": "miniprogram_npm/vant-weapp/tag/index"
   }
 }

@@ -133,9 +133,17 @@
 }
 .hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name{
   display: inline-block;
+  width:50%;
 }
 .hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name .name{
   font-size: 14px;
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 }
 .hotDetails .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name .time{
   font-size: 12px;

@@ -1,0 +1,47 @@
+<!--pages/publish.wxml-->
+  <!-- 选择类目 -->
+  <van-popup show="{{show}}">
+    <view class="itemTitle">请选择类目标签</view>
+    <view class="itemBox">
+      <view class="itemName {{clickId == item.id ? 'fontColor' : ''}}" bindtap="clickSelect" wx:for="{{categoryItemList}}" data-id="{{item.id}}" data-name="{{item.categoryName}}" >{{item.categoryName}}</view>
+      <view class="confirm {{isChoose ? 'buttonBg' : ''}}" bindtap="onConfirm">确认</view>
+    </view>
+  </van-popup>
+<view class="publishBox">
+  <view class="publishChoose">
+    <view class="chooseItem" bindtap="modify">
+      <text class="chooseItemTitle">类目：</text>
+      <view class="chooseContent">
+        <text class="itemContent">{{itemContent}}</text>
+        <text class='icons iconfont icon-bianji'></text>
+      </view>
+    </view>
+  </view>
+  <view class="publishContent">
+    <!-- 标题 -->
+    <view class="inputTitle">
+      <textarea placeholder="{{textPlaceHolder}}" auto-height="{{auto_height}}" bindblur='areablur' bindfocus='areafocus'  value="{{titleContent}}" bindinput='inputValue'/>
+    </view>
+    <!-- 内容 -->
+    <view class="editorBox">
+      <editor
+        id="editor"
+        class="ql-container"
+        showImgSize
+        showImgToolbar
+        showImgResize
+        placeholder="写内容..."
+        read-only="{{readOnly}}"
+        bindready="onEditorReady"
+        bindinput	="checkContent">
+      </editor>
+      <view class="fontNumber">您输入了{{fontNumber}}个字</view>
+    </view>
+  </view>
+</view>
+<view class="bottomButton">
+  <text class="submit {{isSubmit ? 'buttonBg' : ''}}" bindtap="submit">发布</text>
+  <text class="cancle" bindtap="onCancel">取消</text>
+  <text class='upload iconfont icon-tupian' bindtap="uploadBtn"></text>
+</view>
+<van-toast id="van-toast" />

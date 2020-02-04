@@ -1,11 +1,10 @@
- // mine.js
+// mine.js
 var api = require("../../utils/api.js")
 var time = require('../../utils/util.js')
 const app = getApp()
 
 Page({
   data: {
-    show:false,//积分弹窗
     avatarUrl: "",//用户头像地址
     nickName:"未登录"//用户姓名
   },
@@ -50,15 +49,13 @@ Page({
         function (err) {
         }
       ),
-        api.communityUser_Login(
+      api.communityUser_Login(
         { openId: wx.getStorageSync('openId'),
           wechatPortrait: wx.getStorageSync('wechatPortrait'), 
           nickName: time.utf16toEntities(wx.getStorageSync('nickName'))},
         function (res) {
           console.log(res)
           if (res.code == 0) {
-            wx.setStorageSync('nickName', time.uncodeUtf16(res.data.nickname))
-            wx.setStorageSync('wechatPortrait', res.data.wechatPortrait)
             that.setData({
               avatarUrl: res.data.wechatPortrait,
               nickName: time.uncodeUtf16(res.data.nickname),
@@ -175,18 +172,4 @@ Page({
   //     fail(res) { console.log(res)}
   //   })
   // }
-  dialogBtn(){
-    var that=this
-    that.setData({
-      show:true
-    })
-  },
-  onClose() {
-    this.setData({ 
-      show: false 
-    });
-  }
-
-  
-
 })

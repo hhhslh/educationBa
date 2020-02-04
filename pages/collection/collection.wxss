@@ -16,7 +16,7 @@
   margin-bottom: 5px;
 }
 .collection .collection-list .collection-title .collection-left{
-  width: 82%;
+  width: 72%;
   height: 60px;
   font-size: 18px;
   overflow: hidden;
@@ -30,15 +30,15 @@
   margin-right: 2%;
 }
 .collection .collection-list .collection-title .show{
-  height: 60px;
-  width: 16%;
-  border-radius: 8px;
+  height: 80px;
+  width: 35%;
+  border-radius: 5px;
   vertical-align: middle;
 }
 .collection .collection-list .content-avatar text{
   font-size: 14px;
   margin-right: 10px;
-  color: rgb(168, 168, 168)
+  color: rgb(168, 168, 168);
 }
 .collection .collection-list .content-avatar view{
   float: right;

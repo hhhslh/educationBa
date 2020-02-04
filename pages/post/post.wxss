@@ -14,9 +14,13 @@
   box-shadow: 0px 2px 0px #eee;
 }
 .newInvitation-list-one .newInvitation-content-title{
+  display: flex;
+  justify-content: space-between;
   padding: 5px  0;
   font-size: 18px;
   font-weight: bold;
+}
+.newInvitation-list-one .newInvitation-content-title .title{
   overflow: hidden;
   text-overflow: ellipsis;
   line-clamp: 2;
@@ -24,16 +28,20 @@
   -webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
+.newInvitation-list-one .newInvitation-content-title .postModify{
+  width: 60px;
+  text-align: right;
+}
 .newInvitation .newInvitation-content{
   display: flex;
   padding: 5px  0;
   overflow: hidden;
 }
 .newInvitation .newInvitation-content .content-image{
-  height: 88px;
-  width: 26%;
-  margin-top: 5px;
+  height: 80px;
+  width: 35%;
   border-radius: 5px;
+  vertical-align: middle;
 }
 .newInvitation .newInvitation-content .left-content{
    width: 72%;
@@ -45,10 +53,17 @@
   border-radius: 50%;
   margin-right: 10px;
   vertical-align: middle;
+  float: left;
 }
 .newInvitation .newInvitation-content .left-content text{
   font-size: 14px;
-  color: rgb(168, 168, 168)
+  color: rgb(168, 168, 168);
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .newInvitation .newInvitation-content .left-content view{
   margin-top: 5px;

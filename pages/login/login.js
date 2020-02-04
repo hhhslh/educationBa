@@ -81,7 +81,7 @@ Page({
         console.log(res)
         if (res.code == 0) {
           wx.setStorageSync('wechatPortrait', res.data.wechatPortrait)
-          wx.setStorageSync('nickName', time.uncodeUtfNone(res.data.nickname))
+          wx.setStorageSync('nickName', time.utf16toEntities(res.data.nickname))
           wx.setStorageSync('openId', res.data.openId)
           wx.hideLoading()
           wx.navigateBack({

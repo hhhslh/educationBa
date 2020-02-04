@@ -169,22 +169,6 @@ Page({
       })
       return false
     }
-     if (this.data.organization == ""){
-       wx.showToast({
-         title: "公司不能为空",
-         icon: 'none',
-         duration: 1500,
-       })
-      return false
-    } 
-     if (this.data.position == "") {
-       wx.showToast({
-         title: "职位不能为空",
-         icon: 'none',
-         duration: 1500,
-       })
-      return false
-    }  
     if (this.data.phone != "" && !(/^[1][3,4,5,7,8,6,1,2,9][0-9]{9}$/.test(this.data.phone))){
       wx.showToast({
         title: "手机号不正确",
@@ -193,13 +177,22 @@ Page({
       })
       return false
     }
-    if (this.data.usermail != "" && !(/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(this.data.usermail))) {
+    if (this.data.usermail == "") {
       wx.showToast({
-        title: "邮箱不正确",
+        title: "邮箱不能为空",
         icon: 'none',
         duration: 1500,
       })
       return false
+    }else{
+      if (!(/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(this.data.usermail))){
+        wx.showToast({
+          title: "邮箱格式不正确",
+          icon: 'none',
+          duration: 1500,
+        })
+        return false
+      }
     }
     api.communityUserUpdate(
       {

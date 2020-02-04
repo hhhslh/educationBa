@@ -10,11 +10,6 @@
 }
 .follow .follow-list .follow-left{
   font-size: 14px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   line-height: 24px;
   color: rgb(38,38,38);
 }

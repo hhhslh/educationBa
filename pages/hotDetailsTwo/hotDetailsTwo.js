@@ -111,50 +111,70 @@ Page({
   // 二级评论插入
   getcontentTwo(e) {
     var that = this
-    api.msg_sec_check({
-      content: time.utf16toEntities(that.data.getcontentValue)
-    },
-      function (res) {
-        console.log(res)
-        if (res.code == 0) {
-          api.communityCommentSon(
-            {
-              content: time.utf16toEntities(that.data.getcontentValue),
-              wechatId: wx.getStorageSync('openId'),
-              portrait: wx.getStorageSync('wechatPortrait'),
-              nickname: time.utf16toEntities(wx.getStorageSync('nickName')),
-              objectId: that.id
-            },
-            function (res) {
-              console.log(res)
-              if (res.code == 0) {
-                that.setData({
-                  getcontentValue: "",
-                })
-                wx.showToast({
-                  title: "回复成功",
-                  icon: 'success',
-                  duration: 1500,
-                })
-              }
-            },
-            function (err) {
-              console.log(err)
+    if (wx.getStorageSync('openId') == "") {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    } else {
+      if (that.data.getcontentValue == "") {
+        wx.showToast({
+          title: "请填写回复内容...",
+          icon: 'none',
+          duration: 1500,
+        })
+      } else if (that.data.getcontentValue > 140) {
+        wx.showToast({
+          title: "输入框文字不能超过140字...",
+          icon: 'none',
+          duration: 1500,
+        })
+      } else {
+        api.msg_sec_check({
+          content: time.utf16toEntities(that.data.getcontentValue)
+        },
+          function (res) {
+            console.log(res)
+            if (res.code == 0) {
+              api.communityCommentSon(
+                {
+                  content: time.utf16toEntities(that.data.getcontentValue),
+                  wechatId: wx.getStorageSync('openId'),
+                  portrait: wx.getStorageSync('wechatPortrait'),
+                  nickname: time.utf16toEntities(wx.getStorageSync('nickName')),
+                  objectId: that.objectId
+                },
+                function (res) {
+                  console.log(res)
+                  if (res.code == 0) {
+                    that.setData({
+                      getcontentValue: ''
+                    })
+                    wx.showToast({
+                      title: "回复成功",
+                      icon: 'success',
+                      duration: 1500,
+                    })
+                  }
+                },
+                function (err) {
+                  console.log(err)
+                }
+              )
+            } else {
+              wx.showToast({
+                title: "内容包含敏感信息，请重新输入",
+                icon: 'none',
+                duration: 1500,
+              })
             }
-          )
-        } else {
-          wx.showToast({
-            title: "内容包含敏感信息，请重新输入",
-            icon: 'none',
-            duration: 1500,
-          })
-        }
-      },
-      function (err) {
-        console.log(res)
+          },
+          function (err) {
+            console.log(res)
+          }
+        )
+
       }
-    )
-   
+    }
   },
   //评论列表二级回答输入框
   getcontentValue: function (e) {

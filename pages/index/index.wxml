@@ -3,7 +3,6 @@
   <image src="../../images/logo@2x.png"></image>
   <text>火龙果国际教育论坛</text>
 </view>
-<!-- <view bindtap="uploadFlie">上传文件</view> -->
 <view class="oneSwiperPart">
   <swiper autoplay="true" next-margin="35px" circular="true">
       <swiper-item wx:for="{{homeConfigList}}" data-cardid="{{item.content02}}" bindtap="enterCard">
@@ -46,7 +45,7 @@
 </view>
 <!-- 类目帖子 -->
  <view class="newInvitation {{isChoose?'show':'hide'}}" > 
-    <view class="newInvitation-list-one" wx:for="{{postHead}}" wx:key="*this" data-detailid="{{item.itemId}}" bindtap="hotDetails" wx:key="*this">
+    <view class="newInvitation-list-one" wx:for="{{postHead.itemList}}" wx:key="*this" data-detailid="{{item.itemId}}" bindtap="hotDetails" wx:key="*this">
       <view class="newInvitation-content-title">{{item.title}}</view>
       <view class="newInvitation-content">
         <view class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}">

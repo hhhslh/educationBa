@@ -17,11 +17,11 @@
       <input type="text" value="{{slogan}}" placeholder="请输入个性签名" bindinput="slogan" maxlength="20"></input>
     </view>
     <view class="modifyMy-portrait">
-      <text>公司</text>
+      <text>公司（选填）</text>
       <input type="text" value="{{organization}}" placeholder="请输入公司" bindinput="organization" maxlength="20"></input>
     </view>
     <view class="modifyMy-portrait">
-      <text>职位</text>
+      <text>职位（选填）</text>
       <input type="text" value="{{position}}" placeholder="请输入职位" bindinput="position" maxlength="20"></input>
     </view>
     <view class="modifyMy-portrait">
@@ -29,7 +29,7 @@
       <input type="number" value="{{phone}}" placeholder="请输入电话" bindblur="phone"  maxlength="11"></input>
     </view>
     <view class="modifyMy-portrait">
-      <text>邮箱（选填）</text>
+      <text>邮箱</text>
       <input type="text" value="{{usermail}}" placeholder="请输入邮箱" bindblur="usermail"></input>
     </view>
     <view class="btn" bindtap="submission"><van-button type="primary">确认修改</van-button></view>
