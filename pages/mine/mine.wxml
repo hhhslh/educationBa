@@ -8,6 +8,22 @@
        <text>{{nickName}}</text>
        <view class="modify">修改个人资料<van-icon class="modify-icon" name="edit" /></view>
     </view>
+    <view class="integral">
+      <view bindtap="dialogBtn">积分 8分<van-icon name="info-o" size="16px"/></view>
+      <van-popup
+        show="{{ show }}"
+        closeable
+        round
+        bind:close="onClose"
+        class="popup"
+      >
+        <view>积分规则</view>
+        <view>每日登陆 <text>1分</text></view>
+        <view>发布帖子 <text>5分</text></view>
+        <view>转发帖子 <text>3分</text></view>
+        <view>评论帖子 <text>1分</text></view>
+      </van-popup>
+    </view>
     <view class='mine-center-bttom'>
       <view bindtap="post" class="post">
           <text class="num">{{post}}</text>
