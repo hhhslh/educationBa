@@ -196,9 +196,7 @@ Page({
     that.setData({
       listId: e.currentTarget.dataset.listid,
       pageNum: 1,
-      postHeadList:"",
     })
-    console.log(that.data.postHeadList)
     that.tabList()
   },
   tabList(){

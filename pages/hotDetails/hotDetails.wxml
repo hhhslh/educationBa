@@ -50,7 +50,7 @@
     <view bindtap="hotDetailsNum" class="{{hotDetailsNum>5?'hotDetailsNum':'hotDetailsNumHide'}}"> 查看全部{{hotDetailsNum}}条评论</view>
   </view>
   <!-- 最热帖子推荐 -->
-  <view class="newInvitation">
+  <!-- <view class="newInvitation">
     <view class="title">热帖推荐</view> 
     <view bindtap="hotList" data-detailid="{{item.itemId}}" class="newInvitation-list-one" wx:for="{{hotList}}" bindtap="hotDetails">
       <view class="newInvitation-content-title">{{item.title}}</view>
@@ -63,7 +63,7 @@
         <image src="{{item.postIcon}}" class="content-image {{item.postIcon==null||item.postIcon==''?'widthimg':''}}" />
       </view>
     </view>
-  </view>
+  </view> -->
   <view class="null"></view>
 </view>
 <view class="{{loadingAAA?'footInput':'hide'}}">
