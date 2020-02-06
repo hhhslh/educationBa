@@ -44,7 +44,8 @@ Page({
           that.setData({
             post: res.data.myPostResult,
             follow: res.data.myFollowResult,
-            collection: res.data.myCollectResult
+            collection: res.data.myCollectResult,
+            fans: res.data.myFans
           })
         },
         function (err) {
@@ -150,6 +151,18 @@ Page({
     } else {
       wx.navigateTo({
         url: '../collection/collection',
+      })
+    }
+  },
+  //我的粉丝
+  fans: function () {
+    if (wx.getStorageSync('openId') == "") {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../fans/fans',
       })
     }
   },

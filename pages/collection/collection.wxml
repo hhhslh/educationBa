@@ -6,7 +6,7 @@
   <view wx:else>
     <view wx:for="{{collectionList}}" class="collection-list"  >
       <view bindtap="hotDetails" data-detailid="{{item.itemId}}" class="collection-title">
-        <view class="collection-left">{{item.title}}</view>
+        <view class="{{item.postIcon == ''?'widthLong':'collection-left'}}">{{item.title}}</view>
         <image class="{{item.postIcon == ''?'widthimg':'show'}}" src="{{item.postIcon}}"/>
       </view>
       <view class="content-avatar">

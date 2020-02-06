@@ -9,7 +9,7 @@
        <view class="modify">修改个人资料<van-icon class="modify-icon" name="edit" /></view>
     </view>
     <view class="integral"> 
-      <view bindtap="dialogBtn">积分 8分<van-icon name="info-o" size="16px"/></view> 
+      <view class="dialog" bindtap="dialogBtn">积分 8分<van-icon class="dialog-icon" name="info-o"/></view> 
       <van-popup 
         show="{{ show }}" 
         closeable 
@@ -27,31 +27,36 @@
     <view class='mine-center-bttom'>
       <view bindtap="post" class="post">
           <text class="num">{{post}}</text>
-          <text>我的贴子</text>
+          <text>贴子</text>
       </view>
       <view class='xian'>|</view>
       <view bindtap="follow" class="post">
           <text class="num">{{follow}}</text>
-          <text>我的关注</text>
+          <text>关注</text>
       </view>
       <view class='xian'>|</view>
       <view bindtap="collection" class="post">
           <text class="num">{{collection}}</text>
-          <text>我的收藏</text>
+          <text>收藏</text>
+      </view>
+      <view class='xian'>|</view>
+      <view bindtap="fans" class="post">
+          <text class="num">{{fans}}</text>
+          <text>粉丝</text>
       </view>
     </view>
   </view>
   <view class="mine-list">
     <view bindtap="post" class="mine-post">
-     <text>我的帖子</text>
+     <text>帖子</text>
      <image class="icon" src="../../images/post.png"/>
     </view>
     <view bindtap="follow" class="mine-post">
-     <text>我的关注</text>
+     <text>关注</text>
     <image class="icon" src="../../images/follow.png"/>
     </view>
     <view bindtap="collection" class="mine-post">
-     <text>我的收藏</text>
+     <text>收藏</text>
      <image class="icon" src="../../images/collection.png"/>
     </view>
   </view>

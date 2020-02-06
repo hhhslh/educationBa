@@ -17,7 +17,8 @@
     "pages/AdministratorsList/AdministratorsList",
     "pages/AdministratorsDetails/AdministratorsDetails",
     "pages/hotDetailsOne/hotDetailsOne",
-    "pages/postModify/postModify"
+    "pages/postModify/postModify",
+    "pages/fans/fans"
   ],
   "tabBar": {
     "selectedColor": "#215089",
