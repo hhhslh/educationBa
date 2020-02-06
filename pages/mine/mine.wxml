@@ -9,7 +9,7 @@
        <view class="modify">修改个人资料<van-icon class="modify-icon" name="edit" /></view>
     </view>
     <view class="integral"> 
-      <view class="dialog" bindtap="dialogBtn">积分 8分<van-icon class="dialog-icon" name="info-o"/></view> 
+      <view class="dialog" bindtap="dialogBtn">积分 {{score}}分<van-icon class="dialog-icon" name="info-o"/></view> 
       <van-popup 
         show="{{ show }}" 
         closeable 

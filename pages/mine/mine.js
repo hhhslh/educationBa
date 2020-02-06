@@ -7,7 +7,8 @@ Page({
   data: {
     show: false,//积分弹窗 
     avatarUrl: "",//用户头像地址
-    nickName:"未登录"//用户姓名
+    nickName:"未登录",//用户姓名
+    score:""
   },
   /**
    * 生命周期函数--监听页面加载
@@ -34,7 +35,8 @@ Page({
         follow: 0,
         collection: 0,
         avatarUrl: '../../images/mineTou.png',//用户头像地址
-        nickName:  '授权登录'//用户姓名
+        nickName:  '授权登录',//用户姓名
+        score:"0"
       })
     } else {
       api.personalCenterPanel(
@@ -45,7 +47,8 @@ Page({
             post: res.data.myPostResult,
             follow: res.data.myFollowResult,
             collection: res.data.myCollectResult,
-            fans: res.data.myFans
+            fans: res.data.myFans,
+            
           })
         },
         function (err) {
@@ -63,6 +66,7 @@ Page({
             that.setData({
               avatarUrl: res.data.wechatPortrait,
               nickName: time.uncodeUtf16(res.data.nickname),
+              score: res.data.score
             })
           }
         },
@@ -198,5 +202,5 @@ Page({
     this.setData({
       show: false
     });
-  } 
+  },
 })

@@ -22,6 +22,10 @@ Page({
     isSubmit:false,//是否填写完整发布
     fontNumber:0,//还可在输入汉字数量
     textPlaceHolder:"",//标题placeholder
+    uploadFile:"",//上传文件名字
+    attachOne: "",//上传文件123路径
+    attachTwo: "",
+    attachThree: "",
   },
 
   /**
@@ -189,8 +193,9 @@ Page({
               type: "nsi-community/CommentImg/",
             },
             success: function (res) {
-              console.log(res.data, '图片上传之后的数据')
+              console.log(JSON.parse(res.data), '图片上传之后的数据')
               var data = JSON.parse(res.data)
+              console.log(data.data.url)
               that.editorCtx.insertImage({
                 src: data.data.url,
                 success: function () {
@@ -208,6 +213,42 @@ Page({
       }
     })
   },
+  // 上传文件 
+  uploadFlie() {
+    var that=this
+    wx.chooseMessageFile({
+      count: 3,
+      type: 'file',
+      success(res) {
+        console.log(res)
+        that.setData({
+          uploadFile: res.tempFiles,
+        })
+        for(var i = 0; i < res.tempFiles.length;i++){
+          console.log(res.tempFiles[i].name)
+          wx.uploadFile({
+            url: 'http://data.xinxueshuo.cn/nsi-1.0/postItem/upfile.do',
+            filePath: res.tempFiles[i].path,
+            name: 'file',
+            formData: {
+              'type': 'nsi-community/attachment/',
+            },
+            success(msg) {
+              var data = JSON.parse(msg.data)
+              console.log(data.data.url)
+              that.setData({
+                attachOne: data.data.url,
+                attachTwo: "",
+                attachThree: "",
+              })
+            }
+          })
+        }
+        // const tempFilePaths = res.tempFiles 
+       
+      }
+    })
+  }, 
   inputValue(e){
     this.setData({
       titleContent: e.detail.value
@@ -226,6 +267,7 @@ Page({
           console.log('用户点击确定')
           that.setData({
             titleContent: "",
+            uploadFile: "",
             auto_height: true,
           })
           that.editorCtx.clear()
@@ -275,6 +317,9 @@ Page({
             avatar: wx.getStorageSync('wechatPortrait'),
             nickName: time.utf16toEntities(wx.getStorageSync('nickName')),
             parentId: that.data.clickId,
+            attachOne: that.data.attachOne,
+            attachTwo: that.data.attachTwo,
+            attachThree: that.data.attachThree,
           },
           function (msg) {
             if (that.data.titleContent != '' && res.html.replace(/<(\/)?[^>].*?>/g, '').length > 10){
@@ -285,7 +330,8 @@ Page({
                 Toast('提交成功，请等待审核！')
                 setTimeout(function () {
                   that.setData({
-                    titleContent: ""
+                    titleContent: "",
+                     uploadFile: ""
                   })
                   that.editorCtx.clear({})
                   wx.switchTab({

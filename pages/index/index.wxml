@@ -3,7 +3,6 @@
   <image src="../../images/logo@2x.png"></image>
   <text>火龙果国际教育论坛</text>
 </view>
-<!-- <view bindtap="uploadFlie">上传文件</view> --> 
 <view class="oneSwiperPart">
   <swiper autoplay="true" next-margin="35px" circular="true">
       <swiper-item wx:for="{{homeConfigList}}" data-cardid="{{item.content02}}" bindtap="enterCard">

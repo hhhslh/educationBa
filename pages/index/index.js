@@ -107,11 +107,7 @@ Page({
       isSearch:true,
       isRefresh:false
     })
-    if (that.data.listId == "") {
-      that.getIndexList()
-    } else {
-      that.tabList()
-    } 
+    this.getIndexList()
   },
   // 获取全部列表
   getIndexList() {
@@ -182,7 +178,9 @@ Page({
     if (e.detail.title == '全部') {
       this.setData({
         isShow:true,
-        isChoose:false
+        isChoose:false,
+        listId:"",
+        pageNum:1,
       })
     }else{
       this.setData({
@@ -196,9 +194,8 @@ Page({
     that.setData({
       listId: e.currentTarget.dataset.listid,
       pageNum: 1,
-      postHeadList: "",
+      isRefresh:false,
     })
-    console.log(that.data.postHeadList)
     that.tabList()
   }, 
   tabList() {
@@ -208,7 +205,6 @@ Page({
       pageNum: that.data.pageNum,
       pageSize: that.data.pageSize, 
     }, function (res) {
-      console.log('接口请求成功', res)
       for (var i = 0; i < res.data.itemList.length; i++) {
         res.data.itemList[i].createTime = time.formatTimeTwo(res.data.itemList[i].createTime, "M-D")
         res.data.itemList[i].summaryDesc = time.uncodeUtfNone(res.data.itemList[i].summaryDesc)
@@ -236,11 +232,11 @@ Page({
           })
         }
       } 
-        that.setData({
-          postHead: that.data.postHeadList,
-          showId: that.data.listId,
-          isShow: false,
-        })
+      that.setData({
+        postHead: that.data.postHeadList,
+        showId: that.data.listId,
+        isShow: false,
+      })
     },
       function (err) {
         console.log(err)
@@ -260,29 +256,4 @@ Page({
       url: e.currentTarget.dataset.cardid
     })
   },
-  // 上传文件 
-  uploadFlie() {
-    wx.chooseMessageFile({
-      count: 3,
-      type: 'file',
-      success(res) {
-        console.log(res)
-        console.log(res.tempFiles[0].path)
-        // const tempFilePaths = res.tempFiles 
-        wx.uploadFile({
-          url: 'http://high.natapp1.cc/nsi-1.0/postItem/upfile.do',
-          filePath: res.tempFiles[0].path,
-          name: 'file',
-          formData: {
-            'type': 'nsi-community/attachment/',
-          },
-          success(res) {
-            console.log(res)
-            const data = res.data
-          }
-        })
-      }
-    })
-  }, 
-
 })

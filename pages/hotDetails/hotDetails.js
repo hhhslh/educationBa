@@ -24,7 +24,10 @@ Page({
     collDisabled: false,
     collection: '收藏',//收藏
     loadingAAA:false,
-    hotDetailsNum:''//一级评论的数量
+    hotDetailsNum:'',//一级评论的数量
+    attachOne: "",
+    attachTwo: "",
+    attachThree: "", 
   },
   /**
    * 生命周期函数--监听页面加载
@@ -117,6 +120,7 @@ Page({
           if (res.data.hotList[i].postIcon !=""){
             res.data.hotList[i].postIcon = res.data.hotList[i].postIcon + '?x-oss-process=image/resize,m_fill,h_200,w_200'
           }
+
         }
         that.setData({
           contentDetailContent: time.uncodeUtf16(res.data.postItem.content),
@@ -125,6 +129,9 @@ Page({
           contentDetailAvatar: res.data.postItem.avatar,
           contentDetailCreateTime: time.formatTimeTwo(res.data.postItem.createTime, "M月D日"),
           followOpenId: res.data.postItem.openId,
+          attachOne: res.data.postItem.attachOne,
+          attachTwo: res.data.postItem.attachTwo,
+          attachThree: res.data.postItem.attachThree,  
           hotList: res.data.hotList,
           showSkeleton: false,
           loadingAAA: true//loading显示隐藏
@@ -136,6 +143,82 @@ Page({
         console.log(err)
       }
     )
+  },
+  // 下载文件
+  one() {
+    var that=this
+    console.log(1111)
+    wx.downloadFile({
+      url: that.data.attachOne, 
+      success(res) {
+        console.log(res)
+        if (res.statusCode === 200) {
+          wx.saveFile({
+            tempFilePath: res.tempFilePath,
+            success(res) {
+              var savedFilePath = res.savedFilePath
+              console.log(savedFilePath)
+            },
+            fail(err){
+              console.log(err)
+            }
+          })
+        }
+      },
+      fail(err){
+        console.log(err)
+      }
+    })
+  },
+  two() {
+    var that = this
+    console.log(2222)
+    wx.downloadFile({
+      url: that.data.attachTwo,
+      success(res) {
+        console.log(res)
+        if (res.statusCode === 200) {
+          wx.saveFile({
+            tempFilePath: res.tempFilePath,
+            success (res) {
+              var savedFilePath = res.savedFilePath
+              console.log(savedFilePath)
+            },
+            fail(err) {
+              console.log(err)
+            }
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+  },
+  three() {
+    var that = this
+    console.log(333)
+    wx.downloadFile({
+      url: that.data.attachThree,
+      success(res) {
+        console.log(res)
+        if (res.statusCode === 200) {
+          wx.saveFile({
+            tempFilePath: res.tempFilePath,
+            success(res) {
+              var savedFilePath = res.savedFilePath
+              console.log(savedFilePath)
+            },
+            fail(err) {
+              console.log(err)
+            }
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
   },
   // 一级二级评论列表
   commentAndSonlist(e) {
@@ -528,6 +611,7 @@ Page({
       )
     }
   },
+  
   //查看更多评论 hotDetailsID
   hotDetailsNum(){
     wx.navigateTo({

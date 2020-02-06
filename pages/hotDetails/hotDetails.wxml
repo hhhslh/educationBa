@@ -16,7 +16,14 @@
       <view class='hotDetails-content'>
         <rich-text nodes="{{contentDetailContent}}"></rich-text>
       </view>
+      <view class="attach">
+         <text bindtap="one" wx:if="{{attachOne}}">附件一</text>
+         <text bindtap="two" wx:if="{{attachTwo}}">附件二</text>
+         <text bindtap="three" wx:if="{{attachThree}}">附件三</text>
+         <text wx:else></text>
+      </view>
       <view class='hotDetails-answer'>
+        <!-- <button bindtap="downloadFile">下载</button> -->
         <button bindtap="collection" data-title="{{collection}}"  class="fontColor hotDetails-answer-left">{{collection}}</button>
         <button open-type="share" class='fontColor hotDetails-answer-right'>分享给好友</button>
       </view>

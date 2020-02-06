@@ -36,12 +36,20 @@
         bindinput	="checkContent">
       </editor>
       <view class="fontNumber">您输入了{{fontNumber}}个字</view>
+       <!-- 上传文件名字 -->
+       <view  class="uploadFile">
+         <view wx:for="{{uploadFile}}">{{item.name}}</view>
+       </view>
+     
     </view>
+    
   </view>
+  
 </view>
 <view class="bottomButton">
   <text class="submit {{isSubmit ? 'buttonBg' : ''}}" bindtap="submit">发布</text>
   <text class="cancle" bindtap="onCancel">取消</text>
   <text class='upload iconfont icon-tupian' bindtap="uploadBtn"></text>
+  <text class='upload iconfont icon-uploadfile' bindtap="uploadFlie"></text> 
 </view>
 <van-toast id="van-toast" />

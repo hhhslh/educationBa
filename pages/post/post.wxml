@@ -4,7 +4,7 @@
     </view>
     <view wx:else>
       <view class="newInvitation-list-one" wx:for="{{hotList}}" >
-        <view bindtap="hotDetails" data-detailid="{{item.itemId}}" class="newInvitation-content-title">
+        <view data-detailid="{{item.itemId}}" class="newInvitation-content-title">
           <view class="title">{{item.title}}</view>
           <view class="postModify" bindtap="postModify" data-detailid="{{item.itemId}}">
           <van-tag type="primary" size="medium">编辑</van-tag>

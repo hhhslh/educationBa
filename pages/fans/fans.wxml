@@ -1,7 +1,7 @@
 <!--pages/follow.wxml-->
 <view class="follow">
   <view class="noComment" wx:if="{{followList ==''}}">
-    <view>暂无关注</view>
+    <view>暂无粉丝</view>
   </view>
   <view wx:else >
     <view  class="follow-list" wx:for="{{followList}}">
