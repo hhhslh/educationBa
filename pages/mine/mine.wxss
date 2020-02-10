@@ -63,11 +63,17 @@ page {
   margin-left: 5px;
 }
 .mine .mine-center .integral .van-popup{ 
-  padding:30px; 
+  padding:30rpx; 
   border-radius: 5px;
-  width:200px;
-  height:240px;
+  width:420rpx;
+  height:480rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
 } 
+.popupTitle{
+  font-size: 35rpx;
+  font-weight: bold;
+}
 .mine .mine-center .integral .scoreRule view:first-of-type{ 
   font-size:18px; 
   margin:0 0 20px; 

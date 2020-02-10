@@ -21,7 +21,7 @@
     "pages/fans/fans"
   ],
   "tabBar": {
-    "selectedColor": "#215089",
+    "selectedColor": "#e60c4b",
     "list": [
       {
         "pagePath": "pages/index/index",
