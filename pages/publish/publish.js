@@ -26,6 +26,7 @@ Page({
     attachOne: "",//上传文件123路径
     attachTwo: "",
     attachThree: "",
+    attach: []
   },
 
   /**
@@ -220,12 +221,10 @@ Page({
       count: 3,
       type: 'file',
       success(res) {
-        console.log(res)
         that.setData({
           uploadFile: res.tempFiles,
         })
         for(var i = 0; i < res.tempFiles.length;i++){
-          console.log(res.tempFiles[i].name)
           wx.uploadFile({
             url: 'http://data.xinxueshuo.cn/nsi-1.0/postItem/upfile.do',
             filePath: res.tempFiles[i].path,
@@ -235,17 +234,33 @@ Page({
             },
             success(msg) {
               var data = JSON.parse(msg.data)
-              console.log(data.data.url)
-              that.setData({
-                attachOne: data.data.url,
-                attachTwo: "",
-                attachThree: "",
-              })
+              if (data.data.url!=""){
+                that.data.attach.push(data.data.url)
+              }
+              if (res.tempFiles.length == 1){
+                that.setData({
+                  attachOne: that.data.attach[0],
+                  attachTwo: "",
+                  attachThree: "",
+                })
+              } else if (res.tempFiles.length == 2){
+                that.setData({
+                  attachOne: that.data.attach[0],
+                  attachTwo: that.data.attach[1],
+                  attachThree: "",
+                })
+              }else{
+                that.setData({
+                  attachOne: that.data.attach[0],
+                  attachTwo: that.data.attach[1],
+                  attachThree: that.data.attach[2],
+                })
+              }
             }
           })
+          console.log(that.data.attach)
         }
-        // const tempFilePaths = res.tempFiles 
-       
+        
       }
     })
   }, 
@@ -331,7 +346,8 @@ Page({
                 setTimeout(function () {
                   that.setData({
                     titleContent: "",
-                     uploadFile: ""
+                     uploadFile: "",
+                    attach:[]
                   })
                   that.editorCtx.clear({})
                   wx.switchTab({
