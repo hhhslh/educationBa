@@ -158,9 +158,9 @@ page{
   font-size: 40px;
   line-height: 30px;
 }
-.bottomButton .upload:last-of-type{
+/* .bottomButton .upload:last-of-type{
   font-size: 25px;
-}
+} */
 .bottomButton .submit{
   float:right;
   background:rgba(219,219,219,1);

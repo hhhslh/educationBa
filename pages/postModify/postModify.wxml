@@ -3,7 +3,7 @@
   <van-popup show="{{show}}">
     <view class="itemTitle">请选择类目标签</view>
     <view class="itemBox">
-      <view class="itemName {{clickId == item.id ? 'fontColor' : ''}}" bindtap="clickSelect" wx:for="{{categoryItemList}}" data-id="{{item.id}}" data-name="{{item.categoryName}}" >{{item.categoryName}}</view>
+      <view class="itemName {{item.isclickSelect ? 'fontColor' : ''}}" bindtap="clickSelect" wx:for="{{categoryItemList}}" data-id="{{item.id}}" data-name="{{item.categoryName}}" data-index='{{index}}'>{{item.categoryName}}</view>
       <view class="confirm {{isChoose ? 'buttonBg' : ''}}" bindtap="onConfirm">确认</view>
     </view>
   </van-popup>

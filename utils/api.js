@@ -1,6 +1,7 @@
 var http = require('https.js'); //导入封装的 post和get请求
 // const URL = 'http://192.168.0.103:8080/nsi-1.0'; // 测试李岩
 // const URL = 'http://192.168.0.102:8080/nsi-1.0'; // 测试罗振
+// const URL = 'http://high.natapp1.cc/nsi-1.0';//罗震本地 
 const URL = 'https://data.xinxueshuo.cn/nsi-1.0'; // 线上
 const decodeUserInfo = (params, success, faild) => http.post(URL + "/communityUser/decodeUserInfo.do", params, success, faild);
 const chineseList = (params, success, faild) => http.get(URL + "/post/detail.do", params, success, faild);
