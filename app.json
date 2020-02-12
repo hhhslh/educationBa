@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/post/post",
     "pages/mine/mine",
     "pages/logs/logs",
     "pages/hotDetails/hotDetails",
     "pages/publish/publish",
     "pages/news/news",
-    "pages/post/post",
     "pages/login/login",
     "pages/hotList/hotList", 
     "pages/hotDetailsTwo/hotDetailsTwo",

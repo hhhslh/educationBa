@@ -18,21 +18,23 @@ Page({
     itemContent:"",//展示选中标签
     clickId:"",//选中标签Id
     isChoose:false,//是否选择了标签
-    clickItemName:"",//选中标签名字
+    clickItemName:[],//选中标签名字
     isSubmit:false,//是否填写完整发布
     fontNumber:0,//还可在输入汉字数量
     textPlaceHolder: "",//标题placeholder
     contentDetailContent:'',
-    id:''
+    id:'',
+    attach: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.categoryItemName()
-    this.id = options.id
-    this.contentTitle(options.id)
+    var that=this
+    that.categoryItemName()
+    that.id = options.id
+    that.contentTitle(options.id)
   },
   // 类目标签
   categoryItemName(){
@@ -57,7 +59,6 @@ Page({
   // 头部内容
   contentTitle(e) {
     var that = this
-    
     var params = {
       itemId: e
     }
@@ -70,9 +71,10 @@ Page({
           itemContent: res.data.postItem.categoryName,
           clickId: res.data.postItem.parentId,
           isChoose: true,
-          clickItemName: res.data.postItem.categoryName,
+          clickItemName: res.data.postItem.categoryName
         })
         that.checkContent(that.delHtmlTag(res.data.postItem.content))
+        
         if (res.code == 1) {
           wx.showToast({
             title: "此贴已删除",
@@ -99,16 +101,29 @@ Page({
       }
     )
   },
-  // 点击选中标签
-  clickSelect(e){
-    var itemId = e.currentTarget.dataset.id
-    var that=this
+  // 点击选中标签(多选) 
+  clickSelect(e) {
+    var that = this
+    var index = e.currentTarget.dataset.index
+    var comments = this.data.categoryItemList
+    comments[index].isclickSelect = !comments[index].isclickSelect
+    console.log(comments[index].isclickSelect )
     that.setData({
-      clickId: itemId,
-      isChoose:true,
-      clickItemName: e.currentTarget.dataset.name
+      isChoose: true,
+      categoryItemList: comments,
     })
-  },
+    //判断是否重复 
+    if (that.data.clickItemName.indexOf(e.currentTarget.dataset.name) == -1) {
+      that.data.clickItemName.push(e.currentTarget.dataset.name)
+    } else {
+      for (var i = 0; i < that.data.clickItemName.length; i++) {
+        if (that.data.clickItemName[i] == e.currentTarget.dataset.name) {
+          that.data.clickItemName.splice(i, 1);
+        }
+      }
+    }
+    console.log(that.data.clickItemName)
+  }, 
   getId(e){
     this.setData({
       radioId:e.currentTarget.dataset.id
@@ -180,33 +195,55 @@ Page({
   },
   // 修改
   modify(){
+    var that=this
     this.setData({
       show: true,
       textPlaceHolder:""
     })
+    for (var i = 0; i < that.data.itemContent.length; i++) {
+      for (var j = 0; j < that.data.categoryItemList.length; j++) {
+        if (that.data.categoryItemList[j].categoryName == that.data.itemContent[i]) {
+          var comments = that.data.categoryItemList
+          comments[j].isclickSelect = !comments[j].isclickSelect
+          that.setData({
+            categoryItemList: comments
+          })
+        }
+      }
+    }
   },
   // 确认
   onConfirm(e) {
     var that=this
     api.publishCategoryItem({},
       function (res) {
-        if (res.code == 0 && that.data.clickItemName!="") {
-            that.setData({
-              show: false,
-              itemContent: that.data.clickItemName,
-              textPlaceHolder:"请输入标题"
-            })
+        console.log(that.data.clickItemName.length)
+        if (res.code == 0 && that.data.clickItemName != "" && that.data.clickItemName.length < 6) {
+          that.setData({
+            show: false,
+            itemContent: that.data.clickItemName.join(",").replace(/,/g, ";").split(),
+            textPlaceHolder: "请输入标题"
+          })
           wx.showToast({
-            title: "选择" + that.data.clickItemName,
+            title: "选择成功",
             icon: 'success',
             duration: 1500,
           })
-        }else{
+        } else if (that.data.clickItemName.length == 0) {
           that.setData({
             show: true
           })
           wx.showToast({
             title: "请选择类目标签",
+            icon: 'warn',
+            duration: 1500,
+          })
+        } else if (that.data.clickItemName.length > 5) {
+          that.setData({
+            show: true
+          })
+          wx.showToast({
+            title: "最多可选5个",
             icon: 'warn',
             duration: 1500,
           })
@@ -326,9 +363,8 @@ Page({
             openId : wx.getStorageSync('openId'),
             avatar: wx.getStorageSync('wechatPortrait'),
             nickName: time.utf16toEntities(wx.getStorageSync('nickName')),
-            parentId: that.data.clickId,
-            isCheck:0,
-            itemId: that.id
+            itemId: that.id,
+            postType: that.data.clickItemName.join(",").replace(/,/g, ";").split(), 
           },
           function (msg) {
             if (that.data.titleContent != '' && res.html.replace(/<(\/)?[^>].*?>/g, '').length > 10){

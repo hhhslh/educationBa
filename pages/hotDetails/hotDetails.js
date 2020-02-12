@@ -144,62 +144,15 @@ Page({
       }
     )
   },
+  
+
   // 下载文件
   one() {
-    var that=this
+    var that=this 
     console.log(1111)
+    console.log(that.data.attachOne)
     wx.downloadFile({
-      url: that.data.attachOne, 
-      success(res) {
-        console.log(res)
-        if (res.statusCode === 200) {
-          wx.saveFile({
-            tempFilePath: res.tempFilePath,
-            success(res) {
-              var savedFilePath = res.savedFilePath
-              console.log(savedFilePath)
-            },
-            fail(err){
-              console.log(err)
-            }
-          })
-        }
-      },
-      fail(err){
-        console.log(err)
-      }
-    })
-  },
-  two() {
-    var that = this
-    console.log(2222)
-    wx.downloadFile({
-      url: that.data.attachTwo,
-      success(res) {
-        console.log(res)
-        if (res.statusCode === 200) {
-          wx.saveFile({
-            tempFilePath: res.tempFilePath,
-            success (res) {
-              var savedFilePath = res.savedFilePath
-              console.log(savedFilePath)
-            },
-            fail(err) {
-              console.log(err)
-            }
-          })
-        }
-      },
-      fail(err) {
-        console.log(err)
-      }
-    })
-  },
-  three() {
-    var that = this
-    console.log(333)
-    wx.downloadFile({
-      url: that.data.attachThree,
+      url: that.data.attachOne,
       success(res) {
         console.log(res)
         if (res.statusCode === 200) {

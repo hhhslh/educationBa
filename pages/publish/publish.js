@@ -16,9 +16,8 @@ Page({
     show: false,//展示弹窗
     postIcon:"",//内容图片
     itemContent:"",//展示选中标签
-    clickId:"",//选中标签Id
     isChoose:false,//是否选择了标签
-    clickItemName:"",//选中标签名字
+    clickItemName:[],//选中标签名字
     isSubmit:false,//是否填写完整发布
     fontNumber:0,//还可在输入汉字数量
     textPlaceHolder:"",//标题placeholder
@@ -26,6 +25,7 @@ Page({
     attachOne: "",//上传文件123路径
     attachTwo: "",
     attachThree: "",
+    attach: [],
   },
 
   /**
@@ -52,16 +52,28 @@ Page({
       }
     )
   },
-  // 点击选中标签
-  clickSelect(e){
-    var itemId = e.currentTarget.dataset.id
-    var that=this
+  // 点击选中标签(多选) 
+  clickSelect(e) {
+    var that = this
+    var index = e.currentTarget.dataset.index
+    var comments = this.data.categoryItemList
+    comments[index].isclickSelect = !comments[index].isclickSelect
     that.setData({
-      clickId: itemId,
-      isChoose:true,
-      clickItemName: e.currentTarget.dataset.name
+      isChoose: true, 
+      categoryItemList: comments,
     })
-  },
+    //判断是否重复 
+    if (that.data.clickItemName.indexOf(e.currentTarget.dataset.name) == -1) {
+      that.data.clickItemName.push(e.currentTarget.dataset.name)
+    } else {
+      for (var i = 0; i < that.data.clickItemName.length; i++) {
+        if (that.data.clickItemName[i] == e.currentTarget.dataset.name) {
+          that.data.clickItemName.splice(i, 1);
+        }
+      }
+    }
+    console.log(that.data.clickItemName)
+  }, 
   getId(e){
     this.setData({
       radioId:e.currentTarget.dataset.id
@@ -90,10 +102,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that=this
     if (wx.getStorageSync('openId') == "") {
       wx.navigateTo({
         url: '../login/login',
       })
+    }
+    if (that.data.postIcon){
+      that.data.postIcon = !that.data.postIcon
     }
   },
 
@@ -143,23 +159,33 @@ Page({
     var that=this
     api.publishCategoryItem({},
       function (res) {
-        if (res.code == 0 && that.data.clickItemName!="") {
+        console.log(that.data.clickItemName.length)
+        if (res.code == 0 && that.data.clickItemName != "" && that.data.clickItemName.length < 6) {
             that.setData({
               show: false,
-              itemContent: that.data.clickItemName,
+              itemContent: that.data.clickItemName.join(",").replace(/,/g, ";").split(), 
               textPlaceHolder:"请输入标题"
             })
           wx.showToast({
-            title: "选择" + that.data.clickItemName,
+            title: "选择成功",
             icon: 'success',
             duration: 1500,
           })
-        }else{
+        } else if (that.data.clickItemName.length==0){
           that.setData({
             show: true
           })
           wx.showToast({
             title: "请选择类目标签",
+            icon: 'warn',
+            duration: 1500,
+          })
+        } else if (that.data.clickItemName.length >5) {
+          that.setData({
+            show: true
+          })
+          wx.showToast({
+            title: "最多可选5个",
             icon: 'warn',
             duration: 1500,
           })
@@ -220,12 +246,10 @@ Page({
       count: 3,
       type: 'file',
       success(res) {
-        console.log(res)
         that.setData({
           uploadFile: res.tempFiles,
         })
         for(var i = 0; i < res.tempFiles.length;i++){
-          console.log(res.tempFiles[i].name)
           wx.uploadFile({
             url: 'http://data.xinxueshuo.cn/nsi-1.0/postItem/upfile.do',
             filePath: res.tempFiles[i].path,
@@ -235,17 +259,33 @@ Page({
             },
             success(msg) {
               var data = JSON.parse(msg.data)
-              console.log(data.data.url)
-              that.setData({
-                attachOne: data.data.url,
-                attachTwo: "",
-                attachThree: "",
-              })
+              if (data.data.url!=""){
+                that.data.attach.push(data.data.url)
+              }
+              if (res.tempFiles.length == 1){
+                that.setData({
+                  attachOne: that.data.attach[0],
+                  attachTwo: "",
+                  attachThree: "",
+                })
+              } else if (res.tempFiles.length == 2){
+                that.setData({
+                  attachOne: that.data.attach[0],
+                  attachTwo: that.data.attach[1],
+                  attachThree: "",
+                })
+              }else{
+                that.setData({
+                  attachOne: that.data.attach[0],
+                  attachTwo: that.data.attach[1],
+                  attachThree: that.data.attach[2],
+                })
+              }
             }
           })
+          console.log(that.data.attach)
         }
-        // const tempFilePaths = res.tempFiles 
-       
+        
       }
     })
   }, 
@@ -293,17 +333,33 @@ Page({
       })
     }
   },
+  // 防抖
+  debounce(fn,delay) {   //默认300毫秒
+    var timer;
+    return function () {
+      var args = arguments;
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        fn.apply(that, args);   // this 指向vue
+      }, delay);
+    };
+  },
   // 提交
   submit(e) {
+    this.debounce(this.publish(), 500)
+  },
+  publish(){
     var that = this
     that.editorCtx.getContents({
       success: (res) => {
-        if (that.data.postIcon){
+        if (that.data.postIcon) {
           var arr = res.html.match(/<img.*?(?:>|\/>)/gi);
           var src = arr[0].match(/src=[\'\"]?([^\'\"]*)[\'\"]?/i)
           that.data.postIcon = src[1]
-        }else{
-          that.data.postIcon=""
+        } else {
+          that.data.postIcon = ""
         }
         var content = time.utf16toEntities(res.html)
         var title = time.utf16toEntities(that.data.titleContent)
@@ -313,16 +369,16 @@ Page({
             content: content.replace(/\<img/gi, '<img style="max-width:100%;height:auto" '),
             summaryDesc: content.replace(/<(\/)?[^>].*?>/g, '').substr(0, 50),
             postIcon: that.data.postIcon,
-            openId : wx.getStorageSync('openId'),
+            openId: wx.getStorageSync('openId'),
             avatar: wx.getStorageSync('wechatPortrait'),
             nickName: time.utf16toEntities(wx.getStorageSync('nickName')),
-            parentId: that.data.clickId,
             attachOne: that.data.attachOne,
             attachTwo: that.data.attachTwo,
             attachThree: that.data.attachThree,
+            postType: that.data.clickItemName.join(",").replace(/,/g, ";").split(),
           },
           function (msg) {
-            if (that.data.titleContent != '' && res.html.replace(/<(\/)?[^>].*?>/g, '').length > 10){
+            if (that.data.titleContent.length > 0 && that.data.titleContent.length < 40 && res.html.replace(/<(\/)?[^>].*?>/g, '').length > 10) {
               if (msg.code == 0) {
                 that.setData({
                   showModalStatus: false,
@@ -331,7 +387,8 @@ Page({
                 setTimeout(function () {
                   that.setData({
                     titleContent: "",
-                     uploadFile: ""
+                    uploadFile: "",
+                    attach: []
                   })
                   that.editorCtx.clear({})
                   wx.switchTab({
@@ -339,13 +396,19 @@ Page({
                   })
                 }, 2000);
               }
-            } else if (that.data.titleContent == ''){
+            } else if (that.data.titleContent == '') {
               wx.showToast({
                 title: "标题不能为空",
                 icon: 'none',
                 duration: 1500,
               })
-            }else{
+            } else if (that.data.titleContent.length > 40) {
+              wx.showToast({
+                title: "标题最多40字",
+                icon: 'none',
+                duration: 1500,
+              })
+            } else {
               wx.showToast({
                 title: "内容至少10个字",
                 icon: 'none',
