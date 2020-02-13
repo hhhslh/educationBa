@@ -335,20 +335,3 @@
   margin-left:10px;
   color:rgba(255,100,100,1);
 }
-
-.canvas{
-  position: fixed;
-  top: 0;
-  left: -400px
-}
-.canvas-one{
-  width: 350px;
-  height: 300px;
-  position: fixed;
-  top: 30%;
-  left: -400px;
-  transform: translateX(-50%)
-}
-.van-dialog__button{
-  text-align: center;
-}
