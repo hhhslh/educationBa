@@ -17,13 +17,11 @@
         bind:close="onClose" 
         class="popup" 
       > 
-      <view class="scoreRule">
         <view class="popupTitle">积分规则</view> 
         <view>每日登陆 <text>1分</text></view> 
         <view>发布帖子 <text>5分</text></view> 
         <view>转发帖子 <text>3分</text></view> 
         <view>评论帖子 <text>1分</text></view> 
-      </view>
       </van-popup> 
     </view> 
     <view class='mine-center-bttom'>
@@ -62,5 +60,5 @@
      <image class="icon" src="../../images/collection.png"/>
     </view>
   </view>
-  <view bindtap="mineBtn" class="mine-btn">-火龙果国际教育论坛2.6-</view>
+  <view bindtap="mineBtn" class="mine-btn">-火龙果国际教育论坛2.12-</view>
 </view>

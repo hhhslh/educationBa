@@ -128,12 +128,11 @@ function uncodeUtfNone(str) {
   });
   return result;
 }
-
 module.exports = {
   formatTime: formatTime,
   formatTimeTwo: formatTimeTwo,
   getDateDiff: getDateDiff,
   uncodeUtfNone: uncodeUtfNone,
   uncodeUtf16: uncodeUtf16,
-  utf16toEntities: utf16toEntities
+  utf16toEntities: utf16toEntities,
 }
