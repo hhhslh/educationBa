@@ -34,6 +34,7 @@ Page({
         post: 0,
         follow: 0,
         collection: 0,
+        fans:0,
         avatarUrl: '../../images/mineTou.png',//用户头像地址
         nickName:  '授权登录',//用户姓名
         score:"0"

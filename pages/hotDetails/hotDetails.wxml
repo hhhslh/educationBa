@@ -1,4 +1,17 @@
 <!--pages/hotDetails.wxml-->
+<van-dialog
+  use-slot
+  show="{{ show }}"
+  width="350px"
+  confirm-button-text="保存图片"
+  confirm-button-open-type="getUserInfo"
+  bindtap="save"
+>
+  <image style="width:100%;height:300px" src="{{tempFilePath}}" bindlongtap='save' />
+</van-dialog>
+<canvas class='canvas' style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;" canvas-id='canvas'></canvas>
+<canvas bindlongtap='save' class="canvas-one" canvas-id="shareImg"></canvas>
+<!-- <button bindtap="getImg">保存</button> -->
 <van-loading  class="{{loadingAAA?'hide':''}}"/>
 <view class="{{loadingAAA?'hotDetails':'hide'}}">
   <!--提交成功提示框  -->
@@ -17,9 +30,9 @@
         <rich-text nodes="{{contentDetailContent}}"></rich-text>
       </view>
       <view class="attach">
-         <text bindtap="one" wx:if="{{attachOne}}">附件一</text>
-         <text bindtap="two" wx:if="{{attachTwo}}">附件二</text>
-         <text bindtap="three" wx:if="{{attachThree}}">附件三</text>
+         <text bindtap="one" data-name="附件一" wx:if="{{attachOne}}">附件一</text>
+         <text bindtap="two" data-name="附件二" wx:if="{{attachTwo}}">附件二</text>
+         <text bindtap="three" data-name="附件三" wx:if="{{attachThree}}">附件三</text>
          <text wx:else></text>
       </view>
       <view class='hotDetails-answer'>

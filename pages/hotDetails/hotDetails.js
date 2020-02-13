@@ -2,6 +2,11 @@
 var api = require("../../utils/api.js")
 var time = require('../../utils/util.js')
 import Toast from '../../miniprogram_npm/vant-weapp/toast/toast'
+const QRCode = require('../../utils/weapp-qrcode.js')
+import rpx2px from '../../utils/rpx2px.js'
+let qrcode;
+// 300rpx 在6s上为 150px
+const qrcodeWidth = rpx2px(300)
 Page({
   data: {
     showSkeleton: true,
@@ -25,9 +30,15 @@ Page({
     collection: '收藏',//收藏
     loadingAAA:false,
     hotDetailsNum:'',//一级评论的数量
-    attachOne: "",
-    attachTwo: "",
-    attachThree: "", 
+    attachOne: "",//附件1
+    attachTwo: "",//附件2
+    attachThree: "", //附件3
+    image: '',
+    qrcodeWidth: qrcodeWidth,// 用于设置wxml里canvas的width和height样式
+    imgsrc: '',//二维码路径
+    tempFilePath:'',//合成图片的路径
+    show: false,//弹框
+    attachName:""//附件名称
   },
   /**
    * 生命周期函数--监听页面加载
@@ -39,10 +50,32 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
+  onReady() {
+    const z = this
+    qrcode = new QRCode('canvas', {
+      usingIn: this, // usingIn 如果放到组件里使用需要加这个参数
+      image: '',
+      width: qrcodeWidth,
+      height: qrcodeWidth,
+      colorDark: "#000",
+      colorLight: "white",
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+    // 生成图片，绘制完成后调用回调
+    qrcode.makeCode(z.data.text, () => {
+      // 回调
+      setTimeout(() => {
+        qrcode.exportImage(function (path) {
+          z.setData({
+            imgsrc: path
+          })
+        })
+      }, 200)
+    })
   },
-
+  getUserInfo(event) {
+    console.log(event.detail);
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -129,9 +162,9 @@ Page({
           contentDetailAvatar: res.data.postItem.avatar,
           contentDetailCreateTime: time.formatTimeTwo(res.data.postItem.createTime, "M月D日"),
           followOpenId: res.data.postItem.openId,
-          attachOne: res.data.postItem.attachOne,
-          attachTwo: res.data.postItem.attachTwo,
-          attachThree: res.data.postItem.attachThree,  
+          attachOne: res.data.postItem.attachOne.replace("https://nsi.oss-cn-zhangjiakou.aliyuncs.com", "http://nsi-oss.xinxueshuo.cn"),
+          attachTwo: res.data.postItem.attachTwo.replace("https://nsi.oss-cn-zhangjiakou.aliyuncs.com", "http://nsi-oss.xinxueshuo.cn"),
+          attachThree: res.data.postItem.attachThree.replace("https://nsi.oss-cn-zhangjiakou.aliyuncs.com", "http://nsi-oss.xinxueshuo.cn"),  
           hotList: res.data.hotList,
           showSkeleton: false,
           loadingAAA: true//loading显示隐藏
@@ -144,33 +177,18 @@ Page({
       }
     )
   },
-  
-
-  // 下载文件
-  one() {
-    var that=this 
-    console.log(1111)
-    console.log(that.data.attachOne)
-    wx.downloadFile({
-      url: that.data.attachOne,
-      success(res) {
-        console.log(res)
-        if (res.statusCode === 200) {
-          wx.saveFile({
-            tempFilePath: res.tempFilePath,
-            success(res) {
-              var savedFilePath = res.savedFilePath
-              console.log(savedFilePath)
-            },
-            fail(err) {
-              console.log(err)
-            }
-          })
-        }
-      },
-      fail(err) {
-        console.log(err)
-      }
+  renderCode(value) {
+    const z = this
+    console.log('make handler')
+    qrcode.makeCode(value, () => {
+      console.log('make')
+      qrcode.exportImage(function (path) {
+        console.log(path)
+        z.setData({
+          imgsrc: path
+        })
+        z.getImg()
+      })
     })
   },
   // 一级二级评论列表
@@ -564,7 +582,6 @@ Page({
       )
     }
   },
-  
   //查看更多评论 hotDetailsID
   hotDetailsNum(){
     wx.navigateTo({
@@ -574,6 +591,191 @@ Page({
   enterHomePage(e) {
     wx.navigateTo({
       url: '../followHomePage/followHomePage?followerid=' + e.currentTarget.dataset.followerid
+    })
+  },
+  // 下载文件1
+  one(e) {
+    var that = this
+    console.log(1111)
+    console.log(that.data.attachOne)
+    that.setData({
+      attachName: e.currentTarget.dataset.name
+    })
+    console.log(e.currentTarget.dataset.name)
+    wx.downloadFile({
+      url: that.data.attachOne,
+      success(res) {
+        console.log(res)
+        if (res.statusCode === 200) {
+          wx.saveFile({
+            tempFilePath: res.tempFilePath,
+            success(res) {
+              var savedFilePath = res.savedFilePath
+              console.log(savedFilePath)
+              that.renderCode(that.data.attachOne)
+
+            },
+            fail(err) {
+              console.log(err)
+            }
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+  },
+  // 下载文件2
+  two(e) {
+    var that = this
+    console.log(2222)
+    console.log(that.data.attachTwo)
+    that.setData({
+      attachName: e.currentTarget.dataset.name
+    })
+    console.log(e.currentTarget.dataset.name)
+    wx.downloadFile({
+      url: that.data.attachTwo,
+      success(res) {
+        console.log(res)
+        if (res.statusCode === 200) {
+          wx.saveFile({
+            tempFilePath: res.tempFilePath,
+            success(res) {
+              var savedFilePath = res.savedFilePath
+              console.log(savedFilePath)
+              that.renderCode(that.data.attachTwo)
+
+            },
+            fail(err) {
+              console.log(err)
+            }
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+  },
+  // 下载文件3
+  three(e) {
+    var that = this
+    console.log(3333)
+    console.log(that.data.attachThree)
+    that.setData({
+      attachName: e.currentTarget.dataset.name
+    })
+    console.log(e.currentTarget.dataset.name)
+    wx.downloadFile({
+      url: that.data.attachThree,
+      success(res) {
+        console.log(res)
+        if (res.statusCode === 200) {
+          wx.saveFile({
+            tempFilePath: res.tempFilePath,
+            success(res) {
+              var savedFilePath = res.savedFilePath
+              console.log(savedFilePath)
+              that.renderCode(that.data.attachThree)
+
+            },
+            fail(err) {
+              console.log(err)
+            }
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+  },
+  //合成图片
+  getImg() {
+    let that = this
+    let promise1 = new Promise(function (resolve, reject) {
+      wx.getImageInfo({
+        src: '../../images/bg-code.png',
+        success: function (res) {
+          resolve(res);
+        }
+      })
+    });
+    let promise2 = new Promise(function (resolve, reject) {
+      wx.getImageInfo({
+        src: that.data.imgsrc,
+        success: function (res) {
+          resolve(res);
+        },
+        fail(error) {
+          console.log(error)
+        }
+      })
+    });
+    Promise.all([
+      promise1, promise2
+    ]).then(res => {
+      console.log(res)
+      that.setData({
+        show: true
+      })
+      const ctx = wx.createCanvasContext('shareImg')
+      //主要就是计算好各个图文的位置
+      ctx.drawImage('../../' + res[0].path, 0, 0, 350, 300)
+      ctx.drawImage(res[1].path, 250 / 2, 110, 100, 100)
+      ctx.textAlign = 'center' //文字居中
+      ctx.font = 'bold 13px Arial'
+      ctx.fillStyle = '#ff6464'
+      ctx.fillText("火龙果国际教育论坛", 350/2, 30)
+      ctx.fillStyle = '#000'
+      ctx.font = 'bold 18px Arial'
+      ctx.fillText(that.data.contentDetailTitle.length > 16 ? that.data.contentDetailTitle.substring(1, 16) : that.data.contentDetailTitle, 350 / 2, 60)
+      ctx.font = 'bold 17px Arial'
+      ctx.fillText(that.data.attachName, 350 / 2, 90)
+      ctx.font = 'bold 16px Arial'
+      ctx.fillText("请使用保存此图片。用微信扫码", 350 / 2, 240)
+      ctx.font = 'bold 16px Arial'
+      ctx.fillText("查看附件", 350 / 2, 270)
+      ctx.draw(false, setTimeout(function () {
+        wx.canvasToTempFilePath({
+          x: 0,
+          y: 0,
+          width: 350,
+          height: 300,
+          destWidth: 350,
+          destHeight: 300,
+          canvasId: 'shareImg',
+          success: function (res) {
+            console.log(res)
+            that.setData({
+              tempFilePath:  res.tempFilePath
+            })
+          },
+          fail: function (res) {
+            console.log(res)
+          }
+        })
+      }, 300))
+    }).catch(reason => {
+      console.log(reason)
+    });
+  },
+  // 长按保存
+  save: function () {
+    let that = this
+    console.log('save')
+    wx.showActionSheet({
+      itemList: ['保存图片'],
+      success: function (res) {
+        console.log(res.tapIndex)
+        if (res.tapIndex == 0) {
+            wx.saveImageToPhotosAlbum({
+              filePath: that.data.tempFilePath,
+            })
+        }
+      }
     })
   }
 })
