@@ -242,52 +242,80 @@ Page({
   // 上传文件 
   uploadFlie() {
     var that=this
-    wx.chooseMessageFile({
-      count: 3,
-      type: 'file',
-      success(res) {
-        that.setData({
-          uploadFile: res.tempFiles,
-        })
-        for(var i = 0; i < res.tempFiles.length;i++){
-          wx.uploadFile({
-            url: 'http://data.xinxueshuo.cn/nsi-1.0/postItem/upfile.do',
-            filePath: res.tempFiles[i].path,
-            name: 'file',
-            formData: {
-              'type': 'nsi-community/attachment/',
-            },
-            success(msg) {
-              var data = JSON.parse(msg.data)
-              if (data.data.url!=""){
-                that.data.attach.push(data.data.url)
-              }
-              if (res.tempFiles.length == 1){
-                that.setData({
-                  attachOne: that.data.attach[0],
-                  attachTwo: "",
-                  attachThree: "",
-                })
-              } else if (res.tempFiles.length == 2){
-                that.setData({
-                  attachOne: that.data.attach[0],
-                  attachTwo: that.data.attach[1],
-                  attachThree: "",
-                })
-              }else{
-                that.setData({
-                  attachOne: that.data.attach[0],
-                  attachTwo: that.data.attach[1],
-                  attachThree: that.data.attach[2],
-                })
-              }
-            }
-          })
-          console.log(that.data.attach)
-        }
-        
-      }
+    wx.showToast({
+      title: '您可以从微信聊天中选取文件，支持doc，xlsx，ppt，pdf文件，文件大小10MB以内',
+      icon: 'none',
+      duration: 3000
     })
+    setTimeout(function () {
+      wx.chooseMessageFile({
+        count: 3,
+        type: 'file',
+        success(res) {
+          console.log(res)
+          for (var i = 0; i < res.tempFiles.length; i++) {
+            var index = res.tempFiles[i].path.lastIndexOf("\.");
+            var fileType = res.tempFiles[i].path.substring(index + 1, res.tempFiles[i].path.length)
+            console.log(fileType)
+            if ((fileType == 'pdf' || fileType == 'xlsx' || fileType == 'ppt' || fileType == 'doc') && res.tempFiles[i].size < 10500000) {
+              that.setData({
+                uploadFile: res.tempFiles,
+              })
+              wx.uploadFile({
+                url: 'http://data.xinxueshuo.cn/nsi-1.0/postItem/upfile.do',
+                filePath: res.tempFiles[i].path,
+                name: 'file',
+                formData: {
+                  'type': 'nsi-community/attachment/',
+                },
+                success(msg) {
+                  var data = JSON.parse(msg.data)
+                  if (data.data.url != "") {
+                    that.data.attach.push(data.data.url)
+                  }
+                  if (res.tempFiles.length == 1) {
+                    that.setData({
+                      attachOne: that.data.attach[0],
+                      attachTwo: "",
+                      attachThree: "",
+                    })
+                  } else if (res.tempFiles.length == 2) {
+                    that.setData({
+                      attachOne: that.data.attach[0],
+                      attachTwo: that.data.attach[1],
+                      attachThree: "",
+                    })
+                  } else {
+                    that.setData({
+                      attachOne: that.data.attach[0],
+                      attachTwo: that.data.attach[1],
+                      attachThree: that.data.attach[2],
+                    })
+                  }
+                  wx.showToast({
+                    title: '上传成功',
+                    icon: 'success',
+                    duration: 1500
+                  })
+                }
+              })
+            } else if (res.tempFiles[i].size > 10500000) {
+              wx.showToast({
+                title: '支持文件大小10MB以内',
+                icon: 'none',
+                duration: 3000
+              })
+            } else {
+              wx.showToast({
+                title: '仅支持doc，xlsx，ppt，pdf文件',
+                icon: 'none',
+                duration: 3000
+              })
+            }
+          }
+        }
+      })
+    }, 3500);
   }, 
   inputValue(e){
     this.setData({
@@ -363,6 +391,7 @@ Page({
         }
         var content = time.utf16toEntities(res.html)
         var title = time.utf16toEntities(that.data.titleContent)
+        if (that.data.titleContent.length > 0 && that.data.titleContent.length < 40 && res.html.replace(/<(\/)?[^>].*?>/g, '').length > 10) {
         api.publishContent(
           {
             title: title,
@@ -378,7 +407,6 @@ Page({
             postType: that.data.clickItemName.join(",").replace(/,/g, ";").split(),
           },
           function (msg) {
-            if (that.data.titleContent.length > 0 && that.data.titleContent.length < 40 && res.html.replace(/<(\/)?[^>].*?>/g, '').length > 10) {
               if (msg.code == 0) {
                 that.setData({
                   showModalStatus: false,
@@ -396,30 +424,30 @@ Page({
                   })
                 }, 2000);
               }
-            } else if (that.data.titleContent == '') {
-              wx.showToast({
-                title: "标题不能为空",
-                icon: 'none',
-                duration: 1500,
-              })
-            } else if (that.data.titleContent.length > 40) {
-              wx.showToast({
-                title: "标题最多40字",
-                icon: 'none',
-                duration: 1500,
-              })
-            } else {
-              wx.showToast({
-                title: "内容至少10个字",
-                icon: 'none',
-                duration: 1500,
-              })
-            }
           },
           function (err) {
             console.log(err)
           }
         )
+        } else if (that.data.titleContent == '') {
+          wx.showToast({
+            title: "标题不能为空",
+            icon: 'none',
+            duration: 1500,
+          })
+        } else if (that.data.titleContent.length > 40) {
+          wx.showToast({
+            title: "标题最多40字",
+            icon: 'none',
+            duration: 1500,
+          })
+        } else {
+          wx.showToast({
+            title: "内容至少10个字",
+            icon: 'none',
+            duration: 1500,
+          })
+        }
       },
       fail: (res) => {
         console.log(res);

@@ -2,9 +2,9 @@
 <view class="topPart">
   <view class="avar"><image src="{{userMessage.wechatPortrait}}"/></view>
   <view>
-    <text class="focusOnWhite">取消关注</text> 
+    <text class="focusOnWhite">{{follow}}</text> 
     <text class="name">{{userMessage.nickname}}</text>
-    <text class="focusOn buttonBg">取消关注</text> 
+    <text class="focusOn buttonBg" data-openid="{{followOpenId}}" data-title="{{follow}}" bindtap="follow">{{follow}}</text> 
   </view>
   <view class="signature" wx:if="{{userMessage.slogan=='null'|| userMessage.slogan==null}}">暂无签名</view>
   <view class="signature" wx:else>{{userMessage.slogan}}</view>

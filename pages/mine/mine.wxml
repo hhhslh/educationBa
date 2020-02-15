@@ -60,5 +60,5 @@
      <image class="icon" src="../../images/collection.png"/>
     </view>
   </view>
-  <view bindtap="mineBtn" class="mine-btn">-火龙果国际教育论坛2.12-</view>
+  <view bindtap="mineBtn" class="mine-btn">-火龙果国际教育论坛2.14-</view>
 </view>

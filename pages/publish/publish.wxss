@@ -159,7 +159,7 @@ page{
   line-height: 30px;
 }
 .bottomButton .upload:last-of-type{
-  font-size: 25px;
+  font-size: 30px;
 }
 .bottomButton .submit{
   float:right;

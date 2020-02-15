@@ -547,17 +547,16 @@ Page({
   // 下载文件1
   one() {
     var that = this
+    console.log(that.data.attachOne)
     wx.downloadFile({
       url: that.data.attachOne,
       success: function (res) {
         console.log(res)
         var filePath = res.tempFilePath
         var index = that.data.attachOne.lastIndexOf("\.");
-        that.data.attachOne = that.data.attachOne.substring(index + 1, that.data.attachOne.length);
-        console.log(that.data.attachOne)
         wx.openDocument({
           filePath: filePath,
-          fileType: String(that.data.attachOne),
+          fileType: String(that.data.attachOne.substring(index + 1, that.data.attachOne.length)),
           success: function (res) {
             console.log('打开文档成功')
           },
@@ -572,7 +571,7 @@ Page({
     })
   },
   // 下载文件2
-  two(e) {
+  two() {
     var that = this
     wx.downloadFile({
       url: that.data.attachTwo,
@@ -599,7 +598,7 @@ Page({
     })
   },
   // 下载文件3
-  three(e) {
+  three() {
     var that = this
     wx.downloadFile({
       url: that.data.attachThree,
