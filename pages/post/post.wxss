@@ -109,9 +109,11 @@
  display: inline-block;
  vertical-align: middle;
  font-size: 16px;
+ color: rgb(78,78,78);
 }
 .commentNum{
  display: inline-block;
  vertical-align: middle;
  font-size: 14px;
+ color: rgb(78,78,78);
 }
