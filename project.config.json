@@ -102,6 +102,13 @@
 					"id": -1,
 					"name": "pages/hotDetails/hotDetails",
 					"pathName": "pages/hotDetails/hotDetails",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/AdministratorsList/AdministratorsList",
+					"pathName": "pages/AdministratorsList/AdministratorsList",
 					"scene": null
 				}
 			]

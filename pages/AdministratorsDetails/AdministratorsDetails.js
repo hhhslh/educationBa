@@ -9,7 +9,10 @@ Page({
     WXparseData:"",
     nodes:"",
     itemId:"",
-    headerTitle:""
+    headerTitle:"",
+    attachOne:"",//附件1
+    attachTwo:"",//附件2
+    attachThree:"",//附件3
   },
   // 拒绝
   refuse:function(){
@@ -160,7 +163,96 @@ Page({
     });
    
   },
+  // 下载附件一
+  oneBtn:function(){
+    var that = this;
+    console.log(this.data.attachOne)
+    wx.downloadFile({
+      url: this.data.attachOne, 
+      success (res) {
+        console.log(res)
+        var filePath = res.tempFilePath
+        console.log(that.data.attachOne)
+        var index = that.data.attachOne.lastIndexOf("\.");
+        console.log(index)
+        that.data.attachOne = that.data.attachOne.substring(index + 1, that.data.attachOne.length);
+        console.log(that.data.attachOne)
+        wx.openDocument({
+          filePath: filePath,
+          fileType: String(that.data.attachOne),
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail(err) {
+            console.log(err)
+          }
+        })
+      }
+    })
+  },// 下载附件二
+  twoBtn:function(){
+    var that = this;
+    console.log(this.data.attachOne)
+    wx.downloadFile({
+      url: this.data.attachOne, 
+      success (res) {
+        console.log(res)
+        var filePath = res.tempFilePath
+        console.log(that.data.attachOne)
+        var index = that.data.attachOne.lastIndexOf("\.");
+        console.log(index)
+        that.data.attachOne = that.data.attachOne.substring(index + 1, that.data.attachOne.length);
+        console.log(that.data.attachOne)
+        wx.openDocument({
+          filePath: filePath,
+          fileType: String(that.data.attachOne),
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail(err) {
+            console.log(err)
+          }
+        })
+      }
+    })
+  },
+  // 下载附件三
+  threeBtn:function(){
+    var that = this;
+    console.log(this.data.attachOne)
+    wx.downloadFile({
+      url: this.data.attachOne, 
+      success (res) {
+        console.log(res)
+        var filePath = res.tempFilePath
+        console.log(that.data.attachOne)
+        var index = that.data.attachOne.lastIndexOf("\.");
+        console.log(index)
+        that.data.attachOne = that.data.attachOne.substring(index + 1, that.data.attachOne.length);
+        console.log(that.data.attachOne)
+        wx.openDocument({
+          filePath: filePath,
+          fileType: String(that.data.attachOne),
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail(err) {
+            console.log(err)
+          }
+        })
+      }
+    })
+  },
+  // aa:function(){
+  //   console.log("12234445555")
+  // },
+  // btnOne:function(){
+  //   console.log("111111")
 
+  // },
+  // BtnOne:function(){
+  //   console.log("111111")
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -179,8 +271,12 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
+        console.log(res.data.data.postItem.attachOne)
         that.setData({
-          headerTitle: res.data.data.postItem.title
+          headerTitle: res.data.data.postItem.title,
+          attachOne:res.data.data.postItem.attachOne,
+          attachTwo:res.data.data.postItem.attachTwo,
+          attachThree:res.data.data.postItem.attachThree
         })
     
         let data = res.data.data.postItem.content;
