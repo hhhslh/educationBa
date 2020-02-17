@@ -27,7 +27,11 @@ Page({
     hotDetailsNum:'',//一级评论的数量
     attachOne: "",//附件1
     attachTwo: "",//附件2
-    attachThree: ""//附件3
+    attachThree: "",//附件3
+    loading: false,
+    disabled: false,
+    loading1: false,
+    disabled1: false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -182,71 +186,102 @@ Page({
   },
   //一级评论的内容提交接口
   getcontent(e){
-    var that = this
-    if (wx.getStorageSync('openId') == "") {
-      wx.navigateTo({
-        url: '../login/login',
+      var that = this
+      that.setData({
+        loading: !that.data.loading,
+        disabled: !that.data.disabled
       })
-    } else {
-      if (that.data.getcontentValue == ""){
-        wx.showToast({
-          title: "请填写回复内容...",
-          icon: 'none',
-          duration: 1500,
+      if (wx.getStorageSync('openId') == "") {
+        wx.navigateTo({
+          url: '../login/login',
         })
-      } else if (that.data.getcontentValue.length > 140){
-        wx.showToast({
-          title: "输入框文字不能超过140字...",
-          icon: 'none',
-          duration: 1500,
+        that.setData({
+          loading: false,
+          disabled: false
         })
-      }else{
-        api.msg_sec_check({
-          content : time.utf16toEntities(that.data.getcontentValue)
+      } else {
+        if (that.data.getcontentValue == "") {
+          wx.showToast({
+            title: "请填写回复内容...",
+            icon: 'none',
+            duration: 1500,
+          })
+          that.setData({
+            loading: false,
+            disabled: false
+          })
+        } else if (that.data.getcontentValue.length > 140) {
+          wx.showToast({
+            title: "输入框文字不能超过140字...",
+            icon: 'none',
+            duration: 1500,
+          })
+          that.setData({
+            loading: false,
+            disabled: false
+          })
+        } else {
+          api.msg_sec_check({
+            content: time.utf16toEntities(that.data.getcontentValue)
           },
-          function(res){
-            console.log(res)
-            if (res.code == 0){
-              api.communityCommentinsert(
-                {
-                  content: time.utf16toEntities(that.data.getcontentValue),
-                  wechatId: wx.getStorageSync('openId'),
-                  portrait: wx.getStorageSync('wechatPortrait'),
-                  nickname: time.utf16toEntities(wx.getStorageSync('nickName')),
-                  objectId: that.id
-                },
-                function (res) {
-                  console.log(res)
-                  if (res.code == 0) {
-                    wx.showToast({
-                      title: "回复成功",
-                      icon: 'success',
-                      duration: 1500,
+            function (res) {
+              console.log(res)
+              if (res.code == 0) {
+                api.communityCommentinsert(
+                  {
+                    content: time.utf16toEntities(that.data.getcontentValue),
+                    wechatId: wx.getStorageSync('openId'),
+                    portrait: wx.getStorageSync('wechatPortrait'),
+                    nickname: time.utf16toEntities(wx.getStorageSync('nickName')),
+                    objectId: that.id
+                  },
+                  function (res) {
+                    console.log(res)
+                    if (res.code == 0) {
+                      wx.showToast({
+                        title: "回复成功",
+                        icon: 'success',
+                        duration: 1500,
+                      })
+                    }
+                    that.setData({
+                      getcontentValue: "",
+                      loading: false,
+                      disabled: false
                     })
+                  },
+                  function (err) {
+                    that.setData({
+                      getcontentValue: "",
+                      loading: false,
+                      disabled: false
+                    })
+                    console.log(err)
                   }
-                  that.setData({
-                    getcontentValue: ""
-                  })
-                },
-                function (err) {
-                  console.log(err)
-                }
-              )
-            }else{
-              wx.showToast({
-                title: "内容包含敏感信息，请重新输入",
-                icon: 'none',
-                duration: 1500,
-              })
+                )
+              } else if (res.code == 1) {
+                wx.showToast({
+                  title: "内容包含敏感信息，请重新输入",
+                  icon: 'none',
+                  duration: 1500,
+                })
+                that.setData({
+                  loading: false,
+                  disabled: false
+                })
+              }else{
+                that.setData({
+                  loading: false,
+                  disabled: false
+                })
+              }
+            },
+            function (err) {
+              console.log(res)
             }
-          },
-          function(err){
-            console.log(res)
-          }
-        )
-        
+          )
+        }
       }
-    }
   },
   //用于获取单条一级评论的ID
   editorShowTwo: function (e) {
@@ -266,6 +301,10 @@ Page({
   // 二级评论插入
   getcontentTwo(e) {
     var that = this
+    that.setData({
+      loading1: !that.data.loading1,
+      disabled1: !that.data.disabled1
+    })
     if (wx.getStorageSync('openId') == "") {
       wx.navigateTo({
         url: '../login/login',
@@ -277,11 +316,19 @@ Page({
           icon: 'none',
           duration: 1500,
         })
+        that.setData({
+          loading1: false,
+          disabled1: false
+        })
       } else if (that.data.inputValue >140){
         wx.showToast({
           title: "输入框文字不能超过140字...",
           icon: 'none',
           duration: 1500,
+        })
+        that.setData({
+          loading1: false,
+          disabled1: false
         })
       }else {
         api.msg_sec_check({
@@ -303,7 +350,9 @@ Page({
                   if (res.code == 0) {
                     that.setData({
                       listidShow: "000",
-                      inputValue: ''
+                      inputValue: '',
+                      loading1: false,
+                      disabled1: false
                     })
                     wx.showToast({
                       title: "回复成功",
@@ -313,18 +362,35 @@ Page({
                   }
                 },
                 function (err) {
+                  that.setData({
+                    loading1: false,
+                    disabled1: false
+                  })
                   console.log(err)
                 }
               )
-            }else{
+            } else if (res.code == 1){
               wx.showToast({
                 title: "内容包含敏感信息，请重新输入",
                 icon: 'none',
                 duration: 1500,
               })
+              that.setData({
+                loading1: false,
+                disabled1: false
+              })
+            } else {
+              that.setData({
+                loading1: false,
+                disabled1: false
+              })
             }
           },
           function (err) {
+            that.setData({
+              loading1: false,
+              disabled1: false
+            })
             console.log(res)
           }
         )

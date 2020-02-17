@@ -104,3 +104,14 @@
 .hide{
   display: none !important;
 }
+.commentIcon {
+ margin: 2px 4px 0 15px;
+ display: inline-block;
+ vertical-align: middle;
+ font-size: 16px;
+}
+.commentNum{
+ display: inline-block;
+ vertical-align: middle;
+ font-size: 14px;
+}

@@ -10,7 +10,9 @@ Page({
     contentDetailContent: "",//详情内容
     contentDetailNickname: '',//名称
     contentDetailPortrait: '',//头像
-    contentDetailCreateTime: ''//时间
+    contentDetailCreateTime: '',//时间
+    loading1: false,
+    disabled1: false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -111,6 +113,10 @@ Page({
   // 二级评论插入
   getcontentTwo(e) {
     var that = this
+    that.setData({
+      loading1: !that.data.loading1,
+      disabled1: !that.data.disabled1
+    })
     if (wx.getStorageSync('openId') == "") {
       wx.navigateTo({
         url: '../login/login',
@@ -122,11 +128,19 @@ Page({
           icon: 'none',
           duration: 1500,
         })
+        that.setData({
+          loading1: false,
+          disabled1: false
+        })
       } else if (that.data.getcontentValue > 140) {
         wx.showToast({
           title: "输入框文字不能超过140字...",
           icon: 'none',
           duration: 1500,
+        })
+        that.setData({
+          loading1: false,
+          disabled1: false
         })
       } else {
         api.msg_sec_check({
@@ -147,7 +161,9 @@ Page({
                   console.log(res)
                   if (res.code == 0) {
                     that.setData({
-                      getcontentValue: ''
+                      getcontentValue: '',
+                      loading1: false,
+                      disabled1: false
                     })
                     wx.showToast({
                       title: "回复成功",
@@ -157,18 +173,35 @@ Page({
                   }
                 },
                 function (err) {
+                  that.setData({
+                    loading1: false,
+                    disabled1: false
+                  })
                   console.log(err)
                 }
               )
-            } else {
+            } else if (res.code == 1) {
               wx.showToast({
                 title: "内容包含敏感信息，请重新输入",
                 icon: 'none',
                 duration: 1500,
               })
+              that.setData({
+                loading1: false,
+                disabled1: false
+              })
+            }else{
+              that.setData({
+                loading1: false,
+                disabled1: false
+              })
             }
           },
           function (err) {
+            that.setData({
+              loading1: false,
+              disabled1: false
+            })
             console.log(res)
           }
         )

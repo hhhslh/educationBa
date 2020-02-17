@@ -189,6 +189,10 @@
   border: 1px solid #eee;
   height: 38px;
   line-height: 38px;
+  padding: 0;
+  background: rgba(255,100,100,1);
+  color: #fff;
+  font-weight: normal;
 }
 .hotDetails .hotDetails-main .hotDetailsNum{
   font-size: 16px;
@@ -212,24 +216,25 @@
   box-shadow:  0 -2px 3px #eee;
 }
 .footInput input  {
-  width: 74%;
+  width: 72%;
   padding:5px 8px 4px;
   margin-right: 4%;
   background-color: #ddd;
   border-radius: 20px;
   font-size: 14px;
-  margin-left: 4%;
+  margin-left: 3%;
 }
 .footInput .textarea-wrp-btn{
-  width: 14%;
+  width: 18%;
+  margin-right: 3%;
+  height: 32px;
   text-align: center;
-  height: 1rem;
-  padding: 8px;
-  min-height: 1rem;
-  line-height: 1rem;
-  margin-right: 4%;
-  font-size: 14px;
   border-radius: 20px;
+  font-size: 14px;
+  padding: 0;
+  min-height: 32px;
+  line-height: 32px;
+  color: #fff;
 }
 
 /* 最新帖子*/

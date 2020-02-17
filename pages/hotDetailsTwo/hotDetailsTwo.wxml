@@ -32,5 +32,5 @@
 </view>
 <view class="footInput" >
   <input bindinput="getcontentValue" value="{{getcontentValue}}" cursor-spacing="18px"   placeholder="友善的评论是交流的起点"/>
-  <view bindtap="getcontentTwo" class="textarea-wrp-btn buttonBg">回复</view>
+  <button type="warn" loading="{{loading1}}" disabled="{{disabled1}}" bindtap="getcontentTwo"  class="textarea-wrp-btn buttonBg"> 回复 </button>
 </view>

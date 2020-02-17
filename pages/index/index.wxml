@@ -57,6 +57,8 @@
       </view>
       <view class="comment">
         <text class="publishTime">{{item.createTime}}</text>
+        <van-icon name="browsing-history-o" class="commentIcon" />
+        <text class="commentNum">{{item.watchNum}}</text>
         <van-icon name="chat-o" class="commentIcon" />
         <text class="commentNum">{{item.commentNum}}</text>
       </view>
@@ -76,6 +78,8 @@
     </view>
     <view class="comment">
       <text class="publishTime">{{item.createTime}}</text>
+      <van-icon name="browsing-history-o" class="commentIcon" />
+      <text class="commentNum">{{item.watchNum}}</text>
       <van-icon name="chat-o" class="commentIcon" />
       <text class="commentNum">{{item.commentNum}}</text>
     </view>

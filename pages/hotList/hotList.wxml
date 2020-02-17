@@ -9,7 +9,8 @@
           <view class="left-summaryDesc">{{hotBg.summaryDesc}}</view>
           <image src="{{hotBg.avatar}}" class="hotBg-image"/>
           <text>{{hotBg.nickName}}</text>
-          <text>{{hotBg.commentNum}} 评论</text>
+          <text>查看 {{hotBg.watchNum}}</text>
+          <text>评论 {{hotBg.commentNum}}</text>
         </view>
         <image src="{{hotBg.postIcon}}" class="hotBg-content-image {{hotBg.postIcon==null || hotBg.postIcon==''? 'widthimg':''}}" />
       </view>
@@ -32,6 +33,8 @@
     </view>
     <view class="comment">
       <text class="publishTime">{{item.createTime}}</text>
+      <van-icon name="browsing-history-o" class="commentIcon" />
+      <text class="commentNum">{{item.watchNum}}</text>
       <van-icon name="chat-o" class="commentIcon" />
       <text class="commentNum">{{item.commentNum}}</text>
     </view>
