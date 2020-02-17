@@ -17,6 +17,8 @@ Page({
     isPostRefresh: false,//判断帖子是否刷新
     isCommentRefresh: false,//判断回答是否刷新
     tabTitle:"",//选择tab标题
+    follow: '关注',//关注
+    followOpenId:"",
   },
 
   /**
@@ -104,8 +106,10 @@ Page({
       console.log(res)
       res.data.nickname = time.uncodeUtf16(res.data.nickname)
       that.setData({
-        userMessage:res.data
+        userMessage:res.data,
+        followOpenId:res.data.openId
       })
+      that.followCheck(that.data.followerid)
     })
   },
   // 帖子
@@ -194,5 +198,89 @@ Page({
       url: '../hotDetails/hotDetails?id=' + e.currentTarget.dataset.postid
     })
   },
+  //关注判断
+  followCheck(e) {
+    var that = this
+      api.checkFollow(
+        {
+          followerId: that.data.followerid,
+          wechatId: wx.getStorageSync('openId')
+        },
+        function (res) {
+          if(res.msg == '已关注'){
+            that.setData({
+              follow: "取消关注"
+            })
+          }else{
+            that.setData({
+              follow: "关注"
+            })
+          }
+        },
+        function (err) {
+          console.log(err)
+        }
+      )
+  },
+  //关注
+  follow(e) {
+    var that = this
+    console.log(e.currentTarget.dataset.openid)
+      if (wx.getStorageSync('openId') != e.currentTarget.dataset.openid) {
+        if (e.currentTarget.dataset.title == "关注") {
+          api.communityFollow(
+            {
+              followerId: e.currentTarget.dataset.openid,
+              openId: wx.getStorageSync('openId')
+            },
+            function (res) {
+              console.log(res)
+              if (res.code == 0) {
+                wx.showToast({
+                  title: "关注成功",
+                  icon: 'success',
+                  duration: 1500,
+                })
+                that.setData({
+                  follow: '取消关注'
+                })
+              }
+            },
+            function (err) {
+              console.log(err)
+            }
+          )
+        } else {
+          api.cancelFollow(
+            {
+              followerId: e.currentTarget.dataset.openid,
+              wechatId: wx.getStorageSync('openId')
+            },
+            function (res) {
+              console.log(res)
+              if (res.code == 0) {
+                wx.showToast({
+                  title: "取消关注成功",
+                  icon: 'success',
+                  duration: 1500,
+                })
+                that.setData({
+                  follow: '关注'
+                })
+              }
+            },
+            function (err) {
+              console.log(err)
+            }
+          )
+        }
+      } else {
+        wx.showToast({
+          title: "不能关注自己",
+          icon: 'loading',
+          duration: 1500,
+        })
+      }
+    }
   
 })

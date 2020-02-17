@@ -17,3 +17,6 @@ button{
   margin-bottom: 30px;
   font-size: 50rpx;
 }
+.colorRed{
+  color: red;
+}

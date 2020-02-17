@@ -4,8 +4,11 @@
 <!-- <template data="{{wxParseData:article.nodes}}"/> -->
 <view class="header">{{headerTitle}}</view>
 <rich-text nodes="{{nodes}}"></rich-text>
+<view class="colorRed" bindtap="oneBtn" wx:if="{{attachOne}}">附件1</view>
+<view class="colorRed" bindtap="twoBtn" wx:if="{{attachTwo}}">附件2</view>
+<view class="colorRed" bindtap="threeBtn" wx:if="{{attachThree}}">附件3</view>
 <view class="Btn">
   <button size="mini" type="warn" bindtap="refuse">拒绝</button>
-  <button size="mini" type="default">下一个</button>
+  <button size="mini" type="default" bindtap="aa">下一个</button>
   <button size="mini" type="primary" bindtap="adopt">通过</button>
 </view>
