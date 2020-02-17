@@ -22,8 +22,8 @@
          <van-tag type="success" class="{{item.isCheck=='审核中'?'':'hide'}}">{{item.isCheck}}</van-tag>
          <van-tag type="primary" class="{{item.isCheck=='已发布'?'':'hide'}}">{{item.isCheck}}</van-tag>
          <van-tag type="warning" class="{{item.isCheck=='审核失败'?'':'hide'}}">{{item.isCheck}}</van-tag>
-         <van-icon name="browsing-history-o" class="commentIcon" />
-         <text class="commentNum">{{item.watchNum}}</text>
+         <!-- <van-icon name="browsing-history-o" class="commentIcon" />-->
+         <text style="margin-left: 15px;" class="commentNum">阅读 {{item.watchNum}}</text>
          <van-icon name="chat-o" class="commentIcon" />
          <text class="commentNum">{{item.commentNum}}</text>
          <van-icon class="ellipsisRight" name="ellipsis" />
