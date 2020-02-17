@@ -7,7 +7,7 @@ App({
     this.messageNumber()
     //使用更新对象之前判断是否可用
     if (wx.canIUse('getUpdateManager')) {
-      console.log("检查更新")
+      console.log("检查更新版本")
       const updateManager = wx.getUpdateManager()
       updateManager.onCheckForUpdate(function (res) {
         // 请求完新版本信息的回调
