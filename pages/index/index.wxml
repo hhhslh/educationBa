@@ -3,37 +3,38 @@
   <image src="../../images/logo@2x.png"></image>
   <text>火龙果国际教育论坛</text>
 </view>
-<view class="oneSwiperPart">
-  <swiper autoplay="true" next-margin="35px" circular="true">
-      <swiper-item wx:for="{{homeConfigList}}" data-cardid="{{item.content02}}" bindtap="enterCard">
-        <view style="background-image:url({{item.content01}});">
-          <text>{{item.content03}}</text>
-        </view>
-      </swiper-item>
-  </swiper>
-</view>
-<view class="weekDiscuss">
-  <view class="thisWeek">本周讨论</view>
-  <swiper display-multiple-items="2" next-margin="50px" previous-margin="{{discussPreviousMargin}}">
-      <swiper-item wx:for="{{hotList}}" data-detailid="{{item.itemId}}" bindtap="hotDetails">
-        <view class="bgSwiperItem">
-          <text class="hotTitle">{{item.title}}</text>
-          <view class="data">
-            <text>浏览 {{item.watchNum}}</text>
-            <text>收藏 {{item.collectNum}}</text>
+<view class="bgColor">
+  <van-search
+    value="{{ inputValue }}"
+    placeholder="请输入搜索关键词"
+    bind:change="bindinput"
+    bind:search="bindSearch"
+    placeholder-style="font-size:16px;margin-left:8px;rgb(128,128,128)"
+  >
+  </van-search>
+  <view class="oneSwiperPart">
+    <swiper autoplay="true" next-margin="35px" circular="true">
+        <swiper-item wx:for="{{homeConfigList}}" data-cardid="{{item.content02}}" bindtap="enterCard">
+          <view style="background-image:url({{item.content01}});">
+            <text>{{item.content03}}</text>
           </view>
-        </view>
-      </swiper-item>
-  </swiper>
+        </swiper-item>
+    </swiper>
+  </view>
+  <view class="notice" bindtap="toNotice">
+    <text class="buttonBg noticeIcon iconfont icon-notice"></text>
+    <text class="noticeContent">火龙果系列工艺讲座上线啦!</text>
+    <text class="enterIcon iconfont icon-right"></text>
+  </view>
+  <view class="Istop" wx:for="{{topList}}" data-detailid="{{item.itemId}}" bindtap="hotDetails">
+    <text class="buttonBg istopTitle">置顶</text>
+    <text class="topPostTitle">{{item.title}}</text>
+    <view class="topPostData">
+      <text>{{item.watchNum}}浏览</text>
+      <text>{{item.commentNum}}评论</text>
+    </view>
+  </view>
 </view>
-<van-search
-  value="{{ inputValue }}"
-  placeholder="请输入搜索关键词"
-  bind:change="bindinput"
-  bind:search="bindSearch"
-  placeholder-style="font-size:16px;margin-left:8px;rgb(128,128,128)"
->
-</van-search>
 <view class="index_main">
   <view class="chooseTab">
     <van-tabs color="rgba(255,100,100,1)" active="{{active}}" line-width="60" bind:click="chooseAll" swipeable>
