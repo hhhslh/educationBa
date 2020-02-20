@@ -155,7 +155,7 @@ Page({
                   wechatId: wx.getStorageSync('openId'),
                   portrait: wx.getStorageSync('wechatPortrait'),
                   nickname: time.utf16toEntities(wx.getStorageSync('nickName')),
-                  objectId: that.objectId
+                  objectId: that.id
                 },
                 function (res) {
                   console.log(res)
