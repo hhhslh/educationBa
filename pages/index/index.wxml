@@ -23,15 +23,15 @@
   </view>
   <view class="notice" bindtap="toNotice">
     <text class="buttonBg noticeIcon iconfont icon-notice"></text>
-    <text class="noticeContent">火龙果系列工艺讲座上线啦!</text>
+    <text class="noticeContent">火龙果系列公益讲座上线啦!</text>
     <text class="enterIcon iconfont icon-right"></text>
   </view>
   <view class="Istop" wx:for="{{topList}}" data-detailid="{{item.itemId}}" bindtap="hotDetails">
     <text class="buttonBg istopTitle">置顶</text>
     <text class="topPostTitle">{{item.title}}</text>
     <view class="topPostData">
-      <text>{{item.watchNum}}浏览</text>
-      <text>{{item.commentNum}}评论</text>
+      <text>浏览 {{item.watchNum}}</text>
+      <text>评论 {{item.commentNum}}</text>
     </view>
   </view>
 </view>
