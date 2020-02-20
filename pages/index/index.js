@@ -28,7 +28,8 @@ Page({
     searchNull:false,//判断是否是空搜
     homeConfigList: "",
     listId: "",
-    postHeadList: "" 
+    postHeadList: "" ,
+    topList:""
   },
   //事件处理函数
   bindViewTap: function() {
@@ -165,7 +166,8 @@ Page({
         that.setData({
           indexTitle: res.data.postVO,
           newList: that.data.searchList,
-          hotList:res.data.hotList
+          hotList:res.data.hotList,
+          topList: res.data.topList
         })
       },
       function (err) {
@@ -254,6 +256,11 @@ Page({
     console.log(e.currentTarget.dataset.cardid)
     wx.navigateTo({
       url: e.currentTarget.dataset.cardid
+    })
+  },
+  toNotice(){
+    wx.navigateTo({
+      url: '../hotDetails/hotDetails?id=1089'
     })
   },
 })
