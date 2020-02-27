@@ -260,7 +260,7 @@ Page({
   },
   toNotice(){
     wx.navigateTo({
-      url: '../hotDetails/hotDetails?id=1089'
+      url: '../videoList/videoList'
     })
   },
 })

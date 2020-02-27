@@ -22,7 +22,7 @@
     </swiper>
   </view>
   <view class="notice" bindtap="toNotice">
-    <text class="buttonBg noticeIcon iconfont icon-notice"></text>
+    <image class="noticeIcon" src="../../images/video.png" />
     <text class="noticeContent">火龙果系列公益讲座上线啦!</text>
     <text class="enterIcon iconfont icon-right"></text>
   </view>
