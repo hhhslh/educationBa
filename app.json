@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/video/video",
     "pages/index/index",
     "pages/post/post",
     "pages/mine/mine",
@@ -8,7 +9,7 @@
     "pages/hotDetails/hotDetails",
     "pages/news/news",
     "pages/login/login",
-    "pages/hotList/hotList", 
+    "pages/hotList/hotList",
     "pages/hotDetailsTwo/hotDetailsTwo",
     "pages/follow/follow",
     "pages/followHomePage/followHomePage",
@@ -18,7 +19,8 @@
     "pages/AdministratorsDetails/AdministratorsDetails",
     "pages/hotDetailsOne/hotDetailsOne",
     "pages/postModify/postModify",
-    "pages/fans/fans"
+    "pages/fans/fans",
+    "pages/videoList/videoList"
   ],
   "tabBar": {
     "selectedColor": "#e60c4b",

@@ -46,6 +46,8 @@ const personalUserInfo = (params, success, faild) => http.post(URL + "/community
 const homeConfig = (params, success, faild) => http.post(URL + "/CommunityConfig/homeConfig", params, success, faild);
 const postItemUpdate = (params, success, faild) => http.post(URL + "/postItem/update.do", params, success, faild);
 const communityUserFans = (params, success, faild) => http.post(URL + "/communityUser/myFans", params, success, faild);
+const playback = (params, success, faild) => http.get(URL + "/playback/list.do", params, success, faild);
+const managerplayback = (params, success, faild) => http.get(URL + "/manager/playback/detail.do", params, success, faild);
 module.exports = {
   decodeUserInfo:decodeUserInfo, //获取微信用户信息
   chineseList:chineseList,//类目列表
@@ -89,5 +91,7 @@ module.exports = {
   personalUserInfo:personalUserInfo,//获取个人主页用户信息
   homeConfig: homeConfig,//首页轮播
   postItemUpdate: postItemUpdate,//帖子修改
-  communityUserFans: communityUserFans
+  communityUserFans: communityUserFans,///
+  playback: playback,//直播回放
+  managerplayback: managerplayback//直播回放详情
 }

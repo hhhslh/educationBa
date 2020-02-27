@@ -1,0 +1,28 @@
+<!--pages/videoDetails.wxml-->
+<view class='news'>
+  <van-tabs animated bind:click="onClick" swipeable active="{{active}}" duration="0.6">
+    <van-tab title="越姐麻辣说">
+      <view class="news-list" wx:for="{{unreadList}}"  bindtap="enterDetail" data-titleId="{{item.id}}">
+        <view class='news-list-right'>
+          <!-- <view class='news-right-answer'><van-tag type="danger" class="icon" size="medium">直播回放</van-tag><text class="text">{{item.vidioTitile}}</text></view> -->
+          <view class='news-right-answer'><text class="text">{{item.vidioTitile}}</text></view>
+          <view class='news-right-name'>
+            <view>嘉宾：{{item.guest}}</view>
+            <van-tag type="danger" class="icon" size="medium">直播回放</van-tag>
+          </view>
+        </view>
+      </view>
+      <view class="{{unreadList==''?'noUnread':'hide'}}">暂无未读消息</view>
+    </van-tab>
+    <van-tab title="越谈">
+     <view class="news-list" wx:for="{{readList}}"   bindtap="enterDetail" data-titleId="{{item.id}}">
+      <view class='news-list-right'>
+        <view class='news-right-answer'><van-tag type="danger" class="icon" size="medium">直播回放</van-tag><text class="text">{{item.vidioTitile}}</text></view>
+        <view class='news-right-name'>嘉宾：{{item.guest}}</view>
+      </view>
+     </view>
+     <view class="{{readList==''?'noUnread':'hide'}}">暂无未读消息</view>
+    </van-tab>
+  </van-tabs>
+  <van-loading class="loadMore {{loadMore ? 'show':'hide'}}"></van-loading>
+</view>

@@ -2,11 +2,13 @@
 var api = require("../../utils/api.js")
 import Toast from '../../miniprogram_npm/vant-weapp/toast/toast'
 var time = require('../../utils/util.js')
+import WeCropper from '../../we-cropper/we-cropper.js'
+const device = wx.getSystemInfoSync() // 获取设备信息
+const width = device.windowWidth // 示例为一个与屏幕等宽的正方形裁剪框
+const devicePixelRatio = device.pixelRatio
+const height = device.windowHeight - 70
+const fs = width / 750 * 2
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     chooseImage: '',//头像
     nickname: '',//昵称
@@ -16,25 +18,45 @@ Page({
     position: '',//职位
     phone: '',//电话
     usermail: '',//邮箱
-    id:''//ID
+    id:'',//ID
+    active:false,
+    imgSrc: '',//确定裁剪后的图片
+    cropperOpt: {
+      id: 'cropper',
+      width: width, // 画布宽度
+      height: height, // 画布高度
+      scale: 2.5, // 最大缩放倍数
+      zoom: 8, // 缩放系数
+      cut: {
+        x: (width - 200) / 2, // 裁剪框x轴起点(width * fs * 0.128) / 2
+        y: (height * 0.5 - 200 * 0.5), // 裁剪框y轴期起点
+        width: 200, // 裁剪框宽度
+        height: 200// 裁剪框高度
+      }
+    },
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  },
+    const { cropperOpt } = this.data
+    this.cropper = new WeCropper(cropperOpt)
+      .on('ready', (ctx) => {
+        console.log(`wecropper is ready for work!`)
+      })
+      .on('beforeImageLoad', (ctx) => {
+        wx.showToast({
+          title: '上传中',
+          icon: 'loading',
+          duration: 20000
+        })
+      })
+      .on('imageLoad', (ctx) => {
+        wx.hideToast()
+      })
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+    //刷新画面
+    this.wecropper.updateCanvas()
+  },
   onReady: function () {
-
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     //登录用户
     var that = this;
@@ -63,41 +85,6 @@ Page({
       }
     )
     
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
   nickname: function (e) {
     this.setData({
@@ -134,15 +121,41 @@ Page({
       usermail: e.detail.value
     });
   },
+  chooseshow(){
+    var that = this
+    that.setData({
+      active: true
+    })
+  },
   //上传头像
   chooseImage(){
-    var that = this 
+    var that = this
     wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
-        const tempFilePaths = res.tempFilePaths
+        const src = res.tempFilePaths[0];
+        that.wecropper.pushOrign(src);
+      }
+    })
+  },
+  getCropperImage() {
+    let that = this;
+    wx.showToast({
+      title: '上传中',
+      icon: 'loading',
+      duration: 20000
+    })
+    // 如果有需要两层画布处理模糊，实际画的是放大的那个画布
+    this.wecropper.getCropperImage((src) => {
+      if (src) {
+        that.setData({
+          imgSrc: src
+        })
         wx.uploadFile({
           url: 'https://data.xinxueshuo.cn/nsi-1.0/manager/talent/upload.do',
-          filePath: tempFilePaths[0],
+          filePath: src,
           name: 'file',
           formData: {
             'type': 'nsi-community/UserPortrait/'
@@ -151,11 +164,16 @@ Page({
             var data = JSON.parse(res.data)
             if (data.code == 0){
               that.setData({
-                chooseImage: data.data.url
+                chooseImage: data.data.url,
+                active: false
               })
+              wx.hideToast()
             }
           }
         })
+        
+      } else {
+        console.log('获取图片地址失败，请稍后重试')
       }
     })
   },
@@ -224,5 +242,15 @@ Page({
       function(err){
       }
     )
-  }
+  },
+  touchStart(e) {
+    this.cropper.touchStart(e)
+  },
+  touchMove(e) {
+    this.cropper.touchMove(e)
+  },
+  touchEnd(e) {
+    this.cropper.touchEnd(e)
+  },
 })
+ 
