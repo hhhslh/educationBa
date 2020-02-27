@@ -16,7 +16,6 @@ Page({
     show: false,//展示弹窗
     postIcon:"",//内容图片
     itemContent:"",//展示选中标签
-    clickId:"",//选中标签Id
     isChoose:false,//是否选择了标签
     clickItemName:[],//选中标签名字
     isSubmit:false,//是否填写完整发布
@@ -69,7 +68,6 @@ Page({
           contentDetailContent: res.data.postItem.content,
           titleContent: time.uncodeUtf16(res.data.postItem.title),
           itemContent: res.data.postItem.categoryName,
-          clickId: res.data.postItem.parentId,
           isChoose: true,
           clickItemName: res.data.postItem.categoryName
         })

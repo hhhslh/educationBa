@@ -4,7 +4,6 @@ var time = require('../../utils/util.js')
 import Toast from '../../miniprogram_npm/vant-weapp/toast/toast'
 Page({
   data: {
-    showSkeleton: true,
     id: "",//全局ID
     hotDetails: "",// 一级二级评论数据列表
     getcontentValue:"",//一级评论的内容input
@@ -135,7 +134,6 @@ Page({
           attachTwo: res.data.postItem.attachTwo,
           attachThree: res.data.postItem.attachThree,  
           hotList: res.data.hotList,
-          showSkeleton: false,
           loadingAAA: true//loading显示隐藏
         })
         that.followCheck(res.data.postItem.openId)

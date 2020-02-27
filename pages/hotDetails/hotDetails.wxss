@@ -237,7 +237,7 @@
 }
 
 /* 最新帖子*/
-.newInvitation{
+/* .newInvitation{
   background-color: rgb(250, 250, 250)
 }
 .newInvitation .title{
@@ -310,7 +310,7 @@
 	-webkit-box-orient: vertical;
   line-height: 24px;
   color:rgb(78,78,78);
-}
+} */
 .widthLong{
   width:100% !important;
 }

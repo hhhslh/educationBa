@@ -5,7 +5,6 @@ var time = require('../../utils/util.js')
 import Toast from '../../miniprogram_npm/vant-weapp/toast/toast'
 Page({
   data: {
-    showSkeleton: true,
     id: "",//全局ID
     hotDetails: "",// 一级二级评论数据列表
     listidShow: '',//用于来显示二级评论的input

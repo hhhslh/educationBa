@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="head" style='height:{{navH}}px'>
-  <image src="../../images/logo@2x.png"></image>
+  <image mode="scaleToFill" src="../../images/logo@2x.png"></image>
   <text>火龙果国际教育论坛</text>
 </view>
 <view class="bgColor">
@@ -22,23 +22,23 @@
     </swiper>
   </view>
   <view class="notice" bindtap="toNotice">
-    <text class="buttonBg noticeIcon iconfont icon-notice"></text>
-    <text class="noticeContent">火龙果系列工艺讲座上线啦!</text>
+    <image class="noticeIcon" src="../../images/video.png" />
+    <text class="noticeContent">火龙果系列公益讲座上线啦!</text>
     <text class="enterIcon iconfont icon-right"></text>
   </view>
   <view class="Istop" wx:for="{{topList}}" data-detailid="{{item.itemId}}" bindtap="hotDetails">
     <text class="buttonBg istopTitle">置顶</text>
     <text class="topPostTitle">{{item.title}}</text>
     <view class="topPostData">
-      <text>{{item.watchNum}}浏览</text>
-      <text>{{item.commentNum}}评论</text>
+      <text>浏览 {{item.watchNum}}</text>
+      <text>评论 {{item.commentNum}}</text>
     </view>
   </view>
 </view>
 <view class="index_main">
   <view class="chooseTab">
     <van-tabs color="rgba(255,100,100,1)" active="{{active}}" line-width="60" bind:click="chooseAll" swipeable>
-      <van-tab  wx:for="{{indexTitle}}" wx:key="*this" title="{{item.postName}}" >
+      <van-tab  wx:for="{{indexTitle}}" wx:key="*this" title="{{item.postName}}" class="tab-index--van-tab__pane">
           <text class="tabName {{showId == item.id ? 'indexButton' : ''}}"  wx:for="{{item.categoryItem}}" wx:key="*this" bindtap="toTabDetail" data-listid="{{item.id}}">{{item.categoryName}}</text>
       </van-tab>
     </van-tabs>
@@ -50,15 +50,14 @@
       <view class="newInvitation-content-title">{{item.title}}</view>
       <view class="newInvitation-content">
         <view class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}">
-          <image src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
+          <image  mode="scaleToFill" src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
           <text>{{item.nickName}}</text>
           <view class="summaryDesc {{item.postIcon==null ? 'widthLong':'widthShort'}}">{{item.summaryDesc}}</view>
         </view>
-        <image src="{{item.postIcon}}" wx:if="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />
+        <image mode="scaleToFill" src="{{item.postIcon}}" wx:if="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />
       </view>
       <view class="comment">
         <text class="publishTime">{{item.createTime}}</text>
-        <!-- <van-icon name="browsing-history-o" class="commentIcon" /> -->
         <text style="margin-left: 15px;" class="commentNum">阅读 {{item.watchNum}}</text>
         <van-icon name="chat-o" class="commentIcon" />
         <text class="commentNum">{{item.commentNum}}</text>
@@ -71,15 +70,14 @@
     <view class="newInvitation-content-title">{{item.title}}</view>
     <view class="newInvitation-content">
       <view class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}">
-        <image src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
+        <image mode="scaleToFill" src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
         <text>{{item.nickName}}</text>
         <view class="summaryDesc">{{item.summaryDesc}}</view>
       </view>
-      <image src="{{item.postIcon}}" wx:if="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />
+      <image mode="scaleToFill" src="{{item.postIcon}}" wx:if="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />
     </view>
     <view class="comment">
       <text class="publishTime">{{item.createTime}}</text>
-      <!-- <van-icon name="browsing-history-o" class="commentIcon" /> -->
       <text style="margin-left: 15px;" class="commentNum">阅读 {{item.watchNum}}</text>
       <van-icon name="chat-o" class="commentIcon" />
       <text class="commentNum">{{item.commentNum}}</text>

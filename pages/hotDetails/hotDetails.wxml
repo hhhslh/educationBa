@@ -6,7 +6,7 @@
   <view class='hotDetails-top'>
       <view class="hotDetails-image">
         <image src="{{contentDetailAvatar}}" bindtap="enterHomePage" data-followerId="{{followOpenId}}" />
-        <view class="name-time">
+        <view class="name-time"  bindtap="enterHomePage" data-followerId="{{followOpenId}}">
           <view class="name">{{contentDetailNickName}}</view>
           <view class="time">{{contentDetailCreateTime}}</view>
         </view>

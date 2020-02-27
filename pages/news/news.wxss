@@ -86,3 +86,6 @@
 .hide{
   display: none !important;
 }
+.tab-index--van-tab__pane{
+  -webkit-overflow-scrolling: touch;
+}
