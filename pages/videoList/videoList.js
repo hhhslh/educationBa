@@ -46,6 +46,7 @@ Page({
       })
     }
     this.getData("越姐麻辣说")
+    this.read("火龙果讲座")
   },
 
   /**
@@ -80,7 +81,7 @@ Page({
     if (this.data.title == "越姐麻辣说" || this.data.title == "") {
       this.unread("越姐麻辣说")
     } else {
-      this.read("越谈")
+      this.read("火龙果讲座")
     }
     setTimeout(function () {
       wx.hideNavigationBarLoading() //完成停止加载
@@ -99,7 +100,7 @@ Page({
     } else {
       this.data.readpageNum++
       this.data.isRefresh = false
-      this.read("越谈")
+      this.read("火龙果讲座")
     }
   },
 
@@ -150,7 +151,7 @@ Page({
       }
     )
   },
-  //越谈
+  //火龙果讲座
   read(e) {
     var that = this
     api.playback({
@@ -191,18 +192,6 @@ Page({
         console.log(err)
       }
     )
-  },
-  //切换接口
-  onClick(event) {
-    this.setData({
-      title: event.detail.title
-    })
-    console.log(event.detail.title)
-    if (event.detail.title == "越姐麻辣说") {
-      this.getData(event.detail.title)
-    } else {
-      this.read(event.detail.title)
-    }
   },
   // 点击消息进入详情
   enterDetail(e) {
