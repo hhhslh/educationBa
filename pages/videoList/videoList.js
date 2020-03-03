@@ -21,48 +21,19 @@ Page({
     isRefresh: true,//判断是否刷新
     searchList: ""//存放搜索下拉刷新全部列表
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.hideShareMenu()
+   
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (wx.getStorageSync('openId') == "") {
-      wx.navigateTo({
-        url: '../login/login',
-      })
-    }
     this.getData("越姐麻辣说")
     this.read("火龙果讲座")
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -88,7 +59,6 @@ Page({
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 1000);
   },
-
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -103,12 +73,12 @@ Page({
       this.read("火龙果讲座")
     }
   },
-
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  }, 
+  onShareAppMessage: function (res) {
+   
+  },
   //越姐麻辣说
   getData(e) {
     var that = this

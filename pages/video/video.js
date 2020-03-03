@@ -12,6 +12,13 @@ Page({
     this.id = options.id
     this.list(options.id)
   },
+  onShow: function () {
+    if (wx.getStorageSync('openId') == "") {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    }
+  },
   onReady: function (res) {
     this.videoContext = wx.createVideoContext('myVideo')
   },
@@ -20,14 +27,6 @@ Page({
     var goods_id = that.id;//获取产品id
     var goods_title = that.vidioTitile;//获取产品标题
     if (res.from === 'button') {
-      // api.addShareNum({ itemId: goods_id },
-      //   function (res) {
-      //     console.log(res)
-      //   },
-      //   function (err) {
-      //     console.log(err)
-      //   }
-      // )
       return {
         title: goods_title,
         path: '/pages/video/video?id=' + goods_id,
@@ -36,7 +35,7 @@ Page({
   },
   list(e){
     var that = this
-    api.managerplayback({id: e},
+    api.managerplayback({ courseId: e},
       function (res) {
         console.log(res.data)
         that.setData({
