@@ -10,13 +10,15 @@ Page({
   },
   onLoad: function (options) {
     this.id = options.id
-    this.list(options.id)
   },
   onShow: function () {
+    var that = this;
     if (wx.getStorageSync('openId') == "") {
       wx.navigateTo({
         url: '../login/login',
       })
+    }else{
+      this.list(that.id)
     }
   },
   onReady: function (res) {
