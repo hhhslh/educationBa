@@ -8,7 +8,8 @@ Page({
     show: false,//积分弹窗 
     avatarUrl: "",//用户头像地址
     nickName:"未登录",//用户姓名
-    score:""
+    score:"",
+    gradeSign:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -65,9 +66,10 @@ Page({
             wx.setStorageSync('nickName', time.uncodeUtf16(res.data.nickname))
             wx.setStorageSync('wechatPortrait', res.data.wechatPortrait) 
             that.setData({
-              avatarUrl: res.data.wechatPortrait,
+              avatarUrl: res.data.wechatPortrait, 
               nickName: time.uncodeUtf16(res.data.nickname),
-              score: res.data.score
+              score: res.data.score,
+              gradeSign: res.data.gradeSign
             })
           }
         },

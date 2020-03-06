@@ -4,11 +4,14 @@
 <view class='mine'>
   <view  class='mine-center'>
     <view bindtap="materials"  class='mine-center-top'>
-       <image src="{{avatarUrl}}"/>
+       <view class="mine-imgIcon">
+         <image class="mine-img" src="{{avatarUrl}}"/>
+         <image class="{{gradeSign == 4?'mine-icon':'hide'}}" src="../../images/VIP.png"/>
+       </view>
        <text>{{nickName}}</text>
        <view class="modify">修改个人资料<van-icon class="modify-icon" name="edit" /></view>
     </view>
-    <view class="integral"> 
+    <view class="integral">       
       <view class="dialog" bindtap="dialogBtn">积分 {{score}}分<van-icon class="dialog-icon" name="info-o"/></view> 
       <van-popup 
         show="{{ show }}" 
