@@ -64,18 +64,18 @@
     </view>
     <view bindtap="homepage" class="mine-post">
      <text>我的主页</text>
-     <image class="icon" src="../../images/collection.png"/>
+     <image class="icon" src="../../images/homepage.png"/>
     </view>
     <view wx:if="{{gradeSign == 5}}">
       <view class="mine-post">
         <text>我的VIP</text>
-        <image class="icon" src="../../images/collection.png"/>
+        <image class="icon" src="../../images/apply.png"/>
       </view>
     </view>
     <view wx:else>
       <view bindtap="apply" class="mine-post">
        <text>申请VIP认证</text>
-       <image class="icon" src="../../images/collection.png"/>
+       <image class="icon" src="../../images/apply.png"/>
       </view>
     </view>
   </view>
