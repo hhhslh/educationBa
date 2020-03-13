@@ -30,7 +30,8 @@ Page({
     loading: false,
     disabled: false,
     loading1: false,
-    disabled1: false
+    disabled1: false,
+    gradeSign:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -134,6 +135,7 @@ Page({
           attachTwo: res.data.postItem.attachTwo,
           attachThree: res.data.postItem.attachThree,  
           hotList: res.data.hotList,
+          gradeSign: res.data.postItem.gradeSign,
           loadingAAA: true//loading显示隐藏
         })
         that.followCheck(res.data.postItem.openId)

@@ -5,7 +5,7 @@
 .topPart .avar{
   text-align: center;
 }
-.topPart image{
+.topPart .mine-img{
   width:100px;
   height:100px;
   border-radius: 50%; 
@@ -133,8 +133,14 @@
   background-color: #fff;
   box-shadow: 0px 2px 0px #eee;
 }
+.commentPart .cardLine{
+  display: flex;
+  justify-content:flex-start;
+}
+.commentPart .cardLine view{
+  display: inline-block;
+}
 .commentPart .summaryDesc{
-  margin-top: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   line-clamp: 3;
@@ -144,14 +150,12 @@
 	-webkit-box-orient: vertical;
   line-height: 26px;
   color:rgb(78,78,78);
-  display: inline-block;
   margin-left:10px;
 }
 .commentPart .cardLine image{
   width:25px;
   height:25px;
   border-radius: 50%;
-  display: inline-block;
 }
 /* 发布时间及评论 */
 .commentPart .comment{
@@ -187,4 +191,137 @@
 .van-loading{
   margin: 0 auto;
   display: block !important;
+}
+
+.avar{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  transform: translateX(-50%)
+}
+.mine-icon{
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+  width: 30px;
+  height: 30px;
+}
+/* 回答列表的css */
+ .hotDetails-main{
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
+  margin-bottom: 50px;
+}
+ .hotDetails-main .hotDetails-main-list{
+  padding: 10px;
+  background-color:#fff;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+ .hotDetails-main .hotDetails-two{
+  padding-bottom: 0;
+}
+ .hotDetails-main .hotDetails-main-list:last-child{
+  margin-bottom: 0;
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top image{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: top;
+  margin-right: 10px;
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name{
+  display: inline-block;
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name .name{
+  font-size: 16px;
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-top .hotDetails-main-name .time{
+  font-size: 14px;
+  color: rgb(168, 168, 168);
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-bottom{
+   margin:10px 0;
+   font-size:15px;
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-icon-allCommentsShow{
+   line-height: 20px;
+   height: 20px;
+   overflow: hidden;
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-icon-allCommentsShow .allCommentsShow{
+  font-size: 14px;
+  color: rgb(168, 168, 168);
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-icon-allCommentsShow .allCommentsHide{
+  display: none;
+}
+ .hotDetails-main .hotDetails-main-list .hotDetails-main-list-icon-allCommentsShow .hotDetails-main-list-icon{
+  font-size: 20px;
+  vertical-align: middle;
+  text-align: right;
+}
+ .hotDetails-main .hotDetails-main-list .textarea-wrpHide{
+  display: none;
+}
+ .hotDetails-main .hotDetails-main-list .textarea-wrp {
+  display: flex;
+  margin-top: -20px;
+}
+ .hotDetails-main .hotDetails-main-list .textarea-wrp input{
+  width: 80%;
+  padding:8px;
+  border: 1px solid #eee;
+  margin-right: 2%;
+  border-radius: 10px;
+}
+ .hotDetails-main .hotDetails-main-list .textarea-wrp .textarea-wrp-btn{
+  width: 18%;
+  text-align: center;
+  border: 1px solid #eee;
+  height: 38px;
+  line-height: 38px;
+  padding: 0;
+  background: #e60c4b;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: normal;
+}
+.hotDetails-main .hotDetails-main-list .xian{
+   margin-top: 10px;
+   border-bottom: 2px solid rgb(240, 240, 240);
+}
+/* 回答按钮 */
+.footInput{
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  padding: 10px 0;
+  z-index: 22;
+  width: 100%;
+  background-color: #fff;
+  box-shadow:  0 -2px 3px #eee;
+}
+.footInput input  {
+  width: 72%;
+  padding:5px 8px 4px;
+  margin-right: 4%;
+  background-color: #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-left: 3%;
+}
+.footInput .textarea-wrp-btn{
+  width: 18%;
+  margin-right: 3%;
+  height: 32px;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 14px;
+  padding: 0;
+  min-height: 32px;
+  line-height: 32px;
+  color: #fff;
 }

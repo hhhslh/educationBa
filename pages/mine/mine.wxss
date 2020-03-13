@@ -142,7 +142,7 @@ page {
 .mine .mine-btn{
   text-align: center;
   font-size: 12px;
-  margin-top: 40px;
+  margin-top: 20px;
   color: rgb(190, 190, 190)
 }
 .mine-imgIcon{

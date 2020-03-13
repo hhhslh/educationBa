@@ -5,7 +5,10 @@
   <van-toast id="van-toast" />
   <view class='hotDetails-top'>
       <view class="hotDetails-image">
-        <image src="{{contentDetailAvatar}}" bindtap="enterHomePage" data-followerId="{{followOpenId}}" />
+        <view class="mine-imgIcon">
+          <image class="mine-img" src="{{contentDetailAvatar}}" bindtap="enterHomePage" data-followerId="{{followOpenId}}" />
+          <image class="{{gradeSign == 5?'mine-icon':'hide'}}" src="../../images/VIP.png"/>
+        </view>
         <view class="name-time"  bindtap="enterHomePage" data-followerId="{{followOpenId}}">
           <view class="name">{{contentDetailNickName}}</view>
           <view class="time">{{contentDetailCreateTime}}</view>
@@ -48,8 +51,8 @@
         class="{{item.id == listidShow?'allCommentsHide':'hotDetails-main-list-icon'}}">
         <van-icon name="chat-o"/>
         </view>
-       </view>
-       <view class="{{item.id == listidShow?'textarea-wrp':'textarea-wrpHide'}}">
+      </view>
+        <view class="{{item.id == listidShow?'textarea-wrp':'textarea-wrpHide'}}">
           <input bindinput="bindKeyInput" value="{{inputValue}}"   placeholder="回答 {{objectName}}"/>
           <!-- <view bindtap="getcontentTwo" class="textarea-wrp-btn">回复</view> -->
           <button  loading="{{loading1}}" disabled="{{disabled1}}" bindtap="getcontentTwo" class="textarea-wrp-btn"> 回复 </button>

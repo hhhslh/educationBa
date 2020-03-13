@@ -6,7 +6,7 @@
     <view bindtap="materials"  class='mine-center-top'>
        <view class="mine-imgIcon">
          <image class="mine-img" src="{{avatarUrl}}"/>
-         <image class="{{gradeSign == 4?'mine-icon':'hide'}}" src="../../images/VIP.png"/>
+         <image class="{{gradeSign == 5?'mine-icon':'hide'}}" src="../../images/VIP.png"/>
        </view>
        <text>{{nickName}}</text>
        <view class="modify">修改个人资料<van-icon class="modify-icon" name="edit" /></view>
@@ -61,6 +61,22 @@
     <view bindtap="collection" class="mine-post">
      <text>收藏</text>
      <image class="icon" src="../../images/collection.png"/>
+    </view>
+    <view bindtap="homepage" class="mine-post">
+     <text>我的主页</text>
+     <image class="icon" src="../../images/collection.png"/>
+    </view>
+    <view wx:if="{{gradeSign == 5}}">
+      <view class="mine-post">
+        <text>我的VIP</text>
+        <image class="icon" src="../../images/collection.png"/>
+      </view>
+    </view>
+    <view wx:else>
+      <view bindtap="apply" class="mine-post">
+       <text>申请VIP认证</text>
+       <image class="icon" src="../../images/collection.png"/>
+      </view>
     </view>
   </view>
   <view bindtap="mineBtn" class="mine-btn">-火龙果国际教育论坛3.3-</view>

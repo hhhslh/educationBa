@@ -20,7 +20,8 @@
     "pages/hotDetailsOne/hotDetailsOne",
     "pages/postModify/postModify",
     "pages/fans/fans",
-    "pages/videoList/videoList"
+    "pages/videoList/videoList",
+    "pages/apply/apply"
   ],
   "tabBar": {
     "selectedColor": "#e60c4b",

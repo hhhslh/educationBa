@@ -7,10 +7,15 @@
       <view class="newInvitation-hotBg-content">
         <view  class="hotBg-left-content {{hotBg.postIcon==null || hotBg.postIcon==''? 'widthLong':''}}">
           <view class="left-summaryDesc">{{hotBg.summaryDesc}}</view>
-          <image src="{{hotBg.avatar}}" class="hotBg-image"/>
-          <text>{{hotBg.nickName}}</text>
-          <text>阅读 {{hotBg.watchNum}}</text>
-          <text>评论 {{hotBg.commentNum}}</text>
+          <view class='mine-one'>
+            <view class="mine-imgIcon-one">
+              <image src="{{hotBg.avatar}}" class="hotBg-image"/>
+              <image class="{{hotBg.gradeSign == 5?'mine-icon':'hide'}}" src="../../images/VIP.png"/>
+            </view>
+            <text>{{hotBg.nickName}}</text>
+            <text>阅读 {{hotBg.watchNum}}</text>
+            <text>评论 {{hotBg.commentNum}}</text>
+          </view>
         </view>
         <image mode="scaleToFill" src="{{hotBg.postIcon}}" class="hotBg-content-image {{hotBg.postIcon==null || hotBg.postIcon==''? 'widthimg':''}}" />
       </view>
@@ -25,8 +30,13 @@
     <view class="newInvitation-content-title">{{item.title}}</view>
     <view class="newInvitation-content">
       <view  class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}">
-        <image src="{{item.avatar}}" class="head-image"/>
-        <text>{{item.nickName}}</text>
+        <view class="mine">
+          <view class="mine-imgIcon">
+            <image mode="scaleToFill" src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
+            <image class="{{item.gradeSign == 5?'mine-icon':'hide'}}" src="../../images/VIP.png"/>
+          </view>
+          <text>{{item.nickName}}</text>
+        </view>
         <view class="summaryDesc">{{item.summaryDesc}}</view>
       </view>
       <image mode="scaleToFill" src="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />

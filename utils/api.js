@@ -1,5 +1,6 @@
 var http = require('https.js'); //导入封装的 post和get请求
 // const URL = 'http://192.168.0.103:8080/nsi-1.0'; // 测试李岩
+// const URL = 'http://high.natapp1.cc/nsi';//李岩本地
 // const URL = 'http://192.168.0.102:8080/nsi-1.0'; // 测试罗振
 // const URL = 'http://high.natapp1.cc/nsi-1.0';//罗震本地 
 const URL = 'https://data.xinxueshuo.cn/nsi-1.0'; // 线上
@@ -48,6 +49,9 @@ const postItemUpdate = (params, success, faild) => http.post(URL + "/postItem/up
 const communityUserFans = (params, success, faild) => http.post(URL + "/communityUser/myFans", params, success, faild);
 const playback = (params, success, faild) => http.get(URL + "/playback/list.do", params, success, faild);
 const managerplayback = (params, success, faild) => http.get(URL + "/playback/detail.do", params, success, faild);
+const communityAskList = (params, success, faild) => http.post(URL + "/communityAsk/list", params, success, faild);
+const communityAskInsert = (params, success, faild) => http.post(URL + "/communityAsk/insert", params, success, faild);
+const communityAnswerInsert = (params, success, faild) => http.post(URL + "/communityAnswer/insert", params, success, faild);
 module.exports = {
   decodeUserInfo:decodeUserInfo, //获取微信用户信息
   chineseList:chineseList,//类目列表
@@ -93,5 +97,8 @@ module.exports = {
   postItemUpdate: postItemUpdate,//帖子修改
   communityUserFans: communityUserFans,///
   playback: playback,//直播回放
-  managerplayback: managerplayback//直播回放详情
+  managerplayback: managerplayback,//直播回放详情
+  communityAskList: communityAskList,//个人主页回答问题列表
+  communityAskInsert: communityAskInsert,//提问接口
+  communityAnswerInsert: communityAnswerInsert//回答问题接口
 }

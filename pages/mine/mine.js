@@ -173,6 +173,30 @@ Page({
       })
     }
   },
+  //申请VIP
+  apply: function () {
+    if (wx.getStorageSync('openId') == "") {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../apply/apply',
+      })
+    }
+  },
+  //个人主页
+  homepage: function () {
+    if (wx.getStorageSync('openId') == "") {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../followHomePage/followHomePage?followerid='+wx.getStorageSync('openId'),
+      })
+    }
+  },
   mineBtn:function(){
     var that = this
     wx.clearStorage({

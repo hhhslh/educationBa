@@ -201,10 +201,41 @@ page{
 .newInvitation-hot .newInvitation-hotBg-content .hotBg-left-content text {
   font-size: 12px;
   color: rgba(102,102,102,1);
-  margin-right: 15px;
 }
 .newInvitation-hot .newInvitation-hotBg-content .hotBg-content-image{
   height:86px;
   width: 30%;
   border-radius: 4px;
+}
+
+/* vip */
+.mine-one{
+ display: flex;
+ justify-content: space-between;
+}
+.mine-imgIcon-one{
+  position: relative;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  top: -2px;
+}
+.mine{
+ display: flex;
+ justify-content: flex-start;
+}
+.mine-imgIcon{
+  position: relative;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  top: -2px;
+  margin-right: 10px;
+}
+.mine-icon{
+  position: absolute;
+  bottom: -6px;
+  right: -4px;
+  width: 15px;
+  height: 15px;
 }

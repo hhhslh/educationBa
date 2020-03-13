@@ -50,8 +50,13 @@
       <view class="newInvitation-content-title">{{item.title}}</view>
       <view class="newInvitation-content">
         <view class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}">
-          <image  mode="scaleToFill" src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
-          <text>{{item.nickName}}</text>
+          <view class="mine">
+            <view class="mine-imgIcon">
+              <image mode="scaleToFill" src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
+              <image class="{{item.gradeSign == 5?'mine-icon':'hide'}}" src="../../images/VIP.png"/>
+            </view>
+            <text>{{item.nickName}}</text>
+          </view>
           <view class="summaryDesc {{item.postIcon==null ? 'widthLong':'widthShort'}}">{{item.summaryDesc}}</view>
         </view>
         <image mode="scaleToFill" src="{{item.postIcon}}" wx:if="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />
@@ -70,8 +75,13 @@
     <view class="newInvitation-content-title">{{item.title}}</view>
     <view class="newInvitation-content">
       <view class="left-content {{item.postIcon==null || item.postIcon==''? 'widthLong':''}}">
-        <image mode="scaleToFill" src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
-        <text>{{item.nickName}}</text>
+        <view class="mine">
+          <view class="mine-imgIcon">
+            <image mode="scaleToFill" src="{{item.avatar}}" wx:if="{{item.avatar}}" class="head-image"/>
+            <image class="{{item.gradeSign == 5?'mine-icon':'hide'}}" src="../../images/VIP.png"/>
+          </view>
+          <text>{{item.nickName}}</text>
+        </view>
         <view class="summaryDesc">{{item.summaryDesc}}</view>
       </view>
       <image mode="scaleToFill" src="{{item.postIcon}}" wx:if="{{item.postIcon}}" class="content-image {{item.postIcon==null || item.postIcon==''?'widthimg':''}}" />

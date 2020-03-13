@@ -29,7 +29,7 @@ Page({
     homeConfigList: "",
     listId: "",
     postHeadList: "" ,
-    topList:""
+    topList:"",
   },
   //事件处理函数
   bindViewTap: function() {

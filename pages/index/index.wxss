@@ -193,7 +193,6 @@ swiper{
   width:20px;
   height:20px;
   border-radius: 50%;
-  margin-right: 10px;
   vertical-align: middle;
   float: left;
 }
@@ -269,4 +268,23 @@ swiper{
 }
 .tab-index--van-tab__pane{
   -webkit-overflow-scrolling: touch
+}
+/* vip */
+.mine{
+ display: flex;
+ justify-content: flex-start;
+}
+.mine-imgIcon{
+  position: relative;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  margin-right: 10px;
+}
+.mine-icon{
+  position: absolute;
+  bottom: -2px;
+  right: -6px;
+  width: 15px;
+  height: 15px;
 }

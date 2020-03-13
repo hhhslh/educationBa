@@ -6,8 +6,10 @@
 .hotDetails .hotDetails-top .hotDetails-image{
   height: 50px;
   padding: 5px 10px;
+  display: flex;
+  justify-content: flex-start;
 }
-.hotDetails .hotDetails-top .hotDetails-image image{
+.hotDetails .hotDetails-top .hotDetails-image .mine-img{
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -16,7 +18,8 @@
 }
 .hotDetails .hotDetails-top .hotDetails-image .name-time{
   display: inline-block;
-  width:50%;
+  width:67%;
+  margin-top: 4px;
 }
 .hotDetails .hotDetails-top .hotDetails-image .name-time .name{
   font-size: 18px;
@@ -338,4 +341,20 @@
 .attach text{
   margin-left:10px;
   color:rgba(255,100,100,1);
+}
+
+/* vip */
+.mine-imgIcon{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  left: 0;
+  margin-right: 10px;
+}
+.mine-icon{
+  position: absolute;
+  bottom: -2px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
 }

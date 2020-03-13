@@ -19,17 +19,27 @@ Page({
     tabTitle:"",//选择tab标题
     follow: '关注',//关注
     followOpenId:"",
+    askList:'',
+    loadingAAA: false,
+    getcontentValue:'',
+    loading: false,
+    disabled: false,
+    loading1: false,
+    disabled1: false,
+    listidShow:"",
+    inputValue: '',//二级评论点击获取内容
+    footactive: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.followerid)
     this.data.followerid = options.followerid
     this.getUserInfo()
     this.getComment()
     this.getPost()
+    this.communityAskList(options.followerid)
   },
  
   /**
@@ -105,6 +115,11 @@ Page({
     },function(res){
       console.log(res)
       res.data.nickname = time.uncodeUtf16(res.data.nickname)
+      if (res.data.openId == wx.getStorageSync('openId')){
+         that.setData({
+           footactive:true
+         })
+      }
       that.setData({
         userMessage:res.data,
         followOpenId:res.data.openId
@@ -222,65 +237,308 @@ Page({
         }
       )
   },
+  //提问输入框
+  getcontentValue: function (e) {
+    this.setData({
+      getcontentValue: e.detail.value
+    })
+  },
+  //提问内容提交接口
+  getcontent(e) {
+    var that = this
+    that.setData({
+      loading: !that.data.loading,
+      disabled: !that.data.disabled
+    })
+    if (wx.getStorageSync('openId') == "") {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+      that.setData({
+        loading: false,
+        disabled: false
+      })
+    } else {
+      if (that.data.getcontentValue == "") {
+        wx.showToast({
+          title: "请填写提问内容...",
+          icon: 'none',
+          duration: 1500,
+        })
+        that.setData({
+          loading: false,
+          disabled: false
+        })
+      } else if (that.data.getcontentValue.length > 140) {
+        wx.showToast({
+          title: "输入框文字不能超过100字...",
+          icon: 'none',
+          duration: 1500,
+        })
+        that.setData({
+          loading: false,
+          disabled: false
+        })
+      } else {
+        api.msg_sec_check({
+          content: time.utf16toEntities(that.data.getcontentValue)
+        },
+          function (res) {
+            console.log(res)
+            if (res.code == 0) {
+              api.communityAskInsert(
+                {
+                  messageName: time.utf16toEntities(wx.getStorageSync('nickName')),
+                  messagePortrait: wx.getStorageSync('wechatPortrait'),
+                  messageWechatId: wx.getStorageSync('openId'),
+                  messageContent: time.utf16toEntities(that.data.getcontentValue),
+                  objectWechatId: that.data.followOpenId
+                },
+                function (res) {
+                  console.log(res)
+                  if (res.code == 0) {
+                    wx.showToast({
+                      title: "提问成功",
+                      icon: 'success',
+                      duration: 1500,
+                    })
+                  }
+                  that.setData({
+                    getcontentValue: "",
+                    loading: false,
+                    disabled: false
+                  })
+                },
+                function (err) {
+                  that.setData({
+                    getcontentValue: "",
+                    loading: false,
+                    disabled: false
+                  })
+                  console.log(err)
+                }
+              )
+            } else if (res.code == 1) {
+              wx.showToast({
+                title: "内容包含敏感信息，请重新输入",
+                icon: 'none',
+                duration: 1500,
+              })
+              that.setData({
+                loading: false,
+                disabled: false
+              })
+            } else {
+              that.setData({
+                loading: false,
+                disabled: false
+              })
+            }
+          },
+          function (err) {
+            console.log(res)
+          }
+        )
+      }
+    }
+  },
+  //问题列表
+  communityAskList(e){
+    var that = this 
+    api.communityAskList(
+      {
+        wechatId: e,
+        pageNum: 1,
+        pageSize:10
+      },
+      function (res) {
+        console.log(res.data)
+        for (var i = 0; i < res.data.length; i++) {
+          res.data[i].createTime = time.getDateDiff(res.data[i].createTime)
+          for (var j = 0; j < res.data[i].AnswerList.length;j++){
+            res.data[i].AnswerList[j].createTime = time.getDateDiff(res.data[i].AnswerList[j].createTime)
+          }
+        }
+        that.setData({
+          askList: res.data,
+          loadMore: false
+        })
+      },
+      function (err) {
+        console.log(err)
+      }
+    )
+  },
+  //用于获取单条一级评论的ID
+  editorShowTwo: function (e) {
+    this.setData({
+      listidShow: e.currentTarget.dataset.listid,
+      objectName: e.currentTarget.dataset.listname
+    })
+  },
+  //回答输入框
+  bindKeyInput: function (e) {
+    this.setData({
+      inputValue: e.detail.value
+    })
+  },
+  //回答内容提交接口
+  getcontentTwo(e) {
+    var that = this
+    that.setData({
+      loading1: !that.data.loading1,
+      disabled1: !that.data.disabled1
+    })
+    if (wx.getStorageSync('openId') == "") {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    } else {
+      if (that.data.inputValue == "") {
+        wx.showToast({
+          title: "请填写回答内容...",
+          icon: 'none',
+          duration: 1500,
+        })
+        that.setData({
+          loading1: false,
+          disabled1: false
+        })
+      } else if (that.data.inputValue > 140) {
+        wx.showToast({
+          title: "输入框文字不能超过100字...",
+          icon: 'none',
+          duration: 1500,
+        })
+        that.setData({
+          loading1: false,
+          disabled1: false
+        })
+      } else {
+        api.msg_sec_check({
+          content: time.utf16toEntities(that.data.inputValue)
+        },
+          function (res) {
+            console.log(res)
+            if (res.code == 0) {
+              api.communityAnswerInsert(
+                {
+                  messageName: time.utf16toEntities(wx.getStorageSync('nickName')),
+                  messagePortrait: wx.getStorageSync('wechatPortrait'),
+                  messageWechatId: wx.getStorageSync('openId'),
+                  messageContent: time.utf16toEntities(that.data.inputValue),
+                  askId: that.data.listidShow
+                },
+                function (res) {
+                  console.log(res)
+                  if (res.code == 0) {
+                    that.setData({
+                      listidShow: "000",
+                      inputValue: '',
+                      loading1: false,
+                      disabled1: false
+                    })
+                    wx.showToast({
+                      title: "回答成功",
+                      icon: 'success',
+                      duration: 1500,
+                    })
+                    that.communityAskList(that.data.followerid)
+                  }
+                },
+                function (err) {
+                  that.setData({
+                    loading1: false,
+                    disabled1: false
+                  })
+                  console.log(err)
+                }
+              )
+            } else if (res.code == 1) {
+              wx.showToast({
+                title: "内容包含敏感信息，请重新输入",
+                icon: 'none',
+                duration: 1500,
+              })
+              that.setData({
+                loading1: false,
+                disabled1: false
+              })
+            } else {
+              that.setData({
+                loading1: false,
+                disabled1: false
+              })
+            }
+          },
+          function (err) {
+            that.setData({
+              loading1: false,
+              disabled1: false
+            })
+            console.log(res)
+          }
+        )
+      }
+    }
+  },
   //关注
   follow(e) {
     var that = this
-    console.log(e.currentTarget.dataset.openid)
-      if (wx.getStorageSync('openId') != e.currentTarget.dataset.openid) {
-        if (e.currentTarget.dataset.title == "关注") {
-          api.communityFollow(
-            {
-              followerId: e.currentTarget.dataset.openid,
-              openId: wx.getStorageSync('openId')
-            },
-            function (res) {
-              console.log(res)
-              if (res.code == 0) {
-                wx.showToast({
-                  title: "关注成功",
-                  icon: 'success',
-                  duration: 1500,
-                })
-                that.setData({
-                  follow: '取消关注'
-                })
-              }
-            },
-            function (err) {
-              console.log(err)
+    if (wx.getStorageSync('openId') != e.currentTarget.dataset.openid) {
+      if (e.currentTarget.dataset.title == "关注") {
+        api.communityFollow(
+          {
+            followerId: e.currentTarget.dataset.openid,
+            openId: wx.getStorageSync('openId')
+          },
+          function (res) {
+            console.log(res)
+            if (res.code == 0) {
+              wx.showToast({
+                title: "关注成功",
+                icon: 'success',
+                duration: 1500,
+              })
+              that.setData({
+                follow: '取消关注'
+              })
             }
-          )
-        } else {
-          api.cancelFollow(
-            {
-              followerId: e.currentTarget.dataset.openid,
-              wechatId: wx.getStorageSync('openId')
-            },
-            function (res) {
-              console.log(res)
-              if (res.code == 0) {
-                wx.showToast({
-                  title: "取消关注成功",
-                  icon: 'success',
-                  duration: 1500,
-                })
-                that.setData({
-                  follow: '关注'
-                })
-              }
-            },
-            function (err) {
-              console.log(err)
-            }
-          )
-        }
+          },
+          function (err) {
+            console.log(err)
+          }
+        )
       } else {
-        wx.showToast({
-          title: "不能关注自己",
-          icon: 'loading',
-          duration: 1500,
-        })
+        api.cancelFollow(
+          {
+            followerId: e.currentTarget.dataset.openid,
+            wechatId: wx.getStorageSync('openId')
+          },
+          function (res) {
+            console.log(res)
+            if (res.code == 0) {
+              wx.showToast({
+                title: "取消关注成功",
+                icon: 'success',
+                duration: 1500,
+              })
+              that.setData({
+                follow: '关注'
+              })
+            }
+          },
+          function (err) {
+            console.log(err)
+          }
+        )
       }
+    } else {
+      wx.showToast({
+        title: "不能关注自己",
+        icon: 'loading',
+        duration: 1500,
+      })
     }
-  
+  }
 })
