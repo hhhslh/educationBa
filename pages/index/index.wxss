@@ -84,16 +84,19 @@ swiper{
   line-height:40px;
   background:#fff !important;
   margin:5px 0 1px;
+  position: relative;
 }
 .notice .noticeIcon{
-  margin: -4px 10px 0 20px;
+  margin: -14px 10px 0 20px;
   width:28px;
   height:28px;
-  vertical-align: middle;
+  position:absolute;
+  top:50%;
 }
 .notice .noticeContent{
   font-size: 14px;
   color:rgba(88,88,88,1);
+  margin-left: 60px;
 }
 .notice .enterIcon{
   float:right;
@@ -102,10 +105,10 @@ swiper{
 }
 .Istop{
   background:#fff;
-  padding:10px 10px 0 20px;
+  padding:5px 10px 0 20px;
 }
 .Istop:last-of-type{
-  padding:2px 10px 15px 20px !important;
+  padding-bottom:10px !important;
 }
 .Istop .istopTitle{
   font-size: 10px;
