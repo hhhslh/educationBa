@@ -6,18 +6,28 @@
         <text>通知列表</text>
         <text bindtap="readBtn" class="read">全部已读</text>
       </view>
-      <view class="{{unreadList==''?'hide':'news-list'}}" wx:for="{{unreadList}}"   bindtap="enterDetail" data-titleId="{{item.jumpId}}"  data-messageId="{{item.id}}">
+      <view class="{{unreadList==''?'hide':'news-list'}}" wx:for="{{unreadList}}"   >
         <view class='news-list-left'>
           <image src="{{item.messagePortrait}}"/>
           <view class="redPoint {{item.checkState==0? 'show':'hide'}}" ></view>
         </view>
-        <view class='news-list-right' wx:if="{{item.messageType=='评论被回复'}}">
+        <view class='news-list-right' wx:if="{{item.messageType=='评论被回复'}}" bindtap="enterDetail" data-titleId="{{item.jumpId}}"  data-messageId="{{item.id}}">
           <view class='news-right-name'><view class="messageName">{{item.messageName}}</view><view>回复了你的评论</view></view>
           <view class='news-right-answer'  bindtap="enterDetail">{{item.messageContent}}</view>
           <view class='news-right-time'>{{item.createTime}}</view>
         </view>
-        <view class='news-list-right' wx:elif="{{item.messageType=='帖子被回复'}}">
+        <view class='news-list-right' wx:elif="{{item.messageType=='帖子被回复'}}" bindtap="enterDetail" data-titleId="{{item.jumpId}}"  data-messageId="{{item.id}}">
           <view class='news-right-name'><view class="messageName">{{item.messageName}}</view><view>评论了你的帖子</view></view>
+          <view class='news-right-answer'>{{item.messageContent}}</view>
+          <view class='news-right-time'>{{item.createTime}}</view>
+        </view>
+        <view class='news-list-right' wx:elif="{{item.messageType=='互动被提问'}}" bindtap="enterHomePage" data-jumpId="{{item.jumpId}}" data-messageId="{{item.id}}">
+          <view class='news-right-name'><view class="messageName">{{item.messageName}}</view><view>对你进行提问</view></view>
+          <view class='news-right-answer'>{{item.messageContent}}</view>
+          <view class='news-right-time'>{{item.createTime}}</view>
+        </view>
+        <view class='news-list-right' wx:else="{{item.messageType=='互动被回复'}}" bindtap="enterHomePage" data-jumpId="{{item.jumpId}}" data-messageId="{{item.id}}">
+          <view class='news-right-name'><view class="messageName">{{item.messageName}}</view><view>回复了你的问题</view></view>
           <view class='news-right-answer'>{{item.messageContent}}</view>
           <view class='news-right-time'>{{item.createTime}}</view>
         </view>
@@ -25,19 +35,29 @@
       <view class="{{unreadList==''?'noUnread':'hide'}}">暂无未读消息</view>
     </van-tab>
     <van-tab title="已查看">
-     <view class="news-list" wx:for="{{readList}}"   bindtap="enterDetail" data-titleId="{{item.jumpId}}">
+     <view class="news-list" wx:for="{{readList}}">
       <view class='news-list-left'>
         <image src="{{item.messagePortrait}}"/>
         <view class="redPoint {{item.checkState==0? 'show':'hide'}}" ></view>
       </view>
-      <view class='news-list-right' wx:if="{{item.messageType=='评论被回复'}}">
+      <view class='news-list-right' wx:if="{{item.messageType=='评论被回复'}}"  data-messageId="{{item.id}}" bindtap="enterDetail" data-titleId="{{item.jumpId}}">
         <view class='news-right-name'><view class="messageName">{{item.messageName}}</view><view>回复了你的评论</view></view>
-        <view class='news-right-answer'  data-messageId="{{item.id}}" bindtap="enterDetail">{{item.messageContent}}</view>
+        <view class='news-right-answer' >{{item.messageContent}}</view>
         <view class='news-right-time'>{{item.createTime}}</view>
       </view>
-      <view class='news-list-right' wx:elif="{{item.messageType=='帖子被回复'}}">
+      <view class='news-list-right' wx:elif="{{item.messageType=='帖子被回复'}}"  data-messageId="{{item.id}}" bindtap="enterDetail" data-titleId="{{item.jumpId}}">
         <view class='news-right-name'><view class="messageName">{{item.messageName}}</view><view>评论了你的帖子</view></view>
-        <view class='news-right-answer'  data-messageId="{{item.id}}">{{item.messageContent}}</view>
+        <view class='news-right-answer'>{{item.messageContent}}</view>
+        <view class='news-right-time'>{{item.createTime}}</view>
+      </view>
+      <view class='news-list-right' wx:elif="{{item.messageType=='互动被回复'}}" bindtap="enterHomePage" data-jumpId="{{item.jumpId}}" data-messageId="{{item.id}}">
+        <view class='news-right-name'><view class="messageName">{{item.messageName}}</view><view>回复了你的问题</view></view>
+        <view class='news-right-answer'>{{item.messageContent}}</view>
+        <view class='news-right-time'>{{item.createTime}}</view>
+      </view>
+      <view class='news-list-right' wx:else="{{item.messageType=='互动被提问'}}" bindtap="enterHomePage" data-jumpId="{{item.jumpId}}" data-messageId="{{item.id}}">
+        <view class='news-right-name'><view class="messageName">{{item.messageName}}</view><view>对你进行提问</view></view>
+        <view class='news-right-answer'>{{item.messageContent}}</view>
         <view class='news-right-time'>{{item.createTime}}</view>
       </view>
      </view>

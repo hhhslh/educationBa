@@ -234,5 +234,19 @@ Page({
     wx.navigateTo({
       url: '../hotDetails/hotDetails?id=' + e.currentTarget.dataset.titleid
     })
+    messageCount.messageNumber()
   },
+  enterHomePage(e){
+    api.communityMessageCheck({
+      messageId: e.currentTarget.dataset.messageid
+    }, function (res) {
+      console.log(res)
+    }, function (err) {
+      console.log(err)
+    })
+    wx.navigateTo({
+      url: '../followHomePage/followHomePage?followerid=' + e.currentTarget.dataset.jumpid
+    })
+    messageCount.messageNumber()
+  }
 })

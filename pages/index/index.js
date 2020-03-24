@@ -85,8 +85,8 @@ Page({
   },
   onShareAppMessage: function (res) {
     return {
-      title: '标签',
-      path: '/pages/videoList/videoList', //这里设定都是以"/page"开头,并拼接好传递的参数
+      title: '火龙果国际教育论坛',
+      path: '/pages/index/index', //这里设定都是以"/page"开头,并拼接好传递的参数
     }
   },
   gethomeConfig(){
