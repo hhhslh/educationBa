@@ -1,4 +1,4 @@
-<!--index.wxml-->
+ <!--index.wxml-->
 <view class="head" style='height:{{navH}}px'>
   <image mode="scaleToFill" src="../../images/logo@2x.png"></image>
   <text>火龙果国际教育论坛</text>
