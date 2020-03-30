@@ -12,6 +12,10 @@
       <text>电话</text>
       <input type="number" value="{{phone}}" placeholder="请输入电话" bindblur="phone"  maxlength="11"></input>
     </view>
+    <view class="modifyMy-portrait">
+      <text>身份证号</text>
+      <input type="number" value="{{idCardNum}}" placeholder="请输入身份证号" bindblur="idCardNum"  maxlength="18"></input>
+    </view>
     <view class="modifyMy-portrait modifyMy-one">
       <text>认证类型</text>
       <picker mode = "selector" bindchange="bindPickerChange"  value="{{project[idx].val}}" range="{{project}}" range-key="{{'val'}}">

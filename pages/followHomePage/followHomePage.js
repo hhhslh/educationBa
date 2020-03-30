@@ -358,6 +358,7 @@ Page({
           for (var j = 0; j < res.data[i].AnswerList.length;j++){
             res.data[i].AnswerList[j].createTime = time.getDateDiff(res.data[i].AnswerList[j].createTime)
             res.data[i].AnswerList[j].messageName = time.uncodeUtf16(res.data[i].AnswerList[j].messageName)
+            res.data[i].messageName = time.uncodeUtf16(res.data[i].messageName)
 
           }
         }

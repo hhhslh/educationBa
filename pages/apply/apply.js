@@ -9,6 +9,7 @@ Page({
     phone: '',//电话
     id:'',//ID
     idx:0,
+    idCardNum:'',//身份证号
     project: [
       {
         val: '个人'
@@ -71,6 +72,11 @@ Page({
       phone: e.detail.value
     });
   },
+  idCardNum:function(e){
+    this.setData({
+      idCardNum: e.detail.value
+    });
+  },
   // 初始化
   onEditorReady() {
     const that = this
@@ -115,6 +121,23 @@ Page({
         return false
       }
     }
+    if (this.data.idCardNum == "") {
+      wx.showToast({
+        title: "身份证号不能为空",
+        icon: 'none',
+        duration: 1500,
+      })
+      return false
+    } else {
+      if (!(/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(this.data.idCardNum))) {
+        wx.showToast({
+          title: "身份证号格式不正确",
+          icon: 'none',
+          duration: 1500,
+        })
+        return false
+      }
+    }
     that.editorCtx.getContents({
       success: (res) => {
         if (res.text == "\n") {
@@ -131,6 +154,7 @@ Page({
               truename: this.data.truename,//真实姓名
               organization: this.data.organization,//公司
               phone: this.data.phone,//电话
+              idCardNum: this.data.idCardNum,//身份证号
               id: this.data.id,
               openId: wx.getStorageSync('openId'),
               authType: this.data.project[this.data.idx].val,//认证类型
@@ -139,16 +163,31 @@ Page({
             },
             function (res) {
               if (res.code == 0) {
-                wx.showToast({
-                  title: "申请成功",
-                  icon: 'success',
-                  duration: 1500,
+                wx.showModal({
+                  title: '提示',
+                  content: '申请成功，请等待工作人员审核！',
+                  showCancel:false,
+                  success (res) {
+                    if (res.confirm) {
+                      console.log('用户点击确定')
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    } else if (res.cancel) {
+                      console.log('用户点击取消')
+                    }
+                  }
                 })
-                setTimeout(function () {
-                  wx.navigateBack({
-                    delta: 1
-                  })
-                }, 1500);
+                // wx.showToast({
+                //   title: "申请成功，等待工作人员审核",
+                //   icon: 'success',
+                //   duration: 1500,
+                // })
+                // setTimeout(function () {
+                //   wx.navigateBack({
+                //     delta: 1
+                //   })
+                // }, 1500);
               }
             },
             function (err) {
