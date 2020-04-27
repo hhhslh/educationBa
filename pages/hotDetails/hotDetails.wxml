@@ -29,6 +29,7 @@
         <!-- <button bindtap="downloadFile">下载</button> -->
         <button bindtap="collection" data-title="{{collection}}"  class="fontColor hotDetails-answer-left">{{collection}}</button>
         <button open-type="share" class='fontColor hotDetails-answer-right'>分享给好友</button>
+        <button bindtap="shareFriend" class='fontColor hotDetails-answer-right'>分享到朋友圈</button>
       </view>
   </view>
   <view class="{{hotDetails == ''?'hotDetails-main-kong':'hotDetails-main'}}">
@@ -60,24 +61,18 @@
     </view>
     <view bindtap="hotDetailsNum" class="{{hotDetailsNum>5?'hotDetailsNum':'hotDetailsNumHide'}}"> 查看全部{{hotDetailsNum}}条评论</view>
   </view>
-  <!-- 最热帖子推荐 -->
-  <!-- <view class="newInvitation">
-    <view class="title">热帖推荐</view> 
-    <view bindtap="hotList" data-detailid="{{item.itemId}}" class="newInvitation-list-one" wx:for="{{hotList}}" bindtap="hotDetails">
-      <view class="newInvitation-content-title">{{item.title}}</view>
-      <view class="newInvitation-content">
-        <view  class="left-content {{item.postIcon==null||item.postIcon=='' ? 'widthLong':''}}">
-          <image src="{{item.avatar}}" class="head-image"/>
-          <text>{{item.nickName}}</text>
-          <view>{{item.summaryDesc}}</view>
-        </view>
-        <image src="{{item.postIcon}}" class="content-image {{item.postIcon==null||item.postIcon==''?'widthimg':''}}" />
-      </view>
-    </view>
-  </view> -->
   <view class="null"></view>
 </view>
 <view class="{{loadingAAA?'footInput':'hide'}}">
   <input bindinput="getcontentValue" value="{{getcontentValue}}" cursor-spacing="18px"   placeholder="友善的评论是交流的起点"/>
   <button type="warn" loading="{{loading}}" disabled="{{disabled}}" bindtap="getcontent"  class="textarea-wrp-btn buttonBg"> 回复 </button>
+</view>
+
+<!-- <canvas canvas-id="myCanvas" style="width: 286px;height: 415px;background:red;position: fixed;top: -10000px;" /> -->
+<painter style="position: absolute; top: -9999rpx;" palette="{{imgDraw}}" bind:imgOK="onImgOK" bind:imgErr="onImgErr"/>
+<view hidden='{{hidden}}' class='preview' bindtap='cancel'>
+  <image src='{{imagePath}}' mode='widthFix'></image>
+  <view>
+    <button type='primary' size='mini' bindtap='saveShare'>保存分享</button>
+  </view>
 </view>

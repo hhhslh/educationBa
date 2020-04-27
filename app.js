@@ -70,3 +70,36 @@ App({
     })
   },
 })
+// Page({
+//   onLoad(options) {
+//     this.getCode();
+//   },
+//   getCode() { //获取动态小程序码
+//     wx.request({
+//       url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=ACCESS_TOKEN', 
+//       method: 'POST',
+//       dataType: 'json',
+//       data: {
+//         page: "pages/hotDetails/hotDetails",
+//         scene: "1374"
+//       },
+//       header: {
+//         'content-type': 'application/x-www-form-urlencoded'
+//       },
+//       success: res => {
+//         //后端返回的小程序码服务器地址（默认是二进制图片，我这里是后端处理过了）
+//         console.log(res);
+//         //此处是将小程序码下载到本地，用于canvas绘图（ps：网络图片一定要先下载到本地）
+//         wx.downloadFile({
+//           url: res.data.data, //上方返回的服务器小程序码地址
+//           success: res1 => {
+//             if (res1.statusCode === 200) {
+//               //下载成功，我这里是执行的canvas绘图方法（canvas绘图可看下篇文章）
+//               this.canvasPoster(res1);
+//             }
+//           }
+//         });
+//       }
+//     });
+//   }
+// })

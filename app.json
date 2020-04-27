@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/video/video",
     "pages/post/post",
     "pages/mine/mine",
     "pages/publish/publish",
@@ -20,7 +19,6 @@
     "pages/hotDetailsOne/hotDetailsOne",
     "pages/postModify/postModify",
     "pages/fans/fans",
-    "pages/videoList/videoList",
     "pages/apply/apply"
   ],
   "tabBar": {

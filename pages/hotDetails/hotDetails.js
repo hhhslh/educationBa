@@ -31,7 +31,139 @@ Page({
     disabled: false,
     loading1: false,
     disabled1: false,
-    gradeSign:''
+    gradeSign:'',
+    hidden:true,
+    imagePath: '', // 分享的图片路径
+    imgDraw: {},
+  },
+  shareFriend(){
+    let that = this;
+    // if (this.data.imagePath) { //如果已经绘制过了本地保存有图片不需要重新绘制
+    //   this.setData({
+    //     visible: true
+    //   })
+    //   this.triggerEvent('initData')
+    //   return
+    // }
+    wx.showLoading({
+      title: '图片生成中'
+    })
+    if (that.data.contentDetailContent.match(/<img.*?(?:>|\/>)/gi)){
+      var arr = that.data.contentDetailContent.match(/<img.*?(?:>|\/>)/gi)
+      var src = arr[0].match(/src=[\'\"]?([^\'\"]*)[\'\"]?/i)
+      that.data.contentDetailContent=""
+    }else{
+      var src=[]
+      // that.data.contentDetailContent = that.data.contentDetailContent.replace(/<(\/)?[^>].*?>/g, '').substr(0, 100)
+    }
+    
+    this.setData({
+      imgDraw: {
+        width: '350px',
+        height: '700px',
+        // background: 'https://qiniu-image.qtshe.com/20190506share-bg.png',
+        views: [
+          {
+            type: 'image',
+            url: that.data.contentDetailAvatar,
+            css: {
+              top: '10px',
+              left: '10px',
+              width: '40px',
+              height: '40px',
+              borderRadius: '20px'
+            },
+          },
+          {
+            type: 'text',
+            text: that.data.contentDetailNickName,
+            css: {
+              top: '20px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              left: '60px',
+              align: 'left',
+              color: '#3c3c3c'
+            }
+          },
+          {
+            type: 'text',
+            text: that.data.contentDetailTitle,
+            css: {
+              top: '60px',
+              left: '175px',
+              width:'320px',
+              fontSize: '18px',
+              lineHeight:'20px',
+              fontWeight:'bold',
+              align: 'center',
+              color: '#3c3c3c'
+            }
+          },
+          {
+            type: 'image',
+            url: src[1],
+            css: {
+              top: '110px',
+              left: '175px',
+              align: 'center',
+              height: '300px',
+            }
+          },
+          {
+            type: 'text',
+            text: that.data.contentDetailContent.replace(/<(\/)?[^>].*?>/g, '').substr(0, 100)+'...',
+            css: {
+              top: '110px',
+              left: '175px',
+              width: '320px',
+              fontSize: '16px',
+              lineHeight: '20px',
+              align: 'center',
+              color: '#3c3c3c'
+            }
+          },
+        ]
+      }
+    })
+  },
+  onImgOK(e){
+    console.log(e)
+    wx.hideLoading()
+    this.setData({
+      imagePath: e.detail.path,
+      hidden: false,
+    })
+  },
+  onImgErr(e) {
+    wx.hideLoading()
+    wx.showToast({
+      title: '生成分享图失败，请刷新页面重试'
+    })
+  },
+  // 保存图片到本地
+  saveShare() {
+    var that = this
+    wx.saveImageToPhotosAlbum({
+      filePath: that.data.imagePath,
+      success(res) {
+        wx.showModal({
+          content: '图片已保存到相册，赶紧分享吧~',
+          showCancel: false,
+          confirmText: '好的',
+          confirmColor: '#333',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定');
+              /* 该隐藏的隐藏 */
+              that.setData({
+                hidden: true
+              })
+            }
+          }
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -98,8 +230,10 @@ Page({
         path: '/pages/hotDetails/hotDetails?id=' + goods_id,
         // imageUrl: goods_img //不设置则默认为当前页面的截图
       }
+      console.log(imageUrl)
     }
   },
+ 
   // 头部内容
   contentTitle() {
     var that = this

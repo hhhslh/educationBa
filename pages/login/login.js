@@ -32,8 +32,17 @@ Page({
               that.getInfo()
             }
           })
+        }else{
+          wx.navigateBack({
+            delta: 1
+          })
         }
-      }
+      },
+    })
+  },
+  noLogin(){
+    wx.navigateBack({
+      delta: 1
     })
   },
   //获取微信用户信息

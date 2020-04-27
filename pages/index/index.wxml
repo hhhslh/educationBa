@@ -10,7 +10,7 @@
     bind:change="bindinput"
     bind:search="bindSearch"
     placeholder-style="font-size:16px;margin-left:8px;rgb(128,128,128)"
-  >
+  > 
   </van-search>
   <view class="oneSwiperPart">
     <swiper autoplay="true" next-margin="35px" circular="true">
@@ -21,11 +21,11 @@
         </swiper-item>
     </swiper>
   </view>
-  <view class="notice" bindtap="toNotice">
+  <!-- <view class="notice" bindtap="toNotice">
     <image class="noticeIcon" src="../../images/video.png" />
     <text class="noticeContent">越姐麻辣说&火龙果公益讲座 视频回放</text>
     <text class="enterIcon iconfont icon-right"></text>
-  </view>
+  </view> -->
   <view class="Istop" wx:for="{{topList}}" data-detailid="{{item.itemId}}" bindtap="hotDetails">
     <text class="buttonBg istopTitle">置顶</text>
     <text class="topPostTitle">{{item.title}}</text>
