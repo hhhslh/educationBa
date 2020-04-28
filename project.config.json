@@ -125,6 +125,34 @@
 					"pathName": "pages/videoList/videoList",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/hotDetails/hotDetails",
+					"pathName": "pages/hotDetails/hotDetails",
+					"query": "scene=1371",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/hotDetails/hotDetails",
+					"pathName": "pages/hotDetails/hotDetails",
+					"query": "scene=1371",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/hotDetails/hotDetails",
+					"pathName": "pages/hotDetails/hotDetails",
+					"query": "scene= encodeURI('1374')",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "scene= 1374",
+					"scene": null
 				}
 			]
 		}

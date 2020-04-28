@@ -52,6 +52,7 @@ const managerplayback = (params, success, faild) => http.get(URL + "/playback/de
 const communityAskList = (params, success, faild) => http.post(URL + "/communityAsk/list", params, success, faild);
 const communityAskInsert = (params, success, faild) => http.post(URL + "/communityAsk/insert", params, success, faild);
 const communityAnswerInsert = (params, success, faild) => http.post(URL + "/communityAnswer/insert", params, success, faild);
+const getMiniQR = (params, success, faild) => http.post(URL + "/CommonApi/getMiniProgremQR_Unlimited.do", params, success, faild);
 module.exports = {
   decodeUserInfo:decodeUserInfo, //获取微信用户信息
   chineseList:chineseList,//类目列表
@@ -100,5 +101,6 @@ module.exports = {
   managerplayback: managerplayback,//直播回放详情
   communityAskList: communityAskList,//个人主页回答问题列表
   communityAskInsert: communityAskInsert,//提问接口
-  communityAnswerInsert: communityAnswerInsert//回答问题接口
+  communityAnswerInsert: communityAnswerInsert,//回答问题接口
+  getMiniQR: getMiniQR//获取小程序码
 }

@@ -35,6 +35,7 @@ Page({
     hidden:true,
     imagePath: '', // 分享的图片路径
     imgDraw: {},
+    qrcodeUrl:"",//小程序码地址
   },
   shareFriend(){
     let that = this;
@@ -54,14 +55,11 @@ Page({
       that.data.contentDetailContent=""
     }else{
       var src=[]
-      // that.data.contentDetailContent = that.data.contentDetailContent.replace(/<(\/)?[^>].*?>/g, '').substr(0, 100)
     }
-    
     this.setData({
       imgDraw: {
         width: '350px',
-        height: '700px',
-        // background: 'https://qiniu-image.qtshe.com/20190506share-bg.png',
+        height: '520px',
         views: [
           {
             type: 'image',
@@ -107,22 +105,56 @@ Page({
               top: '110px',
               left: '175px',
               align: 'center',
-              height: '300px',
+              width: '320px',
+              height:'250px',
+              mode:'aspectFill',
             }
           },
           {
             type: 'text',
-            text: that.data.contentDetailContent.replace(/<(\/)?[^>].*?>/g, '').substr(0, 100)+'...',
+            text: that.data.contentDetailContent.replace(/<(\/)?[^>].*?>/g, ''),
             css: {
               top: '110px',
               left: '175px',
               width: '320px',
+              maxLines:'13',
               fontSize: '16px',
               lineHeight: '20px',
               align: 'center',
               color: '#3c3c3c'
             }
           },
+          {
+            type: 'image',
+            url: that.data.qrcodeUrl,
+            css: {
+              top: '380px',
+              left: '20px',
+              width: '100px',
+              height: '100px',
+            }
+          },
+          {
+            type: 'text',
+            text: '长按识别小程序码',
+            css: {
+              top: '410px',
+              left: '150px',
+              fontSize: '16px',
+              color: '#3c3c3c'
+            }
+          },
+          {
+            type: 'text',
+            text: '进入详情查看具体内容',
+            css: {
+              top: '430px',
+              left: '150px',
+              fontSize: '16px',
+              color: '#3c3c3c'
+            }
+          },
+         
         ]
       }
     })
@@ -169,8 +201,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.id = options.id
+    if (options.scene) {
+      const scene = decodeURIComponent(options.scene);
+      this.id = scene
+    }else{
+      this.id = options.id
+    }
+    console.log(options)
+    this.getQrcode()
     this.contentTitle()
+  },
+  getQrcode() {
+    var that=this
+    api.getMiniQR({
+      page: "pages/hotDetails/hotDetails",
+      scene: that.id,
+    }, function (res) {
+      that.setData({
+        qrcodeUrl:res.data
+      })
+      console.log(res.data)
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -547,79 +598,79 @@ Page({
     })
   },
   //收藏
-  collection(e){
-    var that = this
-    console.log(e.currentTarget.dataset.title)
-    if (wx.getStorageSync('openId') == "") {
-      wx.navigateTo({
-        url: '../login/login',
-      })
-    } else {
-      if (wx.getStorageSync('openId') != that.data.followOpenId){
-        if (e.currentTarget.dataset.title == "收藏"){
-          api.postItemNum(
-            {
-              itemId: that.id,
-              openId: wx.getStorageSync('openId')
-            },
-            function (res) {
-              console.log(res)
-              if (res.code == 0) {
-                wx.showToast({
-                  title: "收藏成功",
-                  icon: 'success',
-                  duration: 1500,
-                })
-                that.setData({
-                  collDisabled: true,
-                  collection: "已收藏"
-                })
-              }
-              if (res.code == 1) {
-                wx.showToast({
-                  title: res.msg,
-                  icon: 'loading',
-                  duration: 1500,
-                })
-              }
-            },
-            function (err) {
-              console.log(err)
-            }
-          )
-        }else{
-          api.collect_delete(
-            {
-              itemId: that.id,
-              openId: wx.getStorageSync('openId')
-            },
-            function (res) {
-              console.log(res)
-              if (res.code == 0) {
-                wx.showToast({
-                  title: "取消收藏成功",
-                  icon: 'success',
-                  duration: 1500,
-                })
-                that.setData({
-                  collection: "收藏"
-                })
-              }
-            },
-            function (err) {
-              console.log(err)
-            }
-          )
-        }
-      } else {
-        wx.showToast({
-          title: "不能收藏自己",
-          icon: 'loading',
-          duration: 1500,
-        })
-      }
-    }
-  },
+  // collection(e){
+  //   var that = this
+  //   console.log(e.currentTarget.dataset.title)
+  //   if (wx.getStorageSync('openId') == "") {
+  //     wx.navigateTo({
+  //       url: '../login/login',
+  //     })
+  //   } else {
+  //     if (wx.getStorageSync('openId') != that.data.followOpenId){
+  //       if (e.currentTarget.dataset.title == "收藏"){
+  //         api.postItemNum(
+  //           {
+  //             itemId: that.id,
+  //             openId: wx.getStorageSync('openId')
+  //           },
+  //           function (res) {
+  //             console.log(res)
+  //             if (res.code == 0) {
+  //               wx.showToast({
+  //                 title: "收藏成功",
+  //                 icon: 'success',
+  //                 duration: 1500,
+  //               })
+  //               that.setData({
+  //                 collDisabled: true,
+  //                 collection: "已收藏"
+  //               })
+  //             }
+  //             if (res.code == 1) {
+  //               wx.showToast({
+  //                 title: res.msg,
+  //                 icon: 'loading',
+  //                 duration: 1500,
+  //               })
+  //             }
+  //           },
+  //           function (err) {
+  //             console.log(err)
+  //           }
+  //         )
+  //       }else{
+  //         api.collect_delete(
+  //           {
+  //             itemId: that.id,
+  //             openId: wx.getStorageSync('openId')
+  //           },
+  //           function (res) {
+  //             console.log(res)
+  //             if (res.code == 0) {
+  //               wx.showToast({
+  //                 title: "取消收藏成功",
+  //                 icon: 'success',
+  //                 duration: 1500,
+  //               })
+  //               that.setData({
+  //                 collection: "收藏"
+  //               })
+  //             }
+  //           },
+  //           function (err) {
+  //             console.log(err)
+  //           }
+  //         )
+  //       }
+  //     } else {
+  //       wx.showToast({
+  //         title: "不能收藏自己",
+  //         icon: 'loading',
+  //         duration: 1500,
+  //       })
+  //     }
+  //   }
+  // },
   //关注
   follow(e) {
     var that = this
