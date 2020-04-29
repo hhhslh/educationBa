@@ -38,126 +38,148 @@ Page({
     qrcodeUrl:"",//小程序码地址
   },
   shareFriend(){
-    let that = this;
+    var that = this;
     // if (this.data.imagePath) { //如果已经绘制过了本地保存有图片不需要重新绘制
-    //   this.setData({
-    //     visible: true
+    //   wx.showModal({
+    //     content: '图片已保存到相册，赶紧分享吧~',
+    //     showCancel: false,
+    //     confirmText: '好的',
+    //     confirmColor: '#333',
+    //     success: function (res) {
+    //       if (res.confirm) {
+    //         console.log('用户点击确定');
+    //         /* 该隐藏的隐藏 */
+    //         that.setData({
+    //           hidden: true,
+    //           imgDraw:{},
+    //         })
+    //       }
+    //     }
     //   })
-    //   this.triggerEvent('initData')
-    //   return
-    // }
-    wx.showLoading({
-      title: '图片生成中'
-    })
-    if (that.data.contentDetailContent.match(/<img.*?(?:>|\/>)/gi)){
-      var arr = that.data.contentDetailContent.match(/<img.*?(?:>|\/>)/gi)
-      var src = arr[0].match(/src=[\'\"]?([^\'\"]*)[\'\"]?/i)
-      that.data.contentDetailContent=""
-    }else{
-      var src=[]
-    }
-    this.setData({
-      imgDraw: {
-        width: '350px',
-        height: '520px',
-        views: [
-          {
-            type: 'image',
-            url: that.data.contentDetailAvatar,
-            css: {
-              top: '10px',
-              left: '10px',
-              width: '40px',
-              height: '40px',
-              borderRadius: '20px'
-            },
-          },
-          {
-            type: 'text',
-            text: that.data.contentDetailNickName,
-            css: {
-              top: '20px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              left: '60px',
-              align: 'left',
-              color: '#3c3c3c'
-            }
-          },
-          {
-            type: 'text',
-            text: that.data.contentDetailTitle,
-            css: {
-              top: '60px',
-              left: '175px',
-              width:'320px',
-              fontSize: '18px',
-              lineHeight:'20px',
-              fontWeight:'bold',
-              align: 'center',
-              color: '#3c3c3c'
-            }
-          },
-          {
-            type: 'image',
-            url: src[1],
-            css: {
-              top: '110px',
-              left: '175px',
-              align: 'center',
-              width: '320px',
-              height:'250px',
-              mode:'aspectFill',
-            }
-          },
-          {
-            type: 'text',
-            text: that.data.contentDetailContent.replace(/<(\/)?[^>].*?>/g, ''),
-            css: {
-              top: '110px',
-              left: '175px',
-              width: '320px',
-              maxLines:'13',
-              fontSize: '16px',
-              lineHeight: '20px',
-              align: 'center',
-              color: '#3c3c3c'
-            }
-          },
-          {
-            type: 'image',
-            url: that.data.qrcodeUrl,
-            css: {
-              top: '380px',
-              left: '20px',
-              width: '100px',
-              height: '100px',
-            }
-          },
-          {
-            type: 'text',
-            text: '长按识别小程序码',
-            css: {
-              top: '410px',
-              left: '150px',
-              fontSize: '16px',
-              color: '#3c3c3c'
-            }
-          },
-          {
-            type: 'text',
-            text: '进入详情查看具体内容',
-            css: {
-              top: '430px',
-              left: '150px',
-              fontSize: '16px',
-              color: '#3c3c3c'
-            }
-          },
-         
-        ]
+    // }else{
+      wx.showLoading({
+        title: '图片生成中'
+      })
+      if (that.data.contentDetailContent.match(/<img.*?(?:>|\/>)/gi)) {
+        var arr = that.data.contentDetailContent.match(/<img.*?(?:>|\/>)/gi)
+        var src = arr[0].match(/src=[\'\"]?([^\'\"]*)[\'\"]?/i);
+        if (src[1].match('https://nsi.oss-cn-zhangjiakou.aliyuncs.com')){
+          src[1] =src[1].replace(RegExp("https://nsi.oss-cn-zhangjiakou.aliyuncs.com", "g"), "https://nsi-oss.xinxueshuo.cn")
+        }
+        that.data.contentDetailContent = ""
+      } else {
+        var src = []
       }
-    })
+    if (that.data.contentDetailAvatar.match('https://nsi.oss-cn-zhangjiakou.aliyuncs.com')) {
+      that.data.contentDetailAvatar = that.data.contentDetailAvatar.replace(RegExp("https://nsi.oss-cn-zhangjiakou.aliyuncs.com", "g"), "https://nsi-oss.xinxueshuo.cn")
+    }
+    console.log(that.data.contentDetailAvatar)
+    console.log(src[1])
+      this.setData({
+        imgDraw: {
+          width: '300px',
+          height: '450px',
+          views: [
+            {
+              type: 'image',
+              url: that.data.contentDetailAvatar,
+              css: {
+                top: '10px',
+                left: '10px',
+                width: '40px',
+                height: '40px',
+                borderRadius: '20px'
+              },
+            },
+            {
+              type: 'text',
+              text: that.data.contentDetailNickName,
+              css: {
+                top: '20px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                left: '60px',
+                align: 'left',
+                color: '#3c3c3c'
+              }
+            },
+            {
+              type: 'text',
+              text: that.data.contentDetailTitle,
+              css: {
+                top: '60px',
+                left: '150px',
+                width: '280px',
+                fontSize: '18px',
+                maxLines: '2',
+                lineHeight: '20px',
+                fontWeight: 'bold',
+                align: 'center',
+                color: '#3c3c3c'
+              }
+            },
+            {
+              type: 'image',
+              url: src[1],
+              css: {
+                top: '110px',
+                left: '150px',
+                align: 'center',
+                width: '280px',
+                height: '200px',
+                mode: 'aspectFill',
+              }
+            },
+            {
+              type: 'text',
+              text: that.data.contentDetailContent.replace(/<(\/)?[^>].*?>/g, ''),
+              css: {
+                top: '110px',
+                left: '150px',
+                width: '280px',
+                maxLines: '10',
+                fontSize: '16px',
+                lineHeight: '20px',
+                align: 'center',
+                color: '#3c3c3c'
+              }
+            },
+            {
+              type: 'image',
+              url: that.data.qrcodeUrl,
+              css: {
+                top: '330px',
+                left: '20px',
+                width: '100px',
+                height: '100px',
+              }
+            },
+            {
+              type: 'text',
+              text: '长按识别小程序码',
+              css: {
+                top: '360px',
+                left: '140px',
+                fontSize: '16px',
+                color: '#3c3c3c'
+              }
+            },
+            {
+              type: 'text',
+              text: '进入查看详情内容',
+              css: {
+                top: '380px',
+                left: '140px',
+                fontSize: '16px',
+                color: '#3c3c3c'
+              }
+            },
+
+          ]
+        }
+      })
+    // }
+   
   },
   onImgOK(e){
     console.log(e)
@@ -197,6 +219,11 @@ Page({
       }
     })
   },
+  cancel(){
+    this.setData({
+      hidden: true,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -207,22 +234,11 @@ Page({
     }else{
       this.id = options.id
     }
-    console.log(options)
     this.getQrcode()
+    console.log(options)
     this.contentTitle()
   },
-  getQrcode() {
-    var that=this
-    api.getMiniQR({
-      page: "pages/hotDetails/hotDetails",
-      scene: that.id,
-    }, function (res) {
-      that.setData({
-        qrcodeUrl:res.data
-      })
-      console.log(res.data)
-    })
-  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -284,7 +300,19 @@ Page({
       console.log(imageUrl)
     }
   },
- 
+  // 获取小程序码
+  getQrcode() {
+    var that = this
+    api.getMiniQR({
+      page: "pages/hotDetails/hotDetails",
+      scene: String(that.id),
+    }, function (res) {
+      that.setData({
+        qrcodeUrl: res.data
+      })
+      console.log(that.data.qrcodeUrl)
+    })
+  },
   // 头部内容
   contentTitle() {
     var that = this

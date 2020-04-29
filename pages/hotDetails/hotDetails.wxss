@@ -212,7 +212,7 @@
   display: flex;
   bottom: 0;
   padding: 10px 0;
-  z-index: 22;
+  /* z-index: 22; */
   width: 100%;
   background-color: #fff;
   box-shadow:  0 -2px 3px #eee;
@@ -381,22 +381,30 @@
   left:0;
   width:100%;
   height:100%;
-  background-color:rgba(0,0,0,0.8);
+  background-color:rgba(0,0,0,0.5);
   z-index: 2;
   text-align: center;
 }
- 
-.preview image{
-  background: #fff;
+.preview .imageBox{
+  position: fixed;
+  bottom: 0;
   width:100%;
-  height:100%;
+  background: #fff;
+  padding: 25px 20px 70px 20px;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0 0;
 }
- .preview view{
-   position: fixed;
-  bottom: 10%;
+.preview .imageBox image{
+  box-shadow: 0px 0px 5px #ccc;
+  width: 80%;
+  margin-top:25px;
+}
+.preview .saveBox{
+  position: fixed;
+  bottom: 15px;
   width: 100%;
- }
-.preview button{
+}
+.preview .saveBox button{
   border-radius: 50px;
   width: 40%;
 }

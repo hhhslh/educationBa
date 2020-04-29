@@ -63,7 +63,8 @@
   </view>
   <view class="null"></view>
 </view>
-<view class="{{loadingAAA?'footInput':'hide'}}">
+<!-- <view class="{{loadingAAA?'footInput':'hide'}}"> -->
+<view class="footInput">
   <input bindinput="getcontentValue" value="{{getcontentValue}}" cursor-spacing="18px"   placeholder="友善的评论是交流的起点"/>
   <button type="warn" loading="{{loading}}" disabled="{{disabled}}" bindtap="getcontent"  class="textarea-wrp-btn buttonBg"> 回复 </button>
 </view>
@@ -73,9 +74,16 @@
   <view>朋友圈</view>
 </div> -->
 <painter style="position: absolute; top: -9999rpx;" palette="{{imgDraw}}" bind:imgOK="onImgOK" bind:imgErr="onImgErr"/>
-<view hidden='{{hidden}}' class='preview' bindtap='cancel'>
-  <image src='{{imagePath}}' mode='widthFix'></image>
-  <view>
-    <button type='primary' size='mini' bindtap='saveShare'>保存分享</button>
+<view hidden='{{hidden}}' class='preview'>
+  <view  bindtap='cancel'>
+    <view class="imageBox">
+        <view>
+            <text>分享图片至朋友圈</text>
+        </view>
+        <image src='{{imagePath}}' mode='widthFix'></image>
+    </view>
+  </view>
+  <view class="saveBox">
+    <button class="buttonBg" size='mini' bindtap='saveShare'>保存分享</button>
   </view>
 </view>
