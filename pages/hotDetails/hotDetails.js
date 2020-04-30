@@ -34,7 +34,7 @@ Page({
     gradeSign:'',
     hidden:true,
     imagePath: '', // 分享的图片路径
-    imgDraw: {},
+    imgDraw: {},//画布
     qrcodeUrl:"",//小程序码地址
   },
   shareFriend(){
@@ -75,6 +75,7 @@ Page({
     }
     console.log(that.data.contentDetailAvatar)
     console.log(src[1])
+    console.log(that.data.qrcodeUrl)
       this.setData({
         imgDraw: {
           width: '300px',
@@ -238,7 +239,6 @@ Page({
     console.log(options)
     this.contentTitle()
   },
-  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -303,14 +303,14 @@ Page({
   // 获取小程序码
   getQrcode() {
     var that = this
+    var timestamp = new Date().getTime()
     api.getMiniQR({
       page: "pages/hotDetails/hotDetails",
       scene: String(that.id),
     }, function (res) {
-      that.setData({
-        qrcodeUrl: res.data
-      })
-      console.log(that.data.qrcodeUrl)
+        that.setData({
+          qrcodeUrl: res.data.replace(RegExp("http", "g"), "https") + "?time=" + timestamp
+        })
     })
   },
   // 头部内容
