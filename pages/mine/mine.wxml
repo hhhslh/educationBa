@@ -79,5 +79,5 @@
       </view>
     </view>
   </view>
-  <view bindtap="mineBtn" class="mine-btn">-火龙果国际教育论坛4.30-</view>
+  <view bindtap="mineBtn" class="mine-btn">-火龙果国际教育论坛5.10-</view>
 </view>

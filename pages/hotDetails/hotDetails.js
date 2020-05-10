@@ -80,6 +80,7 @@ Page({
         imgDraw: {
           width: '300px',
           height: '450px',
+          background:"#fff",
           views: [
             {
               type: 'image',
